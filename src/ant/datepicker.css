@@ -1,0 +1,26 @@
+.ant-fullcalendar {
+  font-family: inherit;
+}
+.ant-calendar-picker-container {
+  font-family: inherit;
+  position: absolute;
+}
+.ant-calendar-picker {
+  font-family: inherit;
+}
+.ant-calendar-header .ant-calendar-next-year-btn {
+  font-family: inherit;
+}
+.ant-calendar-month-panel-header .ant-calendar-month-panel-next-year-btn {
+  font-family: inherit;
+}
+.ant-calendar-year-panel-header .ant-calendar-year-panel-next-year-btn {
+  font-family: inherit;
+}
+.ant-calendar-decade-panel-header .ant-calendar-decade-panel-next-year-btn {
+  font-family: inherit;
+}
+
+.ant-calendar-range {
+  width: 680px;
+}
