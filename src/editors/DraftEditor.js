@@ -15,10 +15,6 @@ const Container = ({ children, container }) => {
 const DraftEditor = ({ subject = '', input, container = 'card', ...props }) => {
   const { sizes } = React.useContext(ThemeContext);
 
-  console.log('====================================');
-  console.log(subject);
-  console.log('====================================');
-
   return (
     <Container container={container}>
       {subject && (

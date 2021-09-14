@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   listItem: {
     ...theme.typography.body2,
-    height: 48,
+    minHeight: 48,
     textTransform: 'capitalize',
     paddingLeft: theme.spacing(2.5),
     paddingRight: theme.spacing(2.5),
@@ -43,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.main,
     },
   },
+  listContainer: {
+    '& .MuiListItem-root': {
+      paddingLeft: 30,
+    },
+    '& .MuiCollapse-root.MuiCollapse-vertical': {
+      '& .MuiListItem-root': {
+        paddingLeft: 45,
+      },
+    },
+  },
 }));
 
 const ListSubMenu = ({
@@ -51,14 +61,14 @@ const ListSubMenu = ({
   header,
   expanded,
   expandedStyles = {},
-  style = {},
+  style,
   showHeaderIcon,
   dividerColor,
   divider = true,
   className,
   ...rest
 }) => {
-  const { colors } = React.useContext(ThemeContext);
+  const { colors, sizes } = React.useContext(ThemeContext);
   const [menuexpanded, setMenuExpand] = useState(expanded);
   const classes = useStyles();
 
@@ -102,7 +112,7 @@ const ListSubMenu = ({
         )}
       </ListItem>
       <Collapse in={menuexpanded} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" className={classes.listContainer}>
           {children}
         </List>
       </Collapse>

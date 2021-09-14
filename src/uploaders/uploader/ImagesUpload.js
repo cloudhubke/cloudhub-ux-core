@@ -65,8 +65,6 @@ const ImagesCard = ({ cardStyles, children, flex, ...otherProps }) => {
 
 class ImagesUpload extends Component {
   static defaultProps = {
-    preferredCountries: ['ke'],
-    defaultCountry: 'ke',
     value: null,
     limit: 1,
     input: {

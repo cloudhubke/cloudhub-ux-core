@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   listItem: {
     ...theme.typography.body2,
-    height: 48,
+    minHeight: 48,
     textTransform: 'capitalize',
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(2.5),
     paddingRight: theme.spacing(2.5),
     color: theme.palette.text.secondary,
   },
@@ -56,6 +56,7 @@ const ListMenuItem = ({
   textProps,
   actionProps,
   linkto,
+  color,
   className,
   ...rest
 }) => {
@@ -104,6 +105,7 @@ const ListMenuItem = ({
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                color: color || 'inherit',
                 ...iconStyle,
               }}
               className={classes.listItemIcon}
@@ -113,7 +115,11 @@ const ListMenuItem = ({
           )}
           {avatar && <ListItemAvatar>{avatar}</ListItemAvatar>}
 
-          <ListItemText primary={primary} secondary={secondary} />
+          <ListItemText
+            primary={primary}
+            secondary={secondary}
+            style={{ color: color || 'inherit' }}
+          />
 
           {action && (
             <ListItemSecondaryAction {...actionProps}>

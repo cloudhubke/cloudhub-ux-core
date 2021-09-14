@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => {
   return {
     root: {
       borderRadius: theme.shape.borderRadius,
-      border: `solid 1px ${theme.palette.grey[300]}`,
+      border: `solid 1px ${theme.palette.grey['300']}`,
 
       // Toggle
       '& .toggle': {
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => {
         borderRadius: 6,
         boxShadow: 'none',
         background: 'transparent',
-        border: `solid 1px ${theme.palette.grey[300]}`,
+        border: `solid 1px ${theme.palette.grey['300']}`,
         '&:hover': {
           boxShadow: 'none',
           background: theme.palette.action.hover,
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => {
         border: 'none',
         marginTop: theme.spacing(1),
         padding: theme.spacing(1, 0),
-        boxShadow: theme.shadows['25'].z20,
+        boxShadow: theme.shadows.z20,
         borderRadius: theme.shape.borderRadius,
         background: theme.palette.background.paper,
         '& .rdw-dropdownoption-default': {
@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => {
           background: theme.palette.action.hover,
         },
       },
+
       // Popup
       '& .popup': {
         right: 0,
@@ -95,7 +96,7 @@ const useStyles = makeStyles((theme) => {
         left: 'auto',
         border: 'none',
         overflow: 'hidden',
-        boxShadow: theme.shadows['25'].z20,
+        boxShadow: theme.shadows.z20,
         borderRadius: theme.shape.borderRadius,
         background: theme.palette.background.paper,
 
@@ -154,7 +155,7 @@ const useStyles = makeStyles((theme) => {
           },
           '& .rdw-colorpicker-modal-style-label-active': {
             borderBottom: 'none',
-            boxShadow: theme.shadows['25'].z8,
+            boxShadow: theme.shadows.z8,
             color: theme.palette.text.primary,
             background: theme.palette.common.white,
           },
@@ -266,7 +267,7 @@ const useStyles = makeStyles((theme) => {
           },
           '& .rdw-image-modal-header-label-highlighted': {
             zIndex: -1,
-            boxShadow: theme.shadows['25'].z8,
+            boxShadow: theme.shadows.z8,
             background: theme.palette.common.white,
             borderRadius: theme.shape.borderRadius,
           },

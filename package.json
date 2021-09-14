@@ -1,36 +1,31 @@
 {
-  "name": "cloudhubui",
-  "version": "0.0.0-development",
+  "name": "@cloudhub-ux/core",
+  "version": "0.17.0",
   "description": "Various components to use in react projects",
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "main": "./index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "mocha src/index.test.js -w --require babel-core/register",
     "test:single": "mocha src/index.test.js --require babel-core/register",
     "build": "npm-run-all --parallel build:*",
-    "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir dist --ignore *.test.js src",
+    "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir ../core --ignore *.test.js src && cp package.json ../core/package.json",
     "lint": "node ./node_modules/.bin/eslint ./src --max-warnings=0 && echo '✔  Your code looks good.'",
+    "prepublishOnly": "./publish.sh",
     "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudhubke/cloudhubui.git"
+    "url": "https://github.com/cloudhubke/cloudhub-ux-core.git"
   },
   "keywords": [
     "cloudhub"
   ],
-  
   "author": "Bernard Gaitho <gaithoben@gmail.com> (http://github.com/cloudhubke)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloudhubke/cloudhubui/issues"
+    "url": "https://github.com/cloudhubke/cloudhub-ux-core/issues"
   },
-  "homepage": "https://github.com/cloudhubke/cloudhubui#readme",
+  "homepage": "https://github.com/cloudhubke/cloudhub-ux-core#readme",
   "peerDependencies": {
     "@emotion/cache": "^11.1.3",
     "@emotion/react": "^11.1.5",
