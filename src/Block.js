@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { makeStyles } from '@material-ui/styles';
-import { Slide, Grow, Paper } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Slide, Grow, Paper } from '@mui/material';
 import classNames from 'classnames';
 import ThemeContext from './theme/ThemeContext';
 

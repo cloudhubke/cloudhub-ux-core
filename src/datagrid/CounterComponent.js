@@ -1,8 +1,8 @@
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
+import TableCell from '@mui/material/TableCell';
 
 const CounterComponent = ({ data, row, currentPage, pageSize }) => {
-  const ind = 1 + data.findIndex(item => item.id === row.id);
+  const ind = 1 + data.findIndex((item) => item.id === row.id);
   return (
     <TableCell>
       {currentPage === 0 ? ind : currentPage * pageSize + ind}

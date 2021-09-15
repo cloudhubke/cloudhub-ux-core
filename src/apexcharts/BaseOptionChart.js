@@ -1,6 +1,5 @@
 // material
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { useTheme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, useTheme } from '@mui/styles';
 
 // ----------------------------------------------------------------------
 

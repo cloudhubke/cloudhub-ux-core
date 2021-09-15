@@ -1,9 +1,9 @@
 import React from 'react';
-import TableCell from '@material-ui/core/TableCell';
+import TableCell from '@mui/material/TableCell';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import Visibility from '@material-ui/icons/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Visibility from '@mui/icons-material/Visibility';
 
 import IconButton from '../IconButton';
 import Block from '../Block';

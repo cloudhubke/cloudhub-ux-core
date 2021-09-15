@@ -1,18 +1,18 @@
 import React, { Fragment, useState } from 'react';
 
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import { alpha } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Collapse from '@material-ui/core/Collapse';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@mui/styles';
+import { alpha } from '@mui/material/styles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Collapse from '@mui/material/Collapse';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
-import Lens from '@material-ui/icons/Lens';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+import Lens from '@mui/icons-material/Lens';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 import ThemeContext from '../theme/ThemeContext';
 
 const useStyles = makeStyles((theme) => ({

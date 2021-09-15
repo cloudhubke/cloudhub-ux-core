@@ -1,4 +1,4 @@
-import { alpha, fade } from '@material-ui/core/styles';
+import { alpha, fade } from '@mui/material/styles';
 import getPalette from './palettes';
 
 const alphaFn = alpha || fade;
@@ -41,16 +41,16 @@ const ERROR = {
 
 // prettier-ignore
 const GREY = {
-  '0': '#FFFFFF',
-  '100': '#F9FAFB',
-  '200': '#F4F6F8',
-  '300': '#DFE3E8',
-  '400': '#C4CDD5',
-  '500': '#919EAB',
-  '600': '#637381',
-  '700': '#454F5B',
-  '800': '#212B36',
-  '900': '#161C24',
+  0: '#FFFFFF',
+  100: '#F9FAFB',
+  200: '#F4F6F8',
+  300: '#DFE3E8',
+  400: '#C4CDD5',
+  500: '#919EAB',
+  600: '#637381',
+  700: '#454F5B',
+  800: '#212B36',
+  900: '#161C24',
   '500_8': alphaFn('#919EAB', 0.08),
   '500_12': alphaFn('#919EAB', 0.12),
   '500_16': alphaFn('#919EAB', 0.16),
@@ -110,47 +110,43 @@ const getColors = (colors, paletteType = 'green') => {
   return COMMON;
 };
 
-export const getLightColors = (colors) => {
-  return {
-    ...getColors(colors),
-    mode: 'light',
-    text: {
-      primary: GREY['800'],
-      secondary: GREY['600'],
-      disabled: GREY['500'],
-    },
-    background: {
-      paper: '#fff',
-      default: '#fff',
-      neutral: GREY['200'],
-    },
-    action: {
-      active: GREY['600'],
-      ...getColors(colors).action,
-    },
-  };
-};
+export const getLightColors = (colors) => ({
+  ...getColors(colors),
+  mode: 'light',
+  text: {
+    primary: GREY['800'],
+    secondary: GREY['600'],
+    disabled: GREY['500'],
+  },
+  background: {
+    paper: '#fff',
+    default: '#fff',
+    neutral: GREY['200'],
+  },
+  action: {
+    active: GREY['600'],
+    ...getColors(colors).action,
+  },
+});
 
 // DARK MODE
-export const getDarkColors = (colors) => {
-  return {
-    ...getColors(colors),
-    mode: 'dark',
-    text: {
-      primary: '#fff',
-      secondary: GREY['500'],
-      disabled: GREY['600'],
-    },
-    background: {
-      paper: GREY['800'],
-      default: GREY['900'],
-      neutral: GREY['500_16'],
-      level2: '#333',
-      level1: '#2D3748',
-    },
-    action: {
-      active: GREY['500'],
-      ...getColors(colors).action,
-    },
-  };
-};
+export const getDarkColors = (colors) => ({
+  ...getColors(colors),
+  mode: 'dark',
+  text: {
+    primary: '#fff',
+    secondary: GREY['500'],
+    disabled: GREY['600'],
+  },
+  background: {
+    paper: GREY['800'],
+    default: GREY['900'],
+    neutral: GREY['500_16'],
+    level2: '#333',
+    level1: '#2D3748',
+  },
+  action: {
+    active: GREY['500'],
+    ...getColors(colors).action,
+  },
+});

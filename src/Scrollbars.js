@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'simplebar/dist/simplebar.min.css';
 import SimpleBarReact from 'simplebar-react';
-import { makeStyles } from '@material-ui/styles';
-import { alpha } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
+import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 

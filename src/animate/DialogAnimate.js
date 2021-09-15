@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 // material
-import { Dialog } from '@material-ui/core';
+import { Dialog } from '@mui/material';
 //
 import { varFadeInUp } from './variants';
 
@@ -11,10 +11,16 @@ DialogAnimate.propTypes = {
   open: PropTypes.bool.isRequired,
   animate: PropTypes.object,
   onClose: PropTypes.func,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
-export default function DialogAnimate({ open = false, animate, onClose, children, ...other }) {
+export default function DialogAnimate({
+  open = false,
+  animate,
+  onClose,
+  children,
+  ...other
+}) {
   return (
     <AnimatePresence>
       {open && (
@@ -27,9 +33,9 @@ export default function DialogAnimate({ open = false, animate, onClose, children
           PaperProps={{
             sx: {
               borderRadius: 2,
-              bgcolor: 'background.paper'
+              bgcolor: 'background.paper',
             },
-            ...(animate || varFadeInUp)
+            ...(animate || varFadeInUp),
           }}
           {...other}
         >

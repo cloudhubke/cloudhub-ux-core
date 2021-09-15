@@ -2,7 +2,7 @@ import React from 'react';
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/styles';
 //
 import BaseOptionChart from './BaseOptionChart';
 

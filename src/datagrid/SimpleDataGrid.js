@@ -6,16 +6,16 @@ import {
   DragDropProvider,
   TableColumnReordering,
 } from '@devexpress/dx-react-grid-material-ui';
-import TableCell from '@material-ui/core/TableCell';
-import Button from '@material-ui/core/Button';
+import TableCell from '@mui/material/TableCell';
+import Button from '@mui/material/Button';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogContent from '@mui/material/DialogContent';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import Block from '../Block';
 import './grid.css';
 

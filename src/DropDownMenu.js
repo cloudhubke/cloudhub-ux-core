@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { styled, alpha } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { styled, alpha } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StyledMenu = styled((props) => (
   <Menu
