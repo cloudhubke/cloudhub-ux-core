@@ -2,7 +2,6 @@ import React from 'react';
 import isPlainObject from 'lodash/isPlainObject';
 import isEqual from 'lodash/isEqual';
 import { Select, TYPE } from 'baseui/select';
-import LayersManager from './LayersManager';
 import Block from '../Block';
 import Text from '../Text';
 
@@ -48,6 +47,7 @@ const BaseWebSelect = (props) => {
     // eslint-disable-next-line
   }, [JSON.stringify(val)]);
   const [itemOptions, setitemOptions] = React.useState(options);
+  const [tagProps, settagProps] = React.useState({});
 
   const containerRef = React.useRef();
 
@@ -89,7 +89,47 @@ const BaseWebSelect = (props) => {
     } else {
       setitemOptions(options);
     }
+    // eslint-disable-next-line
   }, [JSON.stringify(options)]);
+
+  React.useEffect(() => {
+    if (multi || isMulti) {
+      settagProps({
+        Tag: {
+          props: {
+            onActionClick: (event) => {
+              let deletedText;
+              try {
+                deletedText = event.currentTarget.previousSibling.textContent;
+                setValue((currentVal) => {
+                  const newVal = currentVal
+                    .map((val, index) => {
+                      if (
+                        (val && val === deletedText) ||
+                        (typeof labelExtractor === 'function' &&
+                          labelExtractor(val) === deletedText) ||
+                        getOptionLabel({ option: val, index }) === deletedText
+                      ) {
+                        return null;
+                      }
+                      return val;
+                    })
+                    .filter(Boolean);
+                  if (deletedText && typeof input.onChange === 'function') {
+                    input.onChange(newVal);
+                  }
+                  if (deletedText && typeof onChange === 'function') {
+                    onChange(newVal);
+                  }
+                  return newVal;
+                });
+              } catch (error) {}
+            },
+          },
+        },
+      });
+    }
+  }, [multi, isMulti]);
 
   const optionLabelExtractor = ({ option, index }) => {
     if (labelExtractor) {
@@ -162,6 +202,7 @@ const BaseWebSelect = (props) => {
             // pass sizes as strings, "10px" rather than 10
             style: dropDownStyle,
           },
+          ...tagProps,
         }}
         getOptionLabel={optionLabelExtractor}
         getValueLabel={valueLabelExtractor}
