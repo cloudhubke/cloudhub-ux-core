@@ -22,7 +22,9 @@ const BasewebRemoteSelect = ({
 
   const getOptions = React.useCallback(async () => {
     try {
-      const resultkey = `${url}${debouncedFilter || ''}`;
+      const resultkey = `${url}${debouncedFilter || ''}${JSON.stringify(
+        debouncedParams
+      )}`;
       if (url && dropdownOpen) {
         setisLoading(true);
         if (cachedResults.current[resultkey]) {
