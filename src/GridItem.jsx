@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-// @material-ui/core components
-import { withStyles } from '@material-ui/styles';
-import Grid from '@material-ui/core/Grid';
+// @mui/material components
+import { withStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
 const style = {
   grid: {

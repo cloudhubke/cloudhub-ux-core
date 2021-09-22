@@ -7,7 +7,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 import { editorToolbar } from './EditorToolbar';
 

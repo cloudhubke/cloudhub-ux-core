@@ -1,14 +1,14 @@
 import React from 'react';
 
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import { alpha } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@mui/styles';
+import { alpha } from '@mui/material/styles';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Divider from '@mui/material/Divider';
 
 import { useLocation } from '../customhooks';
 import { Link } from '../reach';

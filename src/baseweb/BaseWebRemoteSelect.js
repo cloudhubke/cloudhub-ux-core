@@ -15,19 +15,21 @@ const BasewebRemoteSelect = ({
   const [isLoading, setisLoading] = React.useState(false);
   const [filter, setfilter] = React.useState('');
   const [options, setoptions] = React.useState([]);
+  const [dropdownOpen, setdropdownOpen] = React.useState(false);
 
   const debouncedFilter = useDebounce(filter, debounceTime);
+  const debouncedParams = useDebounce(params, debounceTime);
 
   const getOptions = React.useCallback(async () => {
     try {
       const resultkey = `${url}${debouncedFilter || ''}`;
-      if (url) {
+      if (url && dropdownOpen) {
         setisLoading(true);
         if (cachedResults.current[resultkey]) {
           setoptions(cachedResults.current[resultkey]);
         } else {
           const { data } = await axiosinstance().get(url, {
-            params: { ...params, [filterkey]: debouncedFilter },
+            params: { ...debouncedParams, [filterkey]: debouncedFilter },
           });
           if (data && Array.isArray(data.items)) {
             setoptions(data.items);
@@ -43,7 +45,7 @@ const BasewebRemoteSelect = ({
         }, 200);
       }
     } catch (error) {}
-  }, [url, debouncedFilter]);
+  }, [url, debouncedFilter, JSON.stringify(debouncedParams), dropdownOpen]);
 
   React.useEffect(() => {
     getOptions();
@@ -55,6 +57,11 @@ const BasewebRemoteSelect = ({
       onInputChange={(event) => {
         const { target } = event;
         setfilter(target.value);
+      }}
+      onOpen={() => setdropdownOpen(true)}
+      onClose={() => {
+        setdropdownOpen(false);
+        setfilter('');
       }}
       isLoading={isLoading}
       {...rest}

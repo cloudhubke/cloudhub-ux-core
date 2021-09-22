@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // material
-import { Card, CardHeader, Box, Typography } from '@material-ui/core';
+import { Card, CardHeader, Box, Typography } from '@mui/material';
 import ThemeContext from './theme/ThemeContext';
 
 // ----------------------------------------------------------------------

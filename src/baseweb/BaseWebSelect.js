@@ -29,6 +29,7 @@ const BaseWebSelect = (props) => {
     labelField,
     valueField,
     filterOptions,
+    dropDownStyle,
     ...rest
   } = props;
 
@@ -157,6 +158,10 @@ const BaseWebSelect = (props) => {
               mountNode: containerRef.current,
             },
           },
+          Dropdown: {
+            // pass sizes as strings, "10px" rather than 10
+            style: dropDownStyle,
+          },
         }}
         getOptionLabel={optionLabelExtractor}
         getValueLabel={valueLabelExtractor}
@@ -201,6 +206,7 @@ BaseWebSelect.defaultProps = {
   // getValueLabel: ({ option, index }) =>
   //   isPlainObject(option) ? option.id || `option-${index}` : `option-${index}`,
   onSelectChange: () => {},
+  dropDownStyle: { maxHeight: '350px' },
 };
 
 export default BaseWebSelect;

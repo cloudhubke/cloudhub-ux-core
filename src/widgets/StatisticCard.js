@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import CountUp from 'react-countup';
-import { makeStyles } from '@material-ui/styles';
-import { alpha, useTheme } from '@material-ui/core/styles';
-import { Box, Paper, Typography } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { alpha, useTheme } from '@mui/material/styles';
+import { Box, Paper, Typography } from '@mui/material';
 import { Icon } from '@iconify/react';
 import ReactApexChart from 'react-apexcharts';
 import trendingUpFill from '@iconify-icons/eva/trending-up-fill';

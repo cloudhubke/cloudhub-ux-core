@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 // nodejs library that concatenates classes
 import classNames from 'classnames';
 
-// @material-ui/core components
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+// @mui/material components
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 
 import hexToRgb from './theme/hexToRgb';
 

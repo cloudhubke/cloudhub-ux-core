@@ -1,7 +1,7 @@
 import React from 'react';
-import MuiButton from '@material-ui/core/Button';
-import ThemeContext from './theme/ThemeContext';
+import MuiButton from '@mui/material/Button';
 import hexContrastColor from 'hex-contrast-color';
+import ThemeContext from './theme/ThemeContext';
 
 let height = 48;
 
