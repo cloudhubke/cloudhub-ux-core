@@ -61,7 +61,7 @@ import {
   ExportPanel as ExportPanel$1,
 } from '@devexpress/dx-react-grid';
 import classNames from 'clsx';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import {
   withComponents,
   RefType,
@@ -69,45 +69,45 @@ import {
   DragSource,
   Sizer,
 } from '@devexpress/dx-react-core';
-import Popover from '@material-ui/core/Popover';
-import List from '@material-ui/core/List';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
-import Input from '@material-ui/core/Input';
-import MenuItem$1 from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+import Popover from '@mui/material/Popover';
+import List from '@mui/material/List';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
+import Input from '@mui/material/Input';
+import MenuItem$1 from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 import {
   firstRowOnPage,
   lastRowOnPage,
   calculateStartPage,
   getCellGeometries,
 } from '@devexpress/dx-grid-core';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import TableCell$1 from '@material-ui/core/TableCell';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import TableRowMUI from '@material-ui/core/TableRow';
-import { lighten, alpha as fade, darken } from '@material-ui/core/styles';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableMUI from '@material-ui/core/Table';
-import Menu$1 from '@material-ui/core/Menu';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import SearchIcon from '@material-ui/icons/Search';
-import List$1 from '@material-ui/icons/List';
-import Toolbar$2 from '@material-ui/core/Toolbar';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Save from '@material-ui/icons/Save';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import TableCell$1 from '@mui/material/TableCell';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import TableRowMUI from '@mui/material/TableRow';
+import { lighten, alpha as fade, darken } from '@mui/material/styles';
+import TableBody from '@mui/material/TableBody';
+import TableHead from '@mui/material/TableHead';
+import TableFooter from '@mui/material/TableFooter';
+import TableMUI from '@mui/material/Table';
+import Menu$1 from '@mui/material/Menu';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import SvgIcon from '@mui/material/SvgIcon';
+import SearchIcon from '@mui/icons-material/Search';
+import List$1 from '@mui/icons-material/List';
+import Toolbar$2 from '@mui/material/Toolbar';
+import InputAdornment from '@mui/material/InputAdornment';
+import Save from '@mui/icons-material/Save';
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -116,8 +116,8 @@ function _classCallCheck(instance, Constructor) {
 }
 
 function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
+  for (let i = 0; i < props.length; i++) {
+    const descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ('value' in descriptor) descriptor.writable = true;
@@ -134,7 +134,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
-      value: value,
+      value,
       enumerable: true,
       configurable: true,
       writable: true,
@@ -150,10 +150,10 @@ function _extends() {
   _extends =
     Object.assign ||
     function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
+      for (let i = 1; i < arguments.length; i++) {
+        const source = arguments[i];
 
-        for (var key in source) {
+        for (const key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
           }
@@ -167,14 +167,15 @@ function _extends() {
 }
 
 function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
+  const keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly)
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
+    let symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) {
+      symbols = symbols.filter(
+        (sym) => Object.getOwnPropertyDescriptor(object, sym).enumerable
+      );
+    }
     keys.push.apply(keys, symbols);
   }
 
@@ -182,17 +183,17 @@ function ownKeys(object, enumerableOnly) {
 }
 
 function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
+  for (let i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
+      ownKeys(Object(source), true).forEach((key) => {
         _defineProperty(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys(Object(source)).forEach(function (key) {
+      ownKeys(Object(source)).forEach((key) => {
         Object.defineProperty(
           target,
           key,
@@ -242,9 +243,10 @@ function _setPrototypeOf(o, p) {
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
+  const target = {};
+  const sourceKeys = Object.keys(source);
+  let key;
+  let i;
 
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
@@ -258,12 +260,13 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
 
-  var target = _objectWithoutPropertiesLoose(source, excluded);
+  const target = _objectWithoutPropertiesLoose(source, excluded);
 
-  var key, i;
+  let key;
+  let i;
 
   if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    const sourceSymbolKeys = Object.getOwnPropertySymbols(source);
 
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
@@ -314,10 +317,10 @@ function _iterableToArrayLimit(arr, i) {
     return;
   }
 
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
+  const _arr = [];
+  let _n = true;
+  let _d = false;
+  let _e;
 
   try {
     for (
@@ -334,7 +337,7 @@ function _iterableToArrayLimit(arr, i) {
     _e = err;
   } finally {
     try {
-      if (!_n && _i['return'] != null) _i['return']();
+      if (!_n && _i.return != null) _i.return();
     } finally {
       if (_d) throw _e;
     }
@@ -347,22 +350,22 @@ function _nonIterableRest() {
   throw new TypeError('Invalid attempt to destructure non-iterable instance');
 }
 
-var styles = {
+const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
   },
 };
 
-var RootBase = function RootBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-    ]);
+const RootBase = function RootBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -386,11 +389,11 @@ process.env.NODE_ENV !== 'production'
 RootBase.defaultProps = {
   className: undefined,
 };
-var Root = withStyles(styles)(RootBase);
+const Root = withStyles(styles)(RootBase);
 
-var Grid = function Grid(_ref) {
-  var children = _ref.children,
-    props = _objectWithoutProperties(_ref, ['children']);
+const Grid = function Grid(_ref) {
+  const { children } = _ref;
+  const props = _objectWithoutProperties(_ref, ['children']);
 
   return createElement(
     Grid$1,
@@ -410,17 +413,17 @@ process.env.NODE_ENV !== 'production'
     })
   : void 0;
 
-var Overlay = function Overlay(_ref) {
-  var visible = _ref.visible,
-    onHide = _ref.onHide,
-    children = _ref.children,
-    target = _ref.target,
-    restProps = _objectWithoutProperties(_ref, [
-      'visible',
-      'onHide',
-      'children',
-      'target',
-    ]);
+const Overlay = function Overlay(_ref) {
+  const { visible } = _ref;
+  const { onHide } = _ref;
+  const { children } = _ref;
+  const { target } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'visible',
+    'onHide',
+    'children',
+    'target',
+  ]);
 
   return createElement(
     Popover,
@@ -456,9 +459,9 @@ Overlay.defaultProps = {
   target: null,
 };
 
-var Container = function Container(_ref) {
-  var children = _ref.children,
-    restProps = _objectWithoutProperties(_ref, ['children']);
+const Container = function Container(_ref) {
+  const { children } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['children']);
 
   return createElement(
     List,
@@ -477,17 +480,17 @@ process.env.NODE_ENV !== 'production'
     })
   : void 0;
 
-var ToggleButton = function ToggleButton(_ref) {
-  var onToggle = _ref.onToggle,
-    getMessage = _ref.getMessage,
-    buttonRef = _ref.buttonRef,
-    active = _ref.active,
-    restProps = _objectWithoutProperties(_ref, [
-      'onToggle',
-      'getMessage',
-      'buttonRef',
-      'active',
-    ]);
+const ToggleButton = function ToggleButton(_ref) {
+  const { onToggle } = _ref;
+  const { getMessage } = _ref;
+  const { buttonRef } = _ref;
+  const { active } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'onToggle',
+    'getMessage',
+    'buttonRef',
+    'active',
+  ]);
 
   return createElement(
     Tooltip,
@@ -501,7 +504,7 @@ var ToggleButton = function ToggleButton(_ref) {
       _extends(
         {
           onClick: onToggle,
-          buttonRef: buttonRef,
+          buttonRef,
         },
         restProps
       ),
@@ -521,7 +524,7 @@ ToggleButton.defaultProps = {
   active: false,
 };
 
-var styles$1 = function styles(theme) {
+const styles$1 = function styles(theme) {
   return {
     checkbox: {
       padding: 0,
@@ -532,19 +535,19 @@ var styles$1 = function styles(theme) {
   };
 };
 
-var ItemBase = function ItemBase(_ref) {
-  var _ref$item = _ref.item,
-    column = _ref$item.column,
-    hidden = _ref$item.hidden,
-    disabled = _ref.disabled,
-    onToggle = _ref.onToggle,
-    classes = _ref.classes,
-    restProps = _objectWithoutProperties(_ref, [
-      'item',
-      'disabled',
-      'onToggle',
-      'classes',
-    ]);
+const ItemBase = function ItemBase(_ref) {
+  const _ref$item = _ref.item;
+  const { column } = _ref$item;
+  const { hidden } = _ref$item;
+  const { disabled } = _ref;
+  const { onToggle } = _ref;
+  const { classes } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'item',
+    'disabled',
+    'onToggle',
+    'classes',
+  ]);
 
   return createElement(
     ListItem,
@@ -553,7 +556,7 @@ var ItemBase = function ItemBase(_ref) {
         key: column.name,
         button: !disabled,
         component: 'li',
-        disabled: disabled,
+        disabled,
         onClick: !disabled ? onToggle : null,
       },
       restProps
@@ -562,7 +565,7 @@ var ItemBase = function ItemBase(_ref) {
       checked: !hidden,
       tabIndex: -1,
       disableRipple: true,
-      disabled: disabled,
+      disabled,
       className: classes.checkbox,
     }),
     createElement(ListItemText, {
@@ -590,7 +593,7 @@ ItemBase.defaultProps = {
   onToggle: function onToggle() {},
   disabled: false,
 };
-var Item = withStyles(styles$1, {
+const Item = withStyles(styles$1, {
   name: 'Item',
 })(ItemBase);
 
@@ -601,7 +604,7 @@ function _createSuper(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -609,11 +612,11 @@ function _createSuper(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -623,12 +626,12 @@ function _createSuper(Derived) {
     return _possibleConstructorReturn(this, result);
   };
 }
-var withPatchedProps = function withPatchedProps(patchProps) {
+const withPatchedProps = function withPatchedProps(patchProps) {
   return function (Target) {
-    var Patched = /*#__PURE__*/ (function (_React$PureComponent) {
+    const Patched = /* #__PURE__ */ (function (_React$PureComponent) {
       _inherits(Patched, _React$PureComponent);
 
-      var _super = _createSuper(Patched);
+      const _super = _createSuper(Patched);
 
       function Patched() {
         _classCallCheck(this, Patched);
@@ -652,12 +655,12 @@ var withPatchedProps = function withPatchedProps(patchProps) {
   };
 };
 
-var defaultMessages = {
+const defaultMessages = {
   showColumnChooser: 'Show Column Chooser',
 };
-var ColumnChooserWithMessages = withPatchedProps(function (_ref) {
-  var messages = _ref.messages,
-    restProps = _objectWithoutProperties(_ref, ['messages']);
+const ColumnChooserWithMessages = withPatchedProps((_ref) => {
+  const { messages } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['messages']);
 
   return _objectSpread2(
     {
@@ -675,14 +678,14 @@ ColumnChooserWithMessages.defaultProps = {
   messages: {},
 };
 ColumnChooserWithMessages.components = ColumnChooser$1.components;
-var ColumnChooser = withComponents({
-  Container: Container,
-  Item: Item,
-  Overlay: Overlay,
-  ToggleButton: ToggleButton,
+const ColumnChooser = withComponents({
+  Container,
+  Item,
+  Overlay,
+  ToggleButton,
 })(ColumnChooserWithMessages);
 
-var styles$2 = function styles(theme) {
+const styles$2 = function styles(theme) {
   return {
     container: {
       position: 'fixed',
@@ -700,19 +703,19 @@ var styles$2 = function styles(theme) {
   };
 };
 
-var ContainerBase = function ContainerBase(_ref) {
-  var clientOffset = _ref.clientOffset,
-    classes = _ref.classes,
-    style = _ref.style,
-    className = _ref.className,
-    children = _ref.children,
-    restProps = _objectWithoutProperties(_ref, [
-      'clientOffset',
-      'classes',
-      'style',
-      'className',
-      'children',
-    ]);
+const ContainerBase = function ContainerBase(_ref) {
+  const { clientOffset } = _ref;
+  const { classes } = _ref;
+  const { style } = _ref;
+  const { className } = _ref;
+  const { children } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'clientOffset',
+    'classes',
+    'style',
+    'className',
+    'children',
+  ]);
 
   return createElement(
     'div',
@@ -754,18 +757,18 @@ ContainerBase.defaultProps = {
   className: undefined,
   children: undefined,
 };
-var Container$1 = withStyles(styles$2, {
+const Container$1 = withStyles(styles$2, {
   name: 'DragDrop',
 })(ContainerBase);
-var ColumnBase = memo(function (_ref2) {
-  var column = _ref2.column,
-    classes = _ref2.classes,
-    className = _ref2.className,
-    restProps = _objectWithoutProperties(_ref2, [
-      'column',
-      'classes',
-      'className',
-    ]);
+const ColumnBase = memo((_ref2) => {
+  const { column } = _ref2;
+  const { classes } = _ref2;
+  const { className } = _ref2;
+  const restProps = _objectWithoutProperties(_ref2, [
+    'column',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     Chip,
@@ -786,19 +789,19 @@ ColumnBase.propTypes = {
 ColumnBase.defaultProps = {
   className: undefined,
 };
-var Column = withStyles(styles$2, {
+const Column = withStyles(styles$2, {
   name: 'DragDrop',
 })(ColumnBase);
 
-var DragDropProvider = withComponents({
+const DragDropProvider = withComponents({
   Container: Container$1,
-  Column: Column,
+  Column,
 })(DragDropProvider$1);
 
-var IS_LEGACY_EDGE_MEDIA_QUERY =
+const IS_LEGACY_EDGE_MEDIA_QUERY =
   '@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)';
 
-var styles$3 = function styles(theme) {
+const styles$3 = function styles(theme) {
   return {
     pageSizeSelector: _objectSpread2({}, theme.typography.caption, {
       paddingRight: theme.spacing(5),
@@ -834,13 +837,13 @@ var styles$3 = function styles(theme) {
   };
 };
 
-var PageSizeSelectorBase = function PageSizeSelectorBase(_ref) {
-  var pageSize = _ref.pageSize,
-    onPageSizeChange = _ref.onPageSizeChange,
-    pageSizes = _ref.pageSizes,
-    getMessage = _ref.getMessage,
-    classes = _ref.classes;
-  var showAll = getMessage('showAll');
+const PageSizeSelectorBase = function PageSizeSelectorBase(_ref) {
+  const { pageSize } = _ref;
+  const { onPageSizeChange } = _ref;
+  const { pageSizes } = _ref;
+  const { getMessage } = _ref;
+  const { classes } = _ref;
+  const showAll = getMessage('showAll');
   return createElement(
     'div',
     {
@@ -873,16 +876,16 @@ var PageSizeSelectorBase = function PageSizeSelectorBase(_ref) {
           },
         }),
       },
-      pageSizes.map(function (item) {
-        return createElement(
+      pageSizes.map((item) =>
+        createElement(
           MenuItem$1,
           {
             key: item,
             value: item,
           },
           item !== 0 ? item : showAll
-        );
-      })
+        )
+      )
     )
   );
 };
@@ -896,11 +899,11 @@ process.env.NODE_ENV !== 'production'
       getMessage: func.isRequired,
     })
   : void 0;
-var PageSizeSelector = withStyles(styles$3, {
+const PageSizeSelector = withStyles(styles$3, {
   name: 'PageSizeSelector',
 })(PageSizeSelectorBase);
 
-var styles$4 = function styles(theme) {
+const styles$4 = function styles(theme) {
   return {
     pagination: {
       margin: 0,
@@ -943,15 +946,15 @@ var styles$4 = function styles(theme) {
   };
 };
 
-var PageButton = function PageButton(_ref) {
-  var _classNames;
+const PageButton = function PageButton(_ref) {
+  let _classNames;
 
-  var text = _ref.text,
-    isActive = _ref.isActive,
-    isDisabled = _ref.isDisabled,
-    classes = _ref.classes,
-    onClick = _ref.onClick;
-  var buttonClasses = classNames(
+  const { text } = _ref;
+  const { isActive } = _ref;
+  const { isDisabled } = _ref;
+  const { classes } = _ref;
+  const { onClick } = _ref;
+  const buttonClasses = classNames(
     ((_classNames = {}),
     _defineProperty(_classNames, classes.button, true),
     _defineProperty(_classNames, classes.activeButton, isActive),
@@ -963,7 +966,7 @@ var PageButton = function PageButton(_ref) {
       {
         className: buttonClasses,
         disabled: isDisabled,
-        onClick: onClick,
+        onClick,
       },
       isActive
         ? {
@@ -989,18 +992,18 @@ PageButton.defaultProps = {
   isDisabled: false,
   isActive: false,
 };
-var ellipsisSymbol = '\u2026';
+const ellipsisSymbol = '\u2026';
 
-var renderPageButtons = function renderPageButtons(
+const renderPageButtons = function renderPageButtons(
   currentPage,
   totalPageCount,
   classes,
   onCurrentPageChange
 ) {
-  var pageButtons = [];
-  var maxButtonCount = 3;
-  var startPage = 1;
-  var endPage = totalPageCount || 1;
+  const pageButtons = [];
+  const maxButtonCount = 3;
+  let startPage = 1;
+  let endPage = totalPageCount || 1;
 
   if (maxButtonCount < totalPageCount) {
     startPage = calculateStartPage(
@@ -1016,7 +1019,7 @@ var renderPageButtons = function renderPageButtons(
       createElement(PageButton, {
         key: 1,
         text: String(1),
-        classes: classes,
+        classes,
         onClick: function onClick() {
           return onCurrentPageChange(0);
         },
@@ -1028,20 +1031,20 @@ var renderPageButtons = function renderPageButtons(
         createElement(PageButton, {
           key: 'ellipsisStart',
           text: ellipsisSymbol,
-          classes: classes,
+          classes,
           isDisabled: true,
         })
       );
     }
   }
 
-  var _loop = function _loop(page) {
+  const _loop = function _loop(page) {
     pageButtons.push(
       createElement(PageButton, {
         key: page,
         text: String(page),
         isActive: page === currentPage + 1,
-        classes: classes,
+        classes,
         onClick: function onClick() {
           return onCurrentPageChange(page - 1);
         },
@@ -1050,7 +1053,7 @@ var renderPageButtons = function renderPageButtons(
     );
   };
 
-  for (var page = startPage; page <= endPage; page += 1) {
+  for (let page = startPage; page <= endPage; page += 1) {
     _loop(page);
   }
 
@@ -1060,7 +1063,7 @@ var renderPageButtons = function renderPageButtons(
         createElement(PageButton, {
           key: 'ellipsisEnd',
           text: ellipsisSymbol,
-          classes: classes,
+          classes,
           isDisabled: true,
         })
       );
@@ -1070,7 +1073,7 @@ var renderPageButtons = function renderPageButtons(
       createElement(PageButton, {
         key: totalPageCount,
         text: String(totalPageCount),
-        classes: classes,
+        classes,
         onClick: function onClick() {
           return onCurrentPageChange(totalPageCount - 1);
         },
@@ -1081,16 +1084,16 @@ var renderPageButtons = function renderPageButtons(
   return pageButtons;
 };
 
-var PaginationBase = function PaginationBase(_ref2) {
-  var totalPages = _ref2.totalPages,
-    totalCount = _ref2.totalCount,
-    pageSize = _ref2.pageSize,
-    currentPage = _ref2.currentPage,
-    onCurrentPageChange = _ref2.onCurrentPageChange,
-    getMessage = _ref2.getMessage,
-    classes = _ref2.classes;
-  var from = firstRowOnPage(currentPage, pageSize, totalCount);
-  var to = lastRowOnPage(currentPage, pageSize, totalCount);
+const PaginationBase = function PaginationBase(_ref2) {
+  const { totalPages } = _ref2;
+  const { totalCount } = _ref2;
+  const { pageSize } = _ref2;
+  const { currentPage } = _ref2;
+  const { onCurrentPageChange } = _ref2;
+  const { getMessage } = _ref2;
+  const { classes } = _ref2;
+  const from = firstRowOnPage(currentPage, pageSize, totalCount);
+  const to = lastRowOnPage(currentPage, pageSize, totalCount);
   return createElement(
     'div',
     {
@@ -1102,8 +1105,8 @@ var PaginationBase = function PaginationBase(_ref2) {
         className: classes.rowsLabel,
       },
       getMessage('info', {
-        from: from,
-        to: to,
+        from,
+        to,
         count: totalCount,
       })
     ),
@@ -1148,11 +1151,11 @@ process.env.NODE_ENV !== 'production'
       getMessage: func.isRequired,
     })
   : void 0;
-var Pagination = withStyles(styles$4, {
+const Pagination = withStyles(styles$4, {
   name: 'Pagination',
 })(PaginationBase);
 
-var styles$5 = function styles(theme) {
+const styles$5 = function styles(theme) {
   return {
     pager: {
       overflow: 'hidden',
@@ -1165,29 +1168,29 @@ var styles$5 = function styles(theme) {
   };
 };
 
-var PagerBase = function PagerBase(_ref) {
-  var currentPage = _ref.currentPage,
-    pageSizes = _ref.pageSizes,
-    totalPages = _ref.totalPages,
-    pageSize = _ref.pageSize,
-    classes = _ref.classes,
-    _onCurrentPageChange = _ref.onCurrentPageChange,
-    onPageSizeChange = _ref.onPageSizeChange,
-    totalCount = _ref.totalCount,
-    getMessage = _ref.getMessage,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'currentPage',
-      'pageSizes',
-      'totalPages',
-      'pageSize',
-      'classes',
-      'onCurrentPageChange',
-      'onPageSizeChange',
-      'totalCount',
-      'getMessage',
-      'className',
-    ]);
+const PagerBase = function PagerBase(_ref) {
+  const { currentPage } = _ref;
+  const { pageSizes } = _ref;
+  const { totalPages } = _ref;
+  const { pageSize } = _ref;
+  const { classes } = _ref;
+  const _onCurrentPageChange = _ref.onCurrentPageChange;
+  const { onPageSizeChange } = _ref;
+  const { totalCount } = _ref;
+  const { getMessage } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'currentPage',
+    'pageSizes',
+    'totalPages',
+    'pageSize',
+    'classes',
+    'onCurrentPageChange',
+    'onPageSizeChange',
+    'totalCount',
+    'getMessage',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -1199,20 +1202,20 @@ var PagerBase = function PagerBase(_ref) {
     ),
     !!pageSizes.length &&
       createElement(PageSizeSelector, {
-        pageSize: pageSize,
-        onPageSizeChange: onPageSizeChange,
-        pageSizes: pageSizes,
-        getMessage: getMessage,
+        pageSize,
+        onPageSizeChange,
+        pageSizes,
+        getMessage,
       }),
     createElement(Pagination, {
-      totalPages: totalPages,
-      totalCount: totalCount,
-      currentPage: currentPage,
+      totalPages,
+      totalCount,
+      currentPage,
       onCurrentPageChange: function onCurrentPageChange(page) {
         return _onCurrentPageChange(page);
       },
-      pageSize: pageSize,
-      getMessage: getMessage,
+      pageSize,
+      getMessage,
     })
   );
 };
@@ -1234,16 +1237,16 @@ process.env.NODE_ENV !== 'production'
 PagerBase.defaultProps = {
   className: undefined,
 };
-var Pager = withStyles(styles$5, {
+const Pager = withStyles(styles$5, {
   name: 'Pager',
 })(PagerBase);
 
-var defaultMessages$1 = {
+const defaultMessages$1 = {
   rowsPerPage: 'Rows per page:',
 };
-var PagingPanelWithMessages = withPatchedProps(function (_ref) {
-  var messages = _ref.messages,
-    restProps = _objectWithoutProperties(_ref, ['messages']);
+const PagingPanelWithMessages = withPatchedProps((_ref) => {
+  const { messages } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['messages']);
 
   return _objectSpread2(
     {
@@ -1263,11 +1266,11 @@ PagingPanelWithMessages.defaultProps = {
   messages: {},
 };
 PagingPanelWithMessages.components = PagingPanel$1.components;
-var PagingPanel = withComponents({
+const PagingPanel = withComponents({
   Container: Pager,
 })(PagingPanelWithMessages);
 
-var styles$6 = function styles(theme) {
+const styles$6 = function styles(theme) {
   return {
     panel: {
       display: 'flex',
@@ -1278,15 +1281,15 @@ var styles$6 = function styles(theme) {
   };
 };
 
-var GroupPanelContainerBase = function GroupPanelContainerBase(_ref) {
-  var classes = _ref.classes,
-    children = _ref.children,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'classes',
-      'children',
-      'className',
-    ]);
+const GroupPanelContainerBase = function GroupPanelContainerBase(_ref) {
+  const { classes } = _ref;
+  const { children } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'classes',
+    'children',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -1311,14 +1314,14 @@ GroupPanelContainerBase.defaultProps = {
   children: undefined,
   className: undefined,
 };
-var GroupPanelContainer = withStyles(styles$6, {
+const GroupPanelContainer = withStyles(styles$6, {
   name: 'GroupPanelContainer',
 })(GroupPanelContainerBase);
 
-var ENTER_KEY_CODE = 13;
-var SPACE_KEY_CODE = 32;
+const ENTER_KEY_CODE = 13;
+const SPACE_KEY_CODE = 32;
 
-var styles$7 = function styles(theme) {
+const styles$7 = function styles(theme) {
   return {
     button: {
       marginRight: theme.spacing(1),
@@ -1334,14 +1337,14 @@ var styles$7 = function styles(theme) {
   };
 };
 
-var label = function label(
+const label = function label(
   showSortingControls,
   sortingEnabled,
   sortingDirection,
   column,
   hovered
 ) {
-  var title = column.title || column.name;
+  const title = column.title || column.name;
   return showSortingControls
     ? createElement(
         TableSortLabel,
@@ -1357,40 +1360,40 @@ var label = function label(
     : title;
 };
 
-var GroupPanelItemBase = function GroupPanelItemBase(_ref) {
-  var _classNames;
+const GroupPanelItemBase = function GroupPanelItemBase(_ref) {
+  let _classNames;
 
-  var _ref$item = _ref.item,
-    column = _ref$item.column,
-    draft = _ref$item.draft,
-    onGroup = _ref.onGroup,
-    showGroupingControls = _ref.showGroupingControls,
-    showSortingControls = _ref.showSortingControls,
-    sortingDirection = _ref.sortingDirection,
-    onSort = _ref.onSort,
-    sortingEnabled = _ref.sortingEnabled,
-    groupingEnabled = _ref.groupingEnabled,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'item',
-      'onGroup',
-      'showGroupingControls',
-      'showSortingControls',
-      'sortingDirection',
-      'onSort',
-      'sortingEnabled',
-      'groupingEnabled',
-      'classes',
-      'className',
-    ]);
+  const _ref$item = _ref.item;
+  const { column } = _ref$item;
+  const { draft } = _ref$item;
+  const { onGroup } = _ref;
+  const { showGroupingControls } = _ref;
+  const { showSortingControls } = _ref;
+  const { sortingDirection } = _ref;
+  const { onSort } = _ref;
+  const { sortingEnabled } = _ref;
+  const { groupingEnabled } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'item',
+    'onGroup',
+    'showGroupingControls',
+    'showSortingControls',
+    'sortingDirection',
+    'onSort',
+    'sortingEnabled',
+    'groupingEnabled',
+    'classes',
+    'className',
+  ]);
 
-  var _React$useState = useState(false),
-    _React$useState2 = _slicedToArray(_React$useState, 2),
-    hovered = _React$useState2[0],
-    setHovered = _React$useState2[1];
+  const _React$useState = useState(false);
+  const _React$useState2 = _slicedToArray(_React$useState, 2);
+  const hovered = _React$useState2[0];
+  const setHovered = _React$useState2[1];
 
-  var chipClassNames = classNames(
+  const chipClassNames = classNames(
     ((_classNames = {}),
     _defineProperty(_classNames, classes.button, true),
     _defineProperty(
@@ -1403,17 +1406,17 @@ var GroupPanelItemBase = function GroupPanelItemBase(_ref) {
     className
   );
 
-  var onClick = function onClick(e) {
-    var isActionKeyDown =
+  const onClick = function onClick(e) {
+    const isActionKeyDown =
       e.keyCode === ENTER_KEY_CODE || e.keyCode === SPACE_KEY_CODE;
-    var isMouseClick = e.keyCode === undefined;
-    var cancelSortingRelatedKey = e.metaKey || e.ctrlKey;
-    var direction =
+    const isMouseClick = e.keyCode === undefined;
+    const cancelSortingRelatedKey = e.metaKey || e.ctrlKey;
+    const direction =
       (isMouseClick || isActionKeyDown) && cancelSortingRelatedKey
         ? null
         : undefined;
     onSort({
-      direction: direction,
+      direction,
       keepOther: cancelSortingRelatedKey,
     });
   };
@@ -1482,11 +1485,11 @@ GroupPanelItemBase.defaultProps = {
   groupingEnabled: false,
   className: undefined,
 };
-var GroupPanelItem = withStyles(styles$7, {
+const GroupPanelItem = withStyles(styles$7, {
   name: 'GroupPanelItem',
 })(GroupPanelItemBase);
 
-var styles$8 = function styles(theme) {
+const styles$8 = function styles(theme) {
   return {
     groupInfo: {
       color: theme.typography.caption.color,
@@ -1496,15 +1499,15 @@ var styles$8 = function styles(theme) {
   };
 };
 
-var GroupPanelEmptyMessageBase = function GroupPanelEmptyMessageBase(_ref) {
-  var getMessage = _ref.getMessage,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'getMessage',
-      'classes',
-      'className',
-    ]);
+const GroupPanelEmptyMessageBase = function GroupPanelEmptyMessageBase(_ref) {
+  const { getMessage } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'getMessage',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -1528,17 +1531,17 @@ process.env.NODE_ENV !== 'production'
 GroupPanelEmptyMessageBase.defaultProps = {
   className: undefined,
 };
-var GroupPanelEmptyMessage = withStyles(styles$8, {
+const GroupPanelEmptyMessage = withStyles(styles$8, {
   name: 'GroupPanelEmptyMessage',
 })(GroupPanelEmptyMessageBase);
 
-var GroupingPanel = withComponents({
+const GroupingPanel = withComponents({
   Container: GroupPanelContainer,
   Item: GroupPanelItem,
   EmptyMessage: GroupPanelEmptyMessage,
 })(GroupingPanel$1);
 
-var styles$9 = function styles(theme) {
+const styles$9 = function styles(theme) {
   return {
     toggleCell: {
       textAlign: 'center',
@@ -1555,27 +1558,27 @@ var styles$9 = function styles(theme) {
   };
 };
 
-var TableDetailToggleCellBase = function TableDetailToggleCellBase(_ref) {
-  var style = _ref.style,
-    expanded = _ref.expanded,
-    classes = _ref.classes,
-    onToggle = _ref.onToggle,
-    tableColumn = _ref.tableColumn,
-    tableRow = _ref.tableRow,
-    row = _ref.row,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'style',
-      'expanded',
-      'classes',
-      'onToggle',
-      'tableColumn',
-      'tableRow',
-      'row',
-      'className',
-    ]);
+const TableDetailToggleCellBase = function TableDetailToggleCellBase(_ref) {
+  const { style } = _ref;
+  const { expanded } = _ref;
+  const { classes } = _ref;
+  const { onToggle } = _ref;
+  const { tableColumn } = _ref;
+  const { tableRow } = _ref;
+  const { row } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'style',
+    'expanded',
+    'classes',
+    'onToggle',
+    'tableColumn',
+    'tableRow',
+    'row',
+    'className',
+  ]);
 
-  var handleClick = function handleClick(e) {
+  const handleClick = function handleClick(e) {
     e.stopPropagation();
     onToggle();
   };
@@ -1585,7 +1588,7 @@ var TableDetailToggleCellBase = function TableDetailToggleCellBase(_ref) {
     _extends(
       {
         className: classNames(classes.toggleCell, className),
-        style: style,
+        style,
       },
       restProps
     ),
@@ -1623,11 +1626,11 @@ TableDetailToggleCellBase.defaultProps = {
   tableRow: undefined,
   row: undefined,
 };
-var TableDetailToggleCell = withStyles(styles$9, {
+const TableDetailToggleCell = withStyles(styles$9, {
   name: 'TableDetailToggleCell',
 })(TableDetailToggleCellBase);
 
-var styles$a = function styles(theme) {
+const styles$a = function styles(theme) {
   return {
     active: {
       backgroundColor: theme.palette.background.default,
@@ -1635,32 +1638,32 @@ var styles$a = function styles(theme) {
   };
 };
 
-var TableDetailCellBase = function TableDetailCellBase(_ref) {
-  var colSpan = _ref.colSpan,
-    style = _ref.style,
-    children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    tableColumn = _ref.tableColumn,
-    tableRow = _ref.tableRow,
-    row = _ref.row,
-    restProps = _objectWithoutProperties(_ref, [
-      'colSpan',
-      'style',
-      'children',
-      'classes',
-      'className',
-      'tableColumn',
-      'tableRow',
-      'row',
-    ]);
+const TableDetailCellBase = function TableDetailCellBase(_ref) {
+  const { colSpan } = _ref;
+  const { style } = _ref;
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { tableColumn } = _ref;
+  const { tableRow } = _ref;
+  const { row } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'colSpan',
+    'style',
+    'children',
+    'classes',
+    'className',
+    'tableColumn',
+    'tableRow',
+    'row',
+  ]);
 
   return createElement(
     TableCell$1,
     _extends(
       {
-        style: style,
-        colSpan: colSpan,
+        style,
+        colSpan,
         className: classNames(classes.active, className),
       },
       restProps
@@ -1690,15 +1693,19 @@ TableDetailCellBase.defaultProps = {
   row: undefined,
   children: undefined,
 };
-var TableDetailCell = withStyles(styles$a, {
+const TableDetailCell = withStyles(styles$a, {
   name: 'TableDetailCell',
 })(TableDetailCellBase);
 
-var TableRow = function TableRow(_ref) {
-  var children = _ref.children,
-    row = _ref.row,
-    tableRow = _ref.tableRow,
-    restProps = _objectWithoutProperties(_ref, ['children', 'row', 'tableRow']);
+const TableRow = function TableRow(_ref) {
+  const { children } = _ref;
+  const { row } = _ref;
+  const { tableRow } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'row',
+    'tableRow',
+  ]);
 
   return createElement(TableRowMUI, restProps, children);
 };
@@ -1715,7 +1722,7 @@ TableRow.defaultProps = {
   tableRow: undefined,
 };
 
-var TableRowDetailWithWidth = function TableRowDetailWithWidth(props) {
+const TableRowDetailWithWidth = function TableRowDetailWithWidth(props) {
   return createElement(
     TableRowDetail$1,
     _extends(
@@ -1728,7 +1735,7 @@ var TableRowDetailWithWidth = function TableRowDetailWithWidth(props) {
 };
 
 TableRowDetailWithWidth.components = TableRowDetail$1.components;
-var TableRowDetail = withComponents({
+const TableRowDetail = withComponents({
   Row: TableRow,
   Cell: TableDetailCell,
   ToggleCell: TableDetailToggleCell,
@@ -1736,7 +1743,7 @@ var TableRowDetail = withComponents({
 TableRowDetail.COLUMN_TYPE = TableRowDetail$1.COLUMN_TYPE;
 TableRowDetail.ROW_TYPE = TableRowDetail$1.ROW_TYPE;
 
-var styles$b = function styles(theme) {
+const styles$b = function styles(theme) {
   return {
     cell: {
       cursor: 'pointer',
@@ -1751,53 +1758,53 @@ var styles$b = function styles(theme) {
   };
 };
 
-var CellBase = function CellBase(_ref) {
-  var _classNames;
+const CellBase = function CellBase(_ref) {
+  let _classNames;
 
-  var Content = _ref.contentComponent,
-    Icon = _ref.iconComponent,
-    Container = _ref.containerComponent,
-    InlineSummary = _ref.inlineSummaryComponent,
-    InlineSummaryItem = _ref.inlineSummaryItemComponent,
-    inlineSummaries = _ref.inlineSummaries,
-    getMessage = _ref.getMessage,
-    style = _ref.style,
-    colSpan = _ref.colSpan,
-    row = _ref.row,
-    column = _ref.column,
-    expanded = _ref.expanded,
-    onToggle = _ref.onToggle,
-    classes = _ref.classes,
-    children = _ref.children,
-    className = _ref.className,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    side = _ref.side,
-    position = _ref.position,
-    restProps = _objectWithoutProperties(_ref, [
-      'contentComponent',
-      'iconComponent',
-      'containerComponent',
-      'inlineSummaryComponent',
-      'inlineSummaryItemComponent',
-      'inlineSummaries',
-      'getMessage',
-      'style',
-      'colSpan',
-      'row',
-      'column',
-      'expanded',
-      'onToggle',
-      'classes',
-      'children',
-      'className',
-      'tableRow',
-      'tableColumn',
-      'side',
-      'position',
-    ]);
+  const Content = _ref.contentComponent;
+  const Icon = _ref.iconComponent;
+  const Container = _ref.containerComponent;
+  const InlineSummary = _ref.inlineSummaryComponent;
+  const InlineSummaryItem = _ref.inlineSummaryItemComponent;
+  const { inlineSummaries } = _ref;
+  const { getMessage } = _ref;
+  const { style } = _ref;
+  const { colSpan } = _ref;
+  const { row } = _ref;
+  const { column } = _ref;
+  const { expanded } = _ref;
+  const { onToggle } = _ref;
+  const { classes } = _ref;
+  const { children } = _ref;
+  const { className } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { side } = _ref;
+  const { position } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'contentComponent',
+    'iconComponent',
+    'containerComponent',
+    'inlineSummaryComponent',
+    'inlineSummaryItemComponent',
+    'inlineSummaries',
+    'getMessage',
+    'style',
+    'colSpan',
+    'row',
+    'column',
+    'expanded',
+    'onToggle',
+    'classes',
+    'children',
+    'className',
+    'tableRow',
+    'tableColumn',
+    'side',
+    'position',
+  ]);
 
-  var handleClick = function handleClick() {
+  const handleClick = function handleClick() {
     return onToggle();
   };
 
@@ -1805,8 +1812,8 @@ var CellBase = function CellBase(_ref) {
     TableCell$1,
     _extends(
       {
-        colSpan: colSpan,
-        style: style,
+        colSpan,
+        style,
         className: classNames(
           ((_classNames = {}),
           _defineProperty(_classNames, classes.cell, true),
@@ -1825,24 +1832,24 @@ var CellBase = function CellBase(_ref) {
     createElement(
       Container,
       {
-        side: side,
-        position: position,
+        side,
+        position,
       },
       createElement(Icon, {
-        expanded: expanded,
+        expanded,
       }),
       createElement(
         Content,
         {
-          column: column,
-          row: row,
+          column,
+          row,
         },
         children
       ),
       inlineSummaries.length
         ? createElement(InlineSummary, {
-            inlineSummaries: inlineSummaries,
-            getMessage: getMessage,
+            inlineSummaries,
+            getMessage,
             inlineSummaryItemComponent: InlineSummaryItem,
           })
         : null
@@ -1890,11 +1897,11 @@ CellBase.defaultProps = {
   side: 'left',
   position: '',
 };
-var Cell = withStyles(styles$b, {
+const Cell = withStyles(styles$b, {
   name: 'TableGroupCell',
 })(CellBase);
 
-var styles$c = function styles() {
+const styles$c = function styles() {
   return {
     columnTitle: {
       verticalAlign: 'middle',
@@ -1902,19 +1909,19 @@ var styles$c = function styles() {
   };
 };
 
-var ContentBase = function ContentBase(_ref) {
-  var column = _ref.column,
-    row = _ref.row,
-    classes = _ref.classes,
-    className = _ref.className,
-    children = _ref.children,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'row',
-      'classes',
-      'className',
-      'children',
-    ]);
+const ContentBase = function ContentBase(_ref) {
+  const { column } = _ref;
+  const { row } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { children } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'row',
+    'classes',
+    'className',
+    'children',
+  ]);
 
   return createElement(
     'span',
@@ -1944,16 +1951,16 @@ ContentBase.defaultProps = {
   children: undefined,
   className: undefined,
 };
-var Content = withStyles(styles$c)(ContentBase);
+const Content = withStyles(styles$c)(ContentBase);
 
-var getBorder = function getBorder(theme) {
+const getBorder = function getBorder(theme) {
   return '1px solid '.concat(
     theme.palette.type === 'light'
       ? lighten(fade(theme.palette.divider, 1), 0.88)
       : darken(fade(theme.palette.divider, 1), 0.68)
   );
 };
-var getStickyCellStyle = function getStickyCellStyle(theme) {
+const getStickyCellStyle = function getStickyCellStyle(theme) {
   return {
     backgroundColor: theme.palette.background.paper,
     position: 'sticky',
@@ -1962,7 +1969,7 @@ var getStickyCellStyle = function getStickyCellStyle(theme) {
   };
 };
 
-var styles$d = function styles(theme) {
+const styles$d = function styles(theme) {
   return {
     wrapper: _objectSpread2({}, getStickyCellStyle(theme), {
       float: 'left',
@@ -1973,21 +1980,21 @@ var styles$d = function styles(theme) {
   };
 };
 
-var ContainerBase$1 = function ContainerBase(_ref) {
-  var children = _ref.children,
-    style = _ref.style,
-    classes = _ref.classes,
-    className = _ref.className,
-    side = _ref.side,
-    position = _ref.position,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'style',
-      'classes',
-      'className',
-      'side',
-      'position',
-    ]);
+const ContainerBase$1 = function ContainerBase(_ref) {
+  const { children } = _ref;
+  const { style } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { side } = _ref;
+  const { position } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'style',
+    'classes',
+    'className',
+    'side',
+    'position',
+  ]);
 
   return createElement(
     'div',
@@ -2019,9 +2026,9 @@ ContainerBase$1.defaultProps = {
   side: 'left',
   position: '',
 };
-var Container$2 = withStyles(styles$d)(ContainerBase$1);
+const Container$2 = withStyles(styles$d)(ContainerBase$1);
 
-var styles$e = function styles(theme) {
+const styles$e = function styles(theme) {
   return {
     indentCell: _objectSpread2({}, getStickyCellStyle(theme), {
       borderBottom: getBorder(theme),
@@ -2029,27 +2036,27 @@ var styles$e = function styles(theme) {
   };
 };
 
-var IndentCellBase = function IndentCellBase(_ref) {
-  var tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    row = _ref.row,
-    column = _ref.column,
-    style = _ref.style,
-    className = _ref.className,
-    classes = _ref.classes,
-    position = _ref.position,
-    side = _ref.side,
-    restProps = _objectWithoutProperties(_ref, [
-      'tableRow',
-      'tableColumn',
-      'row',
-      'column',
-      'style',
-      'className',
-      'classes',
-      'position',
-      'side',
-    ]);
+const IndentCellBase = function IndentCellBase(_ref) {
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { row } = _ref;
+  const { column } = _ref;
+  const { style } = _ref;
+  const { className } = _ref;
+  const { classes } = _ref;
+  const { position } = _ref;
+  const { side } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'tableRow',
+    'tableColumn',
+    'row',
+    'column',
+    'style',
+    'className',
+    'classes',
+    'position',
+    'side',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -2086,9 +2093,9 @@ IndentCellBase.defaultProps = {
   side: 'left',
   position: undefined,
 };
-var IndentCell = withStyles(styles$e)(IndentCellBase);
+const IndentCell = withStyles(styles$e)(IndentCellBase);
 
-var styles$f = function styles(theme) {
+const styles$f = function styles(theme) {
   return {
     groupButton: {
       verticalAlign: 'middle',
@@ -2099,15 +2106,15 @@ var styles$f = function styles(theme) {
   };
 };
 
-var IconBase = memo(function (_ref) {
-  var expanded = _ref.expanded,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'expanded',
-      'classes',
-      'className',
-    ]);
+const IconBase = memo((_ref) => {
+  const { expanded } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'expanded',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     IconButton,
@@ -2130,9 +2137,9 @@ IconBase.propTypes = {
 IconBase.defaultProps = {
   className: undefined,
 };
-var Icon = withStyles(styles$f)(IconBase);
+const Icon = withStyles(styles$f)(IconBase);
 
-var styles$g = function styles() {
+const styles$g = function styles() {
   return {
     row: {
       cursor: 'pointer',
@@ -2140,15 +2147,15 @@ var styles$g = function styles() {
   };
 };
 
-var RowBase = function RowBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-    ]);
+const RowBase = function RowBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     TableRow,
@@ -2170,9 +2177,9 @@ RowBase.defaultProps = {
   children: null,
   className: undefined,
 };
-var Row = withStyles(styles$g)(RowBase);
+const Row = withStyles(styles$g)(RowBase);
 
-var styles$h = function styles(theme) {
+const styles$h = function styles(theme) {
   return {
     inlineSummary: {
       marginLeft: theme.spacing(1),
@@ -2181,19 +2188,19 @@ var styles$h = function styles(theme) {
   };
 };
 
-var InlineSummaryBase = function InlineSummaryBase(_ref) {
-  var inlineSummaries = _ref.inlineSummaries,
-    getMessage = _ref.getMessage,
-    InlineSummaryItem = _ref.inlineSummaryItemComponent,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'inlineSummaries',
-      'getMessage',
-      'inlineSummaryItemComponent',
-      'classes',
-      'className',
-    ]);
+const InlineSummaryBase = function InlineSummaryBase(_ref) {
+  const { inlineSummaries } = _ref;
+  const { getMessage } = _ref;
+  const InlineSummaryItem = _ref.inlineSummaryItemComponent;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'inlineSummaries',
+    'getMessage',
+    'inlineSummaryItemComponent',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'span',
@@ -2205,16 +2212,14 @@ var InlineSummaryBase = function InlineSummaryBase(_ref) {
     ),
     '(',
     inlineSummaries
-      .map(function (s) {
-        return createElement(InlineSummaryItem, {
+      .map((s) =>
+        createElement(InlineSummaryItem, {
           key: s.type,
           summary: s,
-          getMessage: getMessage,
-        });
-      })
-      .reduce(function (acc, summary) {
-        return acc.concat(summary, ', ');
-      }, [])
+          getMessage,
+        })
+      )
+      .reduce((acc, summary) => acc.concat(summary, ', '), [])
       .slice(0, -1),
     ')'
   );
@@ -2233,9 +2238,9 @@ InlineSummaryBase.defaultProps = {
   className: undefined,
   inlineSummaries: [],
 };
-var InlineSummary = withStyles(styles$h)(InlineSummaryBase);
+const InlineSummary = withStyles(styles$h)(InlineSummaryBase);
 
-var styles$i = function styles(theme) {
+const styles$i = function styles(theme) {
   return {
     cell: {
       paddingRight: theme.spacing(1),
@@ -2261,27 +2266,27 @@ var styles$i = function styles(theme) {
   };
 };
 
-var TableCellBase = function TableCellBase(_ref) {
-  var _classNames;
+const TableCellBase = function TableCellBase(_ref) {
+  let _classNames;
 
-  var column = _ref.column,
-    value = _ref.value,
-    children = _ref.children,
-    classes = _ref.classes,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    row = _ref.row,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'value',
-      'children',
-      'classes',
-      'tableRow',
-      'tableColumn',
-      'row',
-      'className',
-    ]);
+  const { column } = _ref;
+  const { value } = _ref;
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { row } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'value',
+    'children',
+    'classes',
+    'tableRow',
+    'tableColumn',
+    'row',
+    'className',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -2339,13 +2344,13 @@ TableCellBase.defaultProps = {
   tableColumn: undefined,
   className: undefined,
 };
-var TableCell = withStyles(styles$i, {
+const TableCell = withStyles(styles$i, {
   name: 'TableCell',
 })(TableCellBase);
 
-var SummaryCell = function SummaryCell(_ref) {
-  var onToggle = _ref.onToggle,
-    restProps = _objectWithoutProperties(_ref, ['onToggle']);
+const SummaryCell = function SummaryCell(_ref) {
+  const { onToggle } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['onToggle']);
 
   return createElement(
     TableCell,
@@ -2363,7 +2368,7 @@ SummaryCell.defaultProps = {
   onToggle: function onToggle() {},
 };
 
-var styles$j = function styles(theme) {
+const styles$j = function styles(theme) {
   return {
     item: {
       fontWeight: theme.typography.fontWeightBold,
@@ -2373,21 +2378,21 @@ var styles$j = function styles(theme) {
   };
 };
 
-var TableSummaryItemBase = function TableSummaryItemBase(_ref) {
-  var children = _ref.children,
-    type = _ref.type,
-    value = _ref.value,
-    getMessage = _ref.getMessage,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'type',
-      'value',
-      'getMessage',
-      'classes',
-      'className',
-    ]);
+const TableSummaryItemBase = function TableSummaryItemBase(_ref) {
+  const { children } = _ref;
+  const { type } = _ref;
+  const { value } = _ref;
+  const { getMessage } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'type',
+    'value',
+    'getMessage',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -2419,9 +2424,9 @@ TableSummaryItemBase.defaultProps = {
   children: undefined,
   className: undefined,
 };
-var TableSummaryItem = withStyles(styles$j)(TableSummaryItemBase);
+const TableSummaryItem = withStyles(styles$j)(TableSummaryItemBase);
 
-var TableGroupRowWithIndent = function TableGroupRowWithIndent(props) {
+const TableGroupRowWithIndent = function TableGroupRowWithIndent(props) {
   return createElement(
     TableGroupRow$1,
     _extends(
@@ -2435,24 +2440,24 @@ var TableGroupRowWithIndent = function TableGroupRowWithIndent(props) {
 };
 
 TableGroupRowWithIndent.components = TableGroupRow$1.components;
-var StubCell = SummaryCell;
-var TableGroupRow = withComponents({
-  Row: Row,
-  Cell: Cell,
-  IndentCell: IndentCell,
+const StubCell = SummaryCell;
+const TableGroupRow = withComponents({
+  Row,
+  Cell,
+  IndentCell,
   Container: Container$2,
-  Content: Content,
-  Icon: Icon,
-  InlineSummary: InlineSummary,
-  InlineSummaryItem: InlineSummaryItem,
-  SummaryCell: SummaryCell,
+  Content,
+  Icon,
+  InlineSummary,
+  InlineSummaryItem,
+  SummaryCell,
   SummaryItem: TableSummaryItem,
-  StubCell: StubCell,
+  StubCell,
 })(TableGroupRowWithIndent);
 TableGroupRow.COLUMN_TYPE = TableGroupRow$1.COLUMN_TYPE;
 TableGroupRow.ROW_TYPE = TableGroupRow$1.ROW_TYPE;
 
-var styles$k = function styles(theme) {
+const styles$k = function styles(theme) {
   return {
     cell: {
       overflow: 'visible',
@@ -2473,31 +2478,31 @@ var styles$k = function styles(theme) {
   };
 };
 
-var TableSelectAllCellBase = function TableSelectAllCellBase(_ref) {
-  var _classNames;
+const TableSelectAllCellBase = function TableSelectAllCellBase(_ref) {
+  let _classNames;
 
-  var allSelected = _ref.allSelected,
-    someSelected = _ref.someSelected,
-    disabled = _ref.disabled,
-    onToggle = _ref.onToggle,
-    classes = _ref.classes,
-    className = _ref.className,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    rowSpan = _ref.rowSpan,
-    restProps = _objectWithoutProperties(_ref, [
-      'allSelected',
-      'someSelected',
-      'disabled',
-      'onToggle',
-      'classes',
-      'className',
-      'tableRow',
-      'tableColumn',
-      'rowSpan',
-    ]);
+  const { allSelected } = _ref;
+  const { someSelected } = _ref;
+  const { disabled } = _ref;
+  const { onToggle } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { rowSpan } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'allSelected',
+    'someSelected',
+    'disabled',
+    'onToggle',
+    'classes',
+    'className',
+    'tableRow',
+    'tableColumn',
+    'rowSpan',
+  ]);
 
-  var cellClasses = classNames(
+  const cellClasses = classNames(
     ((_classNames = {}),
     _defineProperty(_classNames, classes.cell, true),
     _defineProperty(_classNames, classes.pointer, !disabled),
@@ -2511,7 +2516,7 @@ var TableSelectAllCellBase = function TableSelectAllCellBase(_ref) {
       {
         padding: 'checkbox',
         className: cellClasses,
-        rowSpan: rowSpan,
+        rowSpan,
       },
       restProps
     ),
@@ -2519,7 +2524,7 @@ var TableSelectAllCellBase = function TableSelectAllCellBase(_ref) {
       checked: allSelected,
       className: classes.checkbox,
       indeterminate: someSelected,
-      disabled: disabled,
+      disabled,
       onClick: function onClick(e) {
         if (disabled) return;
         e.stopPropagation();
@@ -2552,11 +2557,11 @@ TableSelectAllCellBase.defaultProps = {
   tableColumn: undefined,
   rowSpan: undefined,
 };
-var TableSelectAllCell = withStyles(styles$k, {
+const TableSelectAllCell = withStyles(styles$k, {
   name: 'TableSelectAllCell',
 })(TableSelectAllCellBase);
 
-var styles$l = function styles(theme) {
+const styles$l = function styles(theme) {
   return {
     cell: {
       overflow: 'visible',
@@ -2572,32 +2577,32 @@ var styles$l = function styles(theme) {
   };
 };
 
-var TableSelectCellBase = function TableSelectCellBase(_ref) {
-  var style = _ref.style,
-    selected = _ref.selected,
-    onToggle = _ref.onToggle,
-    classes = _ref.classes,
-    className = _ref.className,
-    row = _ref.row,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    restProps = _objectWithoutProperties(_ref, [
-      'style',
-      'selected',
-      'onToggle',
-      'classes',
-      'className',
-      'row',
-      'tableRow',
-      'tableColumn',
-    ]);
+const TableSelectCellBase = function TableSelectCellBase(_ref) {
+  const { style } = _ref;
+  const { selected } = _ref;
+  const { onToggle } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { row } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'style',
+    'selected',
+    'onToggle',
+    'classes',
+    'className',
+    'row',
+    'tableRow',
+    'tableColumn',
+  ]);
 
   return createElement(
     TableCell$1,
     _extends(
       {
         padding: 'checkbox',
-        style: style,
+        style,
         className: classNames(classes.cell, className),
       },
       restProps
@@ -2633,17 +2638,17 @@ TableSelectCellBase.defaultProps = {
   tableColumn: undefined,
   className: undefined,
 };
-var TableSelectCell = withStyles(styles$l, {
+const TableSelectCell = withStyles(styles$l, {
   name: 'TableSelectCell',
 })(TableSelectCellBase);
 
-var getSelectionColor = function (theme) {
+const getSelectionColor = function (theme) {
   return theme.palette.type === 'light'
     ? lighten(fade(theme.palette.action.selected, 1), 0.96)
     : darken(fade(theme.palette.action.selected, 1), 0.68);
 };
 
-var styles$m = function styles(theme) {
+const styles$m = function styles(theme) {
   return {
     selected: {
       backgroundColor: getSelectionColor(theme),
@@ -2651,27 +2656,27 @@ var styles$m = function styles(theme) {
   };
 };
 
-var TableSelectRowBase = function TableSelectRowBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    onToggle = _ref.onToggle,
-    row = _ref.row,
-    selectByRowClick = _ref.selectByRowClick,
-    highlighted = _ref.highlighted,
-    tableColumn = _ref.tableColumn,
-    tableRow = _ref.tableRow,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-      'onToggle',
-      'row',
-      'selectByRowClick',
-      'highlighted',
-      'tableColumn',
-      'tableRow',
-    ]);
+const TableSelectRowBase = function TableSelectRowBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { onToggle } = _ref;
+  const { row } = _ref;
+  const { selectByRowClick } = _ref;
+  const { highlighted } = _ref;
+  const { tableColumn } = _ref;
+  const { tableRow } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+    'onToggle',
+    'row',
+    'selectByRowClick',
+    'highlighted',
+    'tableColumn',
+    'tableRow',
+  ]);
 
   return createElement(
     TableRowMUI,
@@ -2716,11 +2721,11 @@ TableSelectRowBase.defaultProps = {
   tableColumn: undefined,
   tableRow: undefined,
 };
-var TableSelectRow = withStyles(styles$m, {
+const TableSelectRow = withStyles(styles$m, {
   name: 'TableSelectRow',
 })(TableSelectRowBase);
 
-var TableSelectionWithWidth = function TableSelectionWithWidth(props) {
+const TableSelectionWithWidth = function TableSelectionWithWidth(props) {
   return createElement(
     TableSelection$1,
     _extends(
@@ -2733,14 +2738,14 @@ var TableSelectionWithWidth = function TableSelectionWithWidth(props) {
 };
 
 TableSelectionWithWidth.components = TableSelection$1.components;
-var TableSelection = withComponents({
+const TableSelection = withComponents({
   Row: TableSelectRow,
   Cell: TableSelectCell,
   HeaderCell: TableSelectAllCell,
 })(TableSelectionWithWidth);
 TableSelection.COLUMN_TYPE = TableSelection$1.COLUMN_TYPE;
 
-var styles$n = function styles(theme) {
+const styles$n = function styles(theme) {
   return {
     table: {
       tableLayout: 'fixed',
@@ -2765,21 +2770,21 @@ var styles$n = function styles(theme) {
   };
 };
 
-var TableBase = function TableBase(_ref) {
-  var _classNames;
+const TableBase = function TableBase(_ref) {
+  let _classNames;
 
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    use = _ref.use,
-    tableRef = _ref.tableRef,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-      'use',
-      'tableRef',
-    ]);
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { use } = _ref;
+  const { tableRef } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+    'use',
+    'tableRef',
+  ]);
 
   return createElement(
     TableMUI,
@@ -2815,12 +2820,12 @@ TableBase.defaultProps = {
   use: undefined,
   className: undefined,
 };
-var Table = withStyles(styles$n, {
+const Table = withStyles(styles$n, {
   name: 'Table',
 })(TableBase);
 
-var MINIMAL_COLUMN_WIDTH = 120;
-var TableLayout = function TableLayout(props) {
+const MINIMAL_COLUMN_WIDTH = 120;
+const TableLayout = function TableLayout(props) {
   return createElement(
     TableLayout$1,
     _extends(
@@ -2833,7 +2838,7 @@ var TableLayout = function TableLayout(props) {
   );
 };
 
-var styles$o = function styles(theme) {
+const styles$o = function styles(theme) {
   return {
     cell: {
       padding: 0,
@@ -2844,17 +2849,17 @@ var styles$o = function styles(theme) {
   };
 };
 
-var TableStubCellBase = function TableStubCellBase(_ref) {
-  var classes = _ref.classes,
-    className = _ref.className,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    restProps = _objectWithoutProperties(_ref, [
-      'classes',
-      'className',
-      'tableRow',
-      'tableColumn',
-    ]);
+const TableStubCellBase = function TableStubCellBase(_ref) {
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'classes',
+    'className',
+    'tableRow',
+    'tableColumn',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -2883,11 +2888,11 @@ TableStubCellBase.defaultProps = {
   tableRow: undefined,
   tableColumn: undefined,
 };
-var TableStubCell = withStyles(styles$o, {
+const TableStubCell = withStyles(styles$o, {
   name: 'TableStubCell',
 })(TableStubCellBase);
 
-var styles$p = function styles(theme) {
+const styles$p = function styles(theme) {
   return {
     cell: {
       padding: theme.spacing(6, 0),
@@ -2906,31 +2911,31 @@ var styles$p = function styles(theme) {
   };
 };
 
-var TableNoDataCellBase = function TableNoDataCellBase(_ref) {
-  var style = _ref.style,
-    colSpan = _ref.colSpan,
-    getMessage = _ref.getMessage,
-    classes = _ref.classes,
-    className = _ref.className,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    restProps = _objectWithoutProperties(_ref, [
-      'style',
-      'colSpan',
-      'getMessage',
-      'classes',
-      'className',
-      'tableRow',
-      'tableColumn',
-    ]);
+const TableNoDataCellBase = function TableNoDataCellBase(_ref) {
+  const { style } = _ref;
+  const { colSpan } = _ref;
+  const { getMessage } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'style',
+    'colSpan',
+    'getMessage',
+    'classes',
+    'className',
+    'tableRow',
+    'tableColumn',
+  ]);
 
   return createElement(
     TableCell$1,
     _extends(
       {
-        style: style,
+        style,
         className: classNames(classes.cell, className),
-        colSpan: colSpan,
+        colSpan,
       },
       restProps
     ),
@@ -2967,11 +2972,11 @@ TableNoDataCellBase.defaultProps = {
   tableRow: undefined,
   tableColumn: undefined,
 };
-var TableNoDataCell = withStyles(styles$p, {
+const TableNoDataCell = withStyles(styles$p, {
   name: 'TableNoDataCell',
 })(TableNoDataCellBase);
 
-var styles$q = {
+const styles$q = {
   root: {
     flexGrow: 1,
     overflow: 'auto',
@@ -2981,15 +2986,15 @@ var styles$q = {
   },
 };
 
-var TableContainerBase = function TableContainerBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-    ]);
+const TableContainerBase = function TableContainerBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -3013,14 +3018,14 @@ process.env.NODE_ENV !== 'production'
 TableContainerBase.defaultProps = {
   className: undefined,
 };
-var TableContainer = withStyles(styles$q, {
+const TableContainer = withStyles(styles$q, {
   name: 'TableContainer',
 })(TableContainerBase);
 
-var TableStubRow = function TableStubRow(_ref) {
-  var children = _ref.children,
-    tableRow = _ref.tableRow,
-    restProps = _objectWithoutProperties(_ref, ['children', 'tableRow']);
+const TableStubRow = function TableStubRow(_ref) {
+  const { children } = _ref;
+  const { tableRow } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['children', 'tableRow']);
 
   return createElement(TableRowMUI, restProps, children);
 };
@@ -3035,11 +3040,11 @@ TableStubRow.defaultProps = {
   tableRow: undefined,
 };
 
-var Table$1 = withComponents({
-  Table: Table,
-  TableHead: TableHead,
-  TableBody: TableBody,
-  TableFooter: TableFooter,
+const Table$1 = withComponents({
+  Table,
+  TableHead,
+  TableBody,
+  TableFooter,
   Container: TableContainer,
   Layout: TableLayout,
   Row: TableRow,
@@ -3055,7 +3060,7 @@ Table$1.COLUMN_TYPE = Table$2.COLUMN_TYPE;
 Table$1.ROW_TYPE = Table$2.ROW_TYPE;
 Table$1.NODATA_ROW_TYPE = Table$2.NODATA_ROW_TYPE;
 
-var styles$r = function styles(theme) {
+const styles$r = function styles(theme) {
   return {
     cell: {
       padding: theme.spacing(1),
@@ -3067,17 +3072,17 @@ var styles$r = function styles(theme) {
   };
 };
 
-var TableSkeletonCellBase = function TableSkeletonCellBase(_ref) {
-  var classes = _ref.classes,
-    className = _ref.className,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    restProps = _objectWithoutProperties(_ref, [
-      'classes',
-      'className',
-      'tableRow',
-      'tableColumn',
-    ]);
+const TableSkeletonCellBase = function TableSkeletonCellBase(_ref) {
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'classes',
+    'className',
+    'tableRow',
+    'tableColumn',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -3103,12 +3108,12 @@ TableSkeletonCellBase.defaultProps = {
   tableRow: undefined,
   tableColumn: undefined,
 };
-var TableSkeletonCell = withStyles(styles$r, {
+const TableSkeletonCell = withStyles(styles$r, {
   name: 'TableSkeletonCell',
 })(TableSkeletonCellBase);
 
-var MINIMAL_COLUMN_WIDTH$1 = 120;
-var VirtualTableLayout = function VirtualTableLayout(props) {
+const MINIMAL_COLUMN_WIDTH$1 = 120;
+const VirtualTableLayout = function VirtualTableLayout(props) {
   return createElement(
     TableLayout$1,
     _extends(
@@ -3121,7 +3126,7 @@ var VirtualTableLayout = function VirtualTableLayout(props) {
   );
 };
 
-var FixedHeader = function FixedHeader(props) {
+const FixedHeader = function FixedHeader(props) {
   return createElement(
     Table,
     _extends(
@@ -3133,7 +3138,7 @@ var FixedHeader = function FixedHeader(props) {
   );
 };
 
-var FixedFooter = function FixedFooter(props) {
+const FixedFooter = function FixedFooter(props) {
   return createElement(
     Table,
     _extends(
@@ -3145,10 +3150,10 @@ var FixedFooter = function FixedFooter(props) {
   );
 };
 
-var VirtualTable = makeVirtualTable(Table$1, {
+const VirtualTable = makeVirtualTable(Table$1, {
   VirtualLayout: VirtualTableLayout,
-  FixedHeader: FixedHeader,
-  FixedFooter: FixedFooter,
+  FixedHeader,
+  FixedFooter,
   SkeletonCell: TableSkeletonCell,
   defaultEstimatedRowHeight: 53,
   defaultHeight: 530,
@@ -3157,8 +3162,8 @@ VirtualTable.COLUMN_TYPE = Table$1.COLUMN_TYPE;
 VirtualTable.ROW_TYPE = Table$1.ROW_TYPE;
 VirtualTable.NODATA_ROW_TYPE = Table$1.NODATA_ROW_TYPE;
 
-var styles$s = function styles(_ref) {
-  var spacing = _ref.spacing;
+const styles$s = function styles(_ref) {
+  const { spacing } = _ref;
   return {
     cell: {
       padding: 0,
@@ -3174,29 +3179,29 @@ var styles$s = function styles(_ref) {
   };
 };
 
-var TableFilterCellBase = function TableFilterCellBase(_ref2) {
-  var filter = _ref2.filter,
-    getMessage = _ref2.getMessage,
-    onFilter = _ref2.onFilter,
-    classes = _ref2.classes,
-    children = _ref2.children,
-    className = _ref2.className,
-    tableRow = _ref2.tableRow,
-    tableColumn = _ref2.tableColumn,
-    column = _ref2.column,
-    filteringEnabled = _ref2.filteringEnabled,
-    restProps = _objectWithoutProperties(_ref2, [
-      'filter',
-      'getMessage',
-      'onFilter',
-      'classes',
-      'children',
-      'className',
-      'tableRow',
-      'tableColumn',
-      'column',
-      'filteringEnabled',
-    ]);
+const TableFilterCellBase = function TableFilterCellBase(_ref2) {
+  const { filter } = _ref2;
+  const { getMessage } = _ref2;
+  const { onFilter } = _ref2;
+  const { classes } = _ref2;
+  const { children } = _ref2;
+  const { className } = _ref2;
+  const { tableRow } = _ref2;
+  const { tableColumn } = _ref2;
+  const { column } = _ref2;
+  const { filteringEnabled } = _ref2;
+  const restProps = _objectWithoutProperties(_ref2, [
+    'filter',
+    'getMessage',
+    'onFilter',
+    'classes',
+    'children',
+    'className',
+    'tableRow',
+    'tableColumn',
+    'column',
+    'filteringEnabled',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -3240,11 +3245,11 @@ TableFilterCellBase.defaultProps = {
   column: undefined,
   filteringEnabled: true,
 };
-var TableFilterCell = withStyles(styles$s, {
+const TableFilterCell = withStyles(styles$s, {
   name: 'TableFilterCell',
 })(TableFilterCellBase);
 
-var styles$t = function styles(theme) {
+const styles$t = function styles(theme) {
   return {
     input: {
       width: '100%',
@@ -3256,19 +3261,19 @@ var styles$t = function styles(theme) {
   };
 };
 
-var EditorBase = function EditorBase(_ref) {
-  var value = _ref.value,
-    disabled = _ref.disabled,
-    getMessage = _ref.getMessage,
-    _onChange = _ref.onChange,
-    classes = _ref.classes,
-    restProps = _objectWithoutProperties(_ref, [
-      'value',
-      'disabled',
-      'getMessage',
-      'onChange',
-      'classes',
-    ]);
+const EditorBase = function EditorBase(_ref) {
+  const { value } = _ref;
+  const { disabled } = _ref;
+  const { getMessage } = _ref;
+  const _onChange = _ref.onChange;
+  const { classes } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'value',
+    'disabled',
+    'getMessage',
+    'onChange',
+    'classes',
+  ]);
 
   return createElement(
     Input,
@@ -3279,8 +3284,8 @@ var EditorBase = function EditorBase(_ref) {
           root: classes.root,
         },
         fullWidth: true,
-        disabled: disabled,
-        value: value,
+        disabled,
+        value,
         onChange: function onChange(event) {
           return _onChange(event.target.value);
         },
@@ -3305,7 +3310,7 @@ EditorBase.defaultProps = {
   disabled: false,
   onChange: function onChange() {},
 };
-var Editor = withStyles(styles$t, {
+const Editor = withStyles(styles$t, {
   name: 'Editor',
 })(EditorBase);
 
@@ -3316,7 +3321,7 @@ function _createSuper$1(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -3324,11 +3329,11 @@ function _createSuper$1(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -3339,8 +3344,8 @@ function _createSuper$1(Derived) {
   };
 }
 
-var styles$u = function styles(_ref) {
-  var spacing = _ref.spacing;
+const styles$u = function styles(_ref) {
+  const { spacing } = _ref;
   return {
     icon: {
       marginRight: spacing(1),
@@ -3354,13 +3359,13 @@ var styles$u = function styles(_ref) {
   };
 };
 
-var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
+const FilterSelectorBase = /* #__PURE__ */ (function (_React$PureComponent) {
   _inherits(FilterSelectorBase, _React$PureComponent);
 
-  var _super = _createSuper$1(FilterSelectorBase);
+  const _super = _createSuper$1(FilterSelectorBase);
 
   function FilterSelectorBase(props) {
-    var _this;
+    let _this;
 
     _classCallCheck(this, FilterSelectorBase);
 
@@ -3374,11 +3379,9 @@ var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
     };
 
     _this.handleButtonClick = function () {
-      _this.setState(function (prevState) {
-        return {
-          opened: !prevState.opened,
-        };
-      });
+      _this.setState((prevState) => ({
+        opened: !prevState.opened,
+      }));
     };
 
     _this.handleMenuClose = function () {
@@ -3388,7 +3391,7 @@ var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
     };
 
     _this.handleMenuItemClick = function (nextValue) {
-      var onChange = _this.props.onChange;
+      const { onChange } = _this.props;
 
       _this.setState({
         opened: false,
@@ -3404,17 +3407,17 @@ var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
     {
       key: 'render',
       value: function render() {
-        var _this2 = this;
+        const _this2 = this;
 
-        var _this$props = this.props,
-          value = _this$props.value,
-          availableValues = _this$props.availableValues,
-          disabled = _this$props.disabled,
-          getMessage = _this$props.getMessage,
-          Icon = _this$props.iconComponent,
-          ToggleButton = _this$props.toggleButtonComponent,
-          classes = _this$props.classes;
-        var opened = this.state.opened;
+        const _this$props = this.props;
+        const { value } = _this$props;
+        const { availableValues } = _this$props;
+        const { disabled } = _this$props;
+        const { getMessage } = _this$props;
+        const Icon = _this$props.iconComponent;
+        const ToggleButton = _this$props.toggleButtonComponent;
+        const { classes } = _this$props;
+        const { opened } = this.state;
         return availableValues.length
           ? createElement(
               Fragment,
@@ -3441,8 +3444,8 @@ var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
                   },
                   className: classes.selectMenu,
                 },
-                availableValues.map(function (valueItem) {
-                  return createElement(
+                availableValues.map((valueItem) =>
+                  createElement(
                     MenuItem$1,
                     {
                       key: valueItem,
@@ -3463,8 +3466,8 @@ var FilterSelectorBase = /*#__PURE__*/ (function (_React$PureComponent) {
                       })
                     ),
                     createElement(ListItemText, null, getMessage(valueItem))
-                  );
-                })
+                  )
+                )
               )
             )
           : null;
@@ -3495,29 +3498,29 @@ FilterSelectorBase.defaultProps = {
   onChange: function onChange() {},
   disabled: false,
 };
-var FilterSelector = withStyles(styles$u, {
+const FilterSelector = withStyles(styles$u, {
   name: 'FilterSelector',
 })(FilterSelectorBase);
 
-var ToggleButton$1 = function ToggleButton(_ref) {
-  var buttonRef = _ref.buttonRef,
-    onToggle = _ref.onToggle,
-    disabled = _ref.disabled,
-    children = _ref.children,
-    restProps = _objectWithoutProperties(_ref, [
-      'buttonRef',
-      'onToggle',
-      'disabled',
-      'children',
-    ]);
+const ToggleButton$1 = function ToggleButton(_ref) {
+  const { buttonRef } = _ref;
+  const { onToggle } = _ref;
+  const { disabled } = _ref;
+  const { children } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'buttonRef',
+    'onToggle',
+    'disabled',
+    'children',
+  ]);
 
   return createElement(
     IconButton,
     _extends(
       {
-        buttonRef: buttonRef,
+        buttonRef,
         onClick: onToggle,
-        disabled: disabled,
+        disabled,
       },
       restProps
     ),
@@ -3537,7 +3540,7 @@ ToggleButton$1.defaultProps = {
   disabled: false,
 };
 
-var AVAILABLE_PATHS = {
+const AVAILABLE_PATHS = {
   contains:
     'M6.094 19.563l-2.031 0.281c-0.646 0.094-1.13 0.266-1.453 0.516-0.302 0.24-0.453 0.646-0.453 1.219 0 0.438 0.138 0.799 0.414 1.086s0.664 0.419 1.164 0.398c0.708 0 1.281-0.24 1.719-0.719 0.427-0.49 0.641-1.125 0.641-1.906v-0.875zM8.234 24.641h-2.172v-1.641c-0.677 1.24-1.661 1.859-2.953 1.859-0.927 0-1.682-0.276-2.266-0.828-0.552-0.552-0.828-1.292-0.828-2.219 0-1.927 1.068-3.052 3.203-3.375l2.875-0.438c0-1.469-0.656-2.203-1.969-2.203-1.177 0-2.224 0.427-3.141 1.281v-2.078c1.010-0.656 2.198-0.984 3.563-0.984 2.458 0 3.687 1.302 3.687 3.906v6.719zM14.734 16.797c0.521-0.583 1.167-0.875 1.938-0.875 0.74 0 1.323 0.281 1.75 0.844 0.448 0.583 0.672 1.38 0.672 2.391 0 1.188-0.24 2.13-0.719 2.828-0.49 0.677-1.13 1.016-1.922 1.016-0.719 0-1.302-0.271-1.75-0.813-0.427-0.51-0.641-1.141-0.641-1.891v-1.266c-0.021-0.906 0.203-1.651 0.672-2.234zM16.969 24.859c1.375 0 2.443-0.521 3.203-1.562 0.781-1.042 1.172-2.427 1.172-4.156 0-1.542-0.354-2.771-1.063-3.688-0.688-0.958-1.651-1.438-2.891-1.438-1.427 0-2.531 0.693-3.313 2.078v-6.781h-2.156v15.328h2.172v-1.5c0.677 1.146 1.635 1.719 2.875 1.719zM22.266 6.125c0.135 0 0.245 0.063 0.328 0.188 0.104 0.073 0.156 0.182 0.156 0.328v22.953c0 0.125-0.052 0.24-0.156 0.344-0.083 0.115-0.193 0.172-0.328 0.172h-12.281c-0.146 0-0.266-0.057-0.359-0.172-0.115-0.115-0.172-0.229-0.172-0.344v-22.953c0-0.135 0.057-0.245 0.172-0.328 0.094-0.125 0.214-0.188 0.359-0.188h12.281zM31.531 24.141c-0.76 0.479-1.693 0.719-2.797 0.719-1.427 0-2.589-0.479-3.484-1.438-0.865-0.958-1.286-2.198-1.266-3.719 0-1.688 0.448-3.052 1.344-4.094 0.917-1.042 2.208-1.573 3.875-1.594 0.854 0 1.63 0.177 2.328 0.531v2.156c-0.677-0.531-1.391-0.792-2.141-0.781-0.938 0-1.714 0.339-2.328 1.016-0.594 0.677-0.891 1.552-0.891 2.625 0 1.042 0.297 1.88 0.891 2.516 0.521 0.615 1.25 0.922 2.188 0.922 0.813 0 1.573-0.297 2.281-0.891v2.031z',
   notContains:
@@ -3559,11 +3562,11 @@ var AVAILABLE_PATHS = {
   lessThanOrEqual:
     'M23.828 5.719l1.375 2.375-10.813 6.234 10.813 6.25-1.375 2.375-14.922-8.609zM23.047 24.266l-1.375 2.375-14.922-8.609 1.375-2.391z',
 };
-var Icon$1 = memo(function (_ref) {
-  var type = _ref.type,
-    restProps = _objectWithoutProperties(_ref, ['type']);
+const Icon$1 = memo((_ref) => {
+  const { type } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['type']);
 
-  var path = AVAILABLE_PATHS[type];
+  const path = AVAILABLE_PATHS[type];
   return path
     ? createElement(
         SvgIcon,
@@ -3589,11 +3592,11 @@ Icon$1.defaultProps = {
   type: undefined,
 };
 
-var TableFilterRow = withComponents({
+const TableFilterRow = withComponents({
   Row: TableRow,
   Cell: TableFilterCell,
-  Editor: Editor,
-  FilterSelector: FilterSelector,
+  Editor,
+  FilterSelector,
   Icon: Icon$1,
   ToggleButton: ToggleButton$1,
 })(TableFilterRow$1);
@@ -3606,7 +3609,7 @@ function _createSuper$2(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -3614,11 +3617,11 @@ function _createSuper$2(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -3629,7 +3632,7 @@ function _createSuper$2(Derived) {
   };
 }
 
-var styles$v = function styles(theme) {
+const styles$v = function styles(theme) {
   return {
     resizeHandle: {
       position: 'absolute',
@@ -3671,13 +3674,13 @@ var styles$v = function styles(theme) {
   };
 };
 
-var ResizingControlBase = /*#__PURE__*/ (function (_React$PureComponent) {
+const ResizingControlBase = /* #__PURE__ */ (function (_React$PureComponent) {
   _inherits(ResizingControlBase, _React$PureComponent);
 
-  var _super = _createSuper$2(ResizingControlBase);
+  const _super = _createSuper$2(ResizingControlBase);
 
   function ResizingControlBase(props) {
-    var _this;
+    let _this;
 
     _classCallCheck(this, ResizingControlBase);
 
@@ -3687,7 +3690,7 @@ var ResizingControlBase = /*#__PURE__*/ (function (_React$PureComponent) {
     };
 
     _this.onResizeStart = function (_ref) {
-      var x = _ref.x;
+      const { x } = _ref;
       _this.resizeStartingX = x;
 
       _this.setState({
@@ -3696,18 +3699,18 @@ var ResizingControlBase = /*#__PURE__*/ (function (_React$PureComponent) {
     };
 
     _this.onResizeUpdate = function (_ref2) {
-      var x = _ref2.x;
-      var onWidthDraft = _this.props.onWidthDraft;
+      const { x } = _ref2;
+      const { onWidthDraft } = _this.props;
       onWidthDraft({
         shift: x - _this.resizeStartingX,
       });
     };
 
     _this.onResizeEnd = function (_ref3) {
-      var x = _ref3.x;
-      var _this$props = _this.props,
-        onWidthChange = _this$props.onWidthChange,
-        onWidthDraftCancel = _this$props.onWidthDraftCancel;
+      const { x } = _ref3;
+      const _this$props = _this.props;
+      const { onWidthChange } = _this$props;
+      const { onWidthDraftCancel } = _this$props;
       onWidthDraftCancel();
       onWidthChange({
         shift: x - _this.resizeStartingX,
@@ -3725,13 +3728,15 @@ var ResizingControlBase = /*#__PURE__*/ (function (_React$PureComponent) {
     {
       key: 'render',
       value: function render() {
-        var _classNames, _classNames2, _classNames3;
+        let _classNames;
+        let _classNames2;
+        let _classNames3;
 
-        var _this$props2 = this.props,
-          classes = _this$props2.classes,
-          resizeHandleOpacityClass = _this$props2.resizeHandleOpacityClass,
-          resizeLastHandleClass = _this$props2.resizeLastHandleClass;
-        var resizing = this.state.resizing;
+        const _this$props2 = this.props;
+        const { classes } = _this$props2;
+        const { resizeHandleOpacityClass } = _this$props2;
+        const { resizeLastHandleClass } = _this$props2;
+        const { resizing } = this.state;
         return createElement(
           Draggable,
           {
@@ -3808,7 +3813,7 @@ process.env.NODE_ENV !== 'production'
       resizeHandleOpacityClass: string.isRequired,
     })
   : void 0;
-var ResizingControl = withStyles(styles$v, {
+const ResizingControl = withStyles(styles$v, {
   name: 'ResizingControl',
 })(ResizingControlBase);
 
@@ -3819,7 +3824,7 @@ function _createSuper$3(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -3827,11 +3832,11 @@ function _createSuper$3(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -3842,7 +3847,7 @@ function _createSuper$3(Derived) {
   };
 }
 
-var styles$w = function styles(theme) {
+const styles$w = function styles(theme) {
   return {
     plainTitle: {
       overflow: 'hidden',
@@ -3926,13 +3931,13 @@ var styles$w = function styles(theme) {
   };
 };
 
-var TableHeaderCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
+const TableHeaderCellBase = /* #__PURE__ */ (function (_React$PureComponent) {
   _inherits(TableHeaderCellBase, _React$PureComponent);
 
-  var _super = _createSuper$3(TableHeaderCellBase);
+  const _super = _createSuper$3(TableHeaderCellBase);
 
   function TableHeaderCellBase(props) {
-    var _this;
+    let _this;
 
     _classCallCheck(this, TableHeaderCellBase);
 
@@ -3944,13 +3949,13 @@ var TableHeaderCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
     _this.cellRef = createRef();
 
     _this.getWidthGetter = function () {
-      var getCellWidth = _this.props.getCellWidth;
-      var node = _this.cellRef.current;
+      const { getCellWidth } = _this.props;
+      const node = _this.cellRef.current;
       return (
         node &&
-        getCellWidth(function () {
-          var _node$getBoundingClie = node.getBoundingClientRect(),
-            width = _node$getBoundingClie.width;
+        getCellWidth(() => {
+          const _node$getBoundingClie = node.getBoundingClientRect();
+          const { width } = _node$getBoundingClie;
 
           return width;
         })
@@ -3984,41 +3989,41 @@ var TableHeaderCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
     {
       key: 'render',
       value: function render() {
-        var _classNames;
+        let _classNames;
 
-        var _this$props = this.props,
-          style = _this$props.style,
-          column = _this$props.column,
-          tableColumn = _this$props.tableColumn,
-          draggingEnabled = _this$props.draggingEnabled,
-          resizingEnabled = _this$props.resizingEnabled,
-          onWidthChange = _this$props.onWidthChange,
-          onWidthDraft = _this$props.onWidthDraft,
-          onWidthDraftCancel = _this$props.onWidthDraftCancel,
-          getCellWidth = _this$props.getCellWidth,
-          classes = _this$props.classes,
-          tableRow = _this$props.tableRow,
-          className = _this$props.className,
-          children = _this$props.children,
-          restProps = _objectWithoutProperties(_this$props, [
-            'style',
-            'column',
-            'tableColumn',
-            'draggingEnabled',
-            'resizingEnabled',
-            'onWidthChange',
-            'onWidthDraft',
-            'onWidthDraftCancel',
-            'getCellWidth',
-            'classes',
-            'tableRow',
-            'className',
-            'children',
-          ]);
+        const _this$props = this.props;
+        const { style } = _this$props;
+        const { column } = _this$props;
+        const { tableColumn } = _this$props;
+        const { draggingEnabled } = _this$props;
+        const { resizingEnabled } = _this$props;
+        const { onWidthChange } = _this$props;
+        const { onWidthDraft } = _this$props;
+        const { onWidthDraftCancel } = _this$props;
+        const { getCellWidth } = _this$props;
+        const { classes } = _this$props;
+        const { tableRow } = _this$props;
+        const { className } = _this$props;
+        const { children } = _this$props;
+        const restProps = _objectWithoutProperties(_this$props, [
+          'style',
+          'column',
+          'tableColumn',
+          'draggingEnabled',
+          'resizingEnabled',
+          'onWidthChange',
+          'onWidthDraft',
+          'onWidthDraftCancel',
+          'getCellWidth',
+          'classes',
+          'tableRow',
+          'className',
+          'children',
+        ]);
 
-        var dragging = this.state.dragging;
-        var align = (tableColumn && tableColumn.align) || 'left';
-        var tableCellClasses = classNames(
+        const { dragging } = this.state;
+        const align = (tableColumn && tableColumn.align) || 'left';
+        const tableCellClasses = classNames(
           ((_classNames = {}),
           _defineProperty(_classNames, classes.cell, true),
           _defineProperty(_classNames, classes.cellRight, align === 'right'),
@@ -4042,11 +4047,11 @@ var TableHeaderCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
           _classNames),
           className
         );
-        var cellLayout = createElement(
+        const cellLayout = createElement(
           TableCell$1,
           _extends(
             {
-              style: style,
+              style,
               className: tableCellClasses,
               ref: this.cellRef,
             },
@@ -4061,9 +4066,9 @@ var TableHeaderCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
           ),
           resizingEnabled &&
             createElement(ResizingControl, {
-              onWidthChange: onWidthChange,
-              onWidthDraft: onWidthDraft,
-              onWidthDraftCancel: onWidthDraftCancel,
+              onWidthChange,
+              onWidthDraft,
+              onWidthDraftCancel,
               resizeLastHandleClass: classes.resizeHandle,
               resizeHandleOpacityClass: classes.resizeHandleLine,
             })
@@ -4123,14 +4128,14 @@ TableHeaderCellBase.defaultProps = {
   children: undefined,
   getCellWidth: function getCellWidth() {},
 };
-var TableHeaderCell = withStyles(styles$w, {
+const TableHeaderCell = withStyles(styles$w, {
   name: 'TableHeaderCell',
 })(TableHeaderCellBase);
 
-var ENTER_KEY_CODE$1 = 13;
-var SPACE_KEY_CODE$1 = 32;
+const ENTER_KEY_CODE$1 = 13;
+const SPACE_KEY_CODE$1 = 32;
 
-var styles$x = function styles() {
+const styles$x = function styles() {
   return {
     root: {
       width: '100%',
@@ -4156,46 +4161,46 @@ var styles$x = function styles() {
   };
 };
 
-var _onClick = function onClick(e, onSort) {
-  var isActionKeyDown =
+const _onClick = function onClick(e, onSort) {
+  const isActionKeyDown =
     e.keyCode === ENTER_KEY_CODE$1 || e.keyCode === SPACE_KEY_CODE$1;
-  var isMouseClick = e.keyCode === undefined;
-  var cancelSortingRelatedKey = e.metaKey || e.ctrlKey;
-  var direction =
+  const isMouseClick = e.keyCode === undefined;
+  const cancelSortingRelatedKey = e.metaKey || e.ctrlKey;
+  const direction =
     (isMouseClick || isActionKeyDown) && cancelSortingRelatedKey
       ? null
       : undefined;
-  var keepOther = e.shiftKey || cancelSortingRelatedKey;
+  const keepOther = e.shiftKey || cancelSortingRelatedKey;
   e.preventDefault();
   onSort({
-    direction: direction,
-    keepOther: keepOther,
+    direction,
+    keepOther,
   });
 };
 
-var SortLabelBase = function SortLabelBase(_ref) {
-  var _classNames;
+const SortLabelBase = function SortLabelBase(_ref) {
+  let _classNames;
 
-  var column = _ref.column,
-    align = _ref.align,
-    direction = _ref.direction,
-    children = _ref.children,
-    onSort = _ref.onSort,
-    classes = _ref.classes,
-    getMessage = _ref.getMessage,
-    disabled = _ref.disabled,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'align',
-      'direction',
-      'children',
-      'onSort',
-      'classes',
-      'getMessage',
-      'disabled',
-      'className',
-    ]);
+  const { column } = _ref;
+  const { align } = _ref;
+  const { direction } = _ref;
+  const { children } = _ref;
+  const { onSort } = _ref;
+  const { classes } = _ref;
+  const { getMessage } = _ref;
+  const { disabled } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'align',
+    'direction',
+    'children',
+    'onSort',
+    'classes',
+    'getMessage',
+    'disabled',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -4223,7 +4228,7 @@ var SortLabelBase = function SortLabelBase(_ref) {
           onClick: function onClick(e) {
             return _onClick(e, onSort);
           },
-          disabled: disabled,
+          disabled,
           classes: {
             root: classNames(
               ((_classNames = {}),
@@ -4265,11 +4270,11 @@ SortLabelBase.defaultProps = {
   className: null,
   children: undefined,
 };
-var SortLabel = withStyles(styles$x, {
+const SortLabel = withStyles(styles$x, {
   name: 'SortLabel',
 })(SortLabelBase);
 
-var styles$y = function styles(theme) {
+const styles$y = function styles(theme) {
   return {
     root: {
       paddingLeft: 0,
@@ -4283,19 +4288,19 @@ var styles$y = function styles(theme) {
   };
 };
 
-var GroupButtonBase = function GroupButtonBase(_ref) {
-  var _classNames;
+const GroupButtonBase = function GroupButtonBase(_ref) {
+  let _classNames;
 
-  var disabled = _ref.disabled,
-    onGroup = _ref.onGroup,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'disabled',
-      'onGroup',
-      'classes',
-      'className',
-    ]);
+  const { disabled } = _ref;
+  const { onGroup } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'disabled',
+    'onGroup',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -4332,26 +4337,26 @@ GroupButtonBase.defaultProps = {
   disabled: false,
   className: undefined,
 };
-var GroupButton = withStyles(styles$y, {
+const GroupButton = withStyles(styles$y, {
   name: 'GroupButton',
 })(GroupButtonBase);
 
-var styles$z = {
+const styles$z = {
   title: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
 };
 
-var TitelBase = function TitelBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-    ]);
+const TitelBase = function TitelBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'span',
@@ -4376,11 +4381,11 @@ TitelBase.defaultProps = {
   className: null,
   children: undefined,
 };
-var Title = withStyles(styles$z, {
+const Title = withStyles(styles$z, {
   name: 'Title',
 })(TitelBase);
 
-var styles$A = {
+const styles$A = {
   content: {
     width: '100%',
     minWidth: 0,
@@ -4397,21 +4402,21 @@ var styles$A = {
   },
 };
 
-var ContentBase$1 = function ContentBase(_ref) {
-  var _classNames;
+const ContentBase$1 = function ContentBase(_ref) {
+  let _classNames;
 
-  var column = _ref.column,
-    align = _ref.align,
-    children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'align',
-      'children',
-      'classes',
-      'className',
-    ]);
+  const { column } = _ref;
+  const { align } = _ref;
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'align',
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -4447,16 +4452,16 @@ ContentBase$1.defaultProps = {
   className: null,
   children: undefined,
 };
-var Content$1 = withStyles(styles$A, {
+const Content$1 = withStyles(styles$A, {
   name: 'Content',
 })(ContentBase$1);
 
-var defaultMessages$2 = {
+const defaultMessages$2 = {
   sortingHint: 'Sort',
 };
-var TableHeaderRowWithMessages = withPatchedProps(function (_ref) {
-  var messages = _ref.messages,
-    restProps = _objectWithoutProperties(_ref, ['messages']);
+const TableHeaderRowWithMessages = withPatchedProps((_ref) => {
+  const { messages } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['messages']);
 
   return _objectSpread2(
     {
@@ -4474,17 +4479,17 @@ TableHeaderRowWithMessages.defaultProps = {
   messages: {},
 };
 TableHeaderRowWithMessages.components = TableHeaderRow$1.components;
-var TableHeaderRow = withComponents({
+const TableHeaderRow = withComponents({
   Cell: TableHeaderCell,
   Row: TableRow,
   Content: Content$1,
-  SortLabel: SortLabel,
-  Title: Title,
-  GroupButton: GroupButton,
+  SortLabel,
+  Title,
+  GroupButton,
 })(TableHeaderRowWithMessages);
 TableHeaderRow.ROW_TYPE = TableHeaderRow$1.ROW_TYPE;
 
-var styles$B = function styles(theme) {
+const styles$B = function styles(theme) {
   return {
     cell: {
       paddingRight: theme.spacing(1),
@@ -4508,29 +4513,29 @@ var styles$B = function styles(theme) {
   };
 };
 
-var CellBase$1 = function CellBase(_ref) {
-  var _classNames;
+const CellBase$1 = function CellBase(_ref) {
+  let _classNames;
 
-  var column = _ref.column,
-    value = _ref.value,
-    children = _ref.children,
-    classes = _ref.classes,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    row = _ref.row,
-    className = _ref.className,
-    beforeBorder = _ref.beforeBorder,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'value',
-      'children',
-      'classes',
-      'tableRow',
-      'tableColumn',
-      'row',
-      'className',
-      'beforeBorder',
-    ]);
+  const { column } = _ref;
+  const { value } = _ref;
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { row } = _ref;
+  const { className } = _ref;
+  const { beforeBorder } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'value',
+    'children',
+    'classes',
+    'tableRow',
+    'tableColumn',
+    'row',
+    'className',
+    'beforeBorder',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -4573,11 +4578,11 @@ CellBase$1.defaultProps = {
   className: undefined,
   beforeBorder: false,
 };
-var Cell$1 = withStyles(styles$B, {
+const Cell$1 = withStyles(styles$B, {
   name: 'Cell',
 })(CellBase$1);
 
-var styles$C = function styles(theme) {
+const styles$C = function styles(theme) {
   return {
     headerCellBorder: {
       borderRight: getBorder(theme),
@@ -4594,19 +4599,19 @@ var styles$C = function styles(theme) {
   };
 };
 
-var BandedHeaderCellBase = function BandedHeaderCellBase(_ref) {
-  var _classNames;
+const BandedHeaderCellBase = function BandedHeaderCellBase(_ref) {
+  let _classNames;
 
-  var HeaderCellComponent = _ref.component,
-    className = _ref.className,
-    classes = _ref.classes,
-    beforeBorder = _ref.beforeBorder,
-    restProps = _objectWithoutProperties(_ref, [
-      'component',
-      'className',
-      'classes',
-      'beforeBorder',
-    ]);
+  const HeaderCellComponent = _ref.component;
+  const { className } = _ref;
+  const { classes } = _ref;
+  const { beforeBorder } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'component',
+    'className',
+    'classes',
+    'beforeBorder',
+  ]);
 
   return createElement(
     HeaderCellComponent,
@@ -4636,18 +4641,18 @@ BandedHeaderCellBase.defaultProps = {
   className: undefined,
   beforeBorder: false,
 };
-var BandedHeaderCell = withStyles(styles$C, {
+const BandedHeaderCell = withStyles(styles$C, {
   name: 'BandedHeaderCell',
 })(BandedHeaderCellBase);
 
-var styles$D = {
+const styles$D = {
   emptyCell: {
     display: 'none',
   },
 };
 
-var InvisibleCellBase = function InvisibleCellBase(_ref) {
-  var classes = _ref.classes;
+const InvisibleCellBase = function InvisibleCellBase(_ref) {
+  const { classes } = _ref;
   return createElement(TableCell$1, {
     className: classes.emptyCell,
   });
@@ -4658,30 +4663,30 @@ process.env.NODE_ENV !== 'production'
       classes: object.isRequired,
     })
   : void 0;
-var InvisibleCell = withStyles(styles$D, {
+const InvisibleCell = withStyles(styles$D, {
   name: 'InvisibleCell',
 })(InvisibleCellBase);
 
-var styles$E = {
+const styles$E = {
   row: {
     height: 'auto',
   },
 };
-var RowBase$1 = function RowBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    row = _ref.row,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-      'row',
-      'tableRow',
-      'tableColumn',
-    ]);
+const RowBase$1 = function RowBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { row } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+    'row',
+    'tableRow',
+    'tableColumn',
+  ]);
 
   return createElement(
     TableRowMUI,
@@ -4711,19 +4716,19 @@ RowBase$1.defaultProps = {
   tableColumn: undefined,
   className: undefined,
 };
-var Row$1 = withStyles(styles$E, {
+const Row$1 = withStyles(styles$E, {
   name: 'Row',
 })(RowBase$1);
 
-var TableBandHeader = withComponents({
+const TableBandHeader = withComponents({
   Cell: Cell$1,
   Row: Row$1,
-  BandedHeaderCell: BandedHeaderCell,
-  InvisibleCell: InvisibleCell,
+  BandedHeaderCell,
+  InvisibleCell,
 })(TableBandHeader$1);
 TableBandHeader.ROW_TYPE = TableBandHeader$1.ROW_TYPE;
 
-var styles$F = function styles(theme) {
+const styles$F = function styles(theme) {
   return {
     cell: {
       padding: theme.spacing(1),
@@ -4759,43 +4764,44 @@ var styles$F = function styles(theme) {
   };
 };
 
-var EditCellBase = function EditCellBase(_ref) {
-  var _classNames, _classNames2;
+const EditCellBase = function EditCellBase(_ref) {
+  let _classNames;
+  let _classNames2;
 
-  var column = _ref.column,
-    value = _ref.value,
-    onValueChange = _ref.onValueChange,
-    style = _ref.style,
-    classes = _ref.classes,
-    children = _ref.children,
-    row = _ref.row,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    editingEnabled = _ref.editingEnabled,
-    className = _ref.className,
-    autoFocus = _ref.autoFocus,
-    onBlur = _ref.onBlur,
-    onFocus = _ref.onFocus,
-    onKeyDown = _ref.onKeyDown,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'value',
-      'onValueChange',
-      'style',
-      'classes',
-      'children',
-      'row',
-      'tableRow',
-      'tableColumn',
-      'editingEnabled',
-      'className',
-      'autoFocus',
-      'onBlur',
-      'onFocus',
-      'onKeyDown',
-    ]);
+  const { column } = _ref;
+  const { value } = _ref;
+  const { onValueChange } = _ref;
+  const { style } = _ref;
+  const { classes } = _ref;
+  const { children } = _ref;
+  const { row } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { editingEnabled } = _ref;
+  const { className } = _ref;
+  const { autoFocus } = _ref;
+  const { onBlur } = _ref;
+  const { onFocus } = _ref;
+  const { onKeyDown } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'value',
+    'onValueChange',
+    'style',
+    'classes',
+    'children',
+    'row',
+    'tableRow',
+    'tableColumn',
+    'editingEnabled',
+    'className',
+    'autoFocus',
+    'onBlur',
+    'onFocus',
+    'onKeyDown',
+  ]);
 
-  var inputClasses = classNames(
+  const inputClasses = classNames(
     ((_classNames = {}),
     _defineProperty(
       _classNames,
@@ -4809,12 +4815,12 @@ var EditCellBase = function EditCellBase(_ref) {
     ),
     _classNames)
   );
-  var patchedChildren = children
+  const patchedChildren = children
     ? cloneElement(children, {
-        autoFocus: autoFocus,
-        onBlur: onBlur,
-        onFocus: onFocus,
-        onKeyDown: onKeyDown,
+        autoFocus,
+        onBlur,
+        onFocus,
+        onKeyDown,
       })
     : children;
   return createElement(
@@ -4822,7 +4828,7 @@ var EditCellBase = function EditCellBase(_ref) {
     _extends(
       {
         className: classNames(classes.cell, className),
-        style: style,
+        style,
       },
       restProps
     ),
@@ -4837,15 +4843,15 @@ var EditCellBase = function EditCellBase(_ref) {
         classes: {
           input: inputClasses,
         },
-        value: value,
+        value,
         readOnly: !editingEnabled,
         onChange: function onChange(e) {
           return onValueChange(e.target.value);
         }, // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus: autoFocus,
-        onBlur: onBlur,
-        onFocus: onFocus,
-        onKeyDown: onKeyDown,
+        autoFocus,
+        onBlur,
+        onFocus,
+        onKeyDown,
       })
   );
 };
@@ -4885,18 +4891,18 @@ EditCellBase.defaultProps = {
   onFocus: function onFocus() {},
   onKeyDown: function onKeyDown() {},
 };
-var EditCell = withStyles(styles$F, {
+const EditCell = withStyles(styles$F, {
   name: 'EditCell',
 })(EditCellBase);
 
-var TableEditRow = withComponents({
+const TableEditRow = withComponents({
   Row: TableRow,
   Cell: EditCell,
 })(TableEditRow$1);
 TableEditRow.ADDED_ROW_TYPE = TableEditRow$1.ADDED_ROW_TYPE;
 TableEditRow.EDIT_ROW_TYPE = TableEditRow$1.EDIT_ROW_TYPE;
 
-var styles$G = function styles(theme) {
+const styles$G = function styles(theme) {
   return {
     button: {
       padding: theme.spacing(1),
@@ -4919,21 +4925,21 @@ var styles$G = function styles(theme) {
   };
 };
 
-var withEditColumnStyles = withStyles(styles$G, {
+const withEditColumnStyles = withStyles(styles$G, {
   name: 'EditColumn',
 });
 
-var CommandButtonBase = function CommandButtonBase(_ref) {
-  var onExecute = _ref.onExecute,
-    text = _ref.text,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'onExecute',
-      'text',
-      'classes',
-      'className',
-    ]);
+const CommandButtonBase = function CommandButtonBase(_ref) {
+  const { onExecute } = _ref;
+  const { text } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'onExecute',
+    'text',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     Button,
@@ -4963,25 +4969,25 @@ process.env.NODE_ENV !== 'production'
 CommandButtonBase.defaultProps = {
   className: undefined,
 };
-var CommandButton = withEditColumnStyles(CommandButtonBase);
+const CommandButton = withEditColumnStyles(CommandButtonBase);
 
-var EditCommandHeadingCellBase = function EditCommandHeadingCellBase(_ref2) {
-  var _classNames;
+const EditCommandHeadingCellBase = function EditCommandHeadingCellBase(_ref2) {
+  let _classNames;
 
-  var children = _ref2.children,
-    classes = _ref2.classes,
-    className = _ref2.className,
-    tableRow = _ref2.tableRow,
-    tableColumn = _ref2.tableColumn,
-    rowSpan = _ref2.rowSpan,
-    restProps = _objectWithoutProperties(_ref2, [
-      'children',
-      'classes',
-      'className',
-      'tableRow',
-      'tableColumn',
-      'rowSpan',
-    ]);
+  const { children } = _ref2;
+  const { classes } = _ref2;
+  const { className } = _ref2;
+  const { tableRow } = _ref2;
+  const { tableColumn } = _ref2;
+  const { rowSpan } = _ref2;
+  const restProps = _objectWithoutProperties(_ref2, [
+    'children',
+    'classes',
+    'className',
+    'tableRow',
+    'tableColumn',
+    'rowSpan',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -4994,7 +5000,7 @@ var EditCommandHeadingCellBase = function EditCommandHeadingCellBase(_ref2) {
           _classNames),
           className
         ),
-        rowSpan: rowSpan,
+        rowSpan,
       },
       restProps
     ),
@@ -5019,23 +5025,23 @@ EditCommandHeadingCellBase.defaultProps = {
   tableColumn: undefined,
   rowSpan: undefined,
 };
-var EditCommandHeadingCell = withEditColumnStyles(EditCommandHeadingCellBase);
+const EditCommandHeadingCell = withEditColumnStyles(EditCommandHeadingCellBase);
 
-var EditCommandCellBase = function EditCommandCellBase(_ref3) {
-  var tableRow = _ref3.tableRow,
-    tableColumn = _ref3.tableColumn,
-    row = _ref3.row,
-    children = _ref3.children,
-    classes = _ref3.classes,
-    className = _ref3.className,
-    restProps = _objectWithoutProperties(_ref3, [
-      'tableRow',
-      'tableColumn',
-      'row',
-      'children',
-      'classes',
-      'className',
-    ]);
+const EditCommandCellBase = function EditCommandCellBase(_ref3) {
+  const { tableRow } = _ref3;
+  const { tableColumn } = _ref3;
+  const { row } = _ref3;
+  const { children } = _ref3;
+  const { classes } = _ref3;
+  const { className } = _ref3;
+  const restProps = _objectWithoutProperties(_ref3, [
+    'tableRow',
+    'tableColumn',
+    'row',
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -5066,25 +5072,25 @@ EditCommandCellBase.defaultProps = {
   tableColumn: undefined,
   row: undefined,
 };
-var EditCommandCell = withEditColumnStyles(EditCommandCellBase);
+const EditCommandCell = withEditColumnStyles(EditCommandCellBase);
 
-var TableEditColumnWithWidth = withPatchedProps(function (props) {
-  return _objectSpread2(
+const TableEditColumnWithWidth = withPatchedProps((props) =>
+  _objectSpread2(
     {
       width: 150,
     },
     props
-  );
-})(TableEditColumn$1);
+  )
+)(TableEditColumn$1);
 TableEditColumnWithWidth.components = TableEditColumn$1.components;
-var TableEditColumn = withComponents({
+const TableEditColumn = withComponents({
   Cell: EditCommandCell,
   HeaderCell: EditCommandHeadingCell,
   Command: CommandButton,
 })(TableEditColumnWithWidth);
 TableEditColumn.COLUMN_TYPE = TableEditColumn$1.COLUMN_TYPE;
 
-var styles$H = function styles(theme) {
+const styles$H = function styles(theme) {
   return {
     emptyMessage: {
       margin: '0 auto',
@@ -5096,10 +5102,10 @@ var styles$H = function styles(theme) {
   };
 };
 
-var EmptyMessageBase = function EmptyMessageBase(_ref) {
-  var getMessage = _ref.getMessage,
-    classes = _ref.classes,
-    restProps = _objectWithoutProperties(_ref, ['getMessage', 'classes']);
+const EmptyMessageBase = function EmptyMessageBase(_ref) {
+  const { getMessage } = _ref;
+  const { classes } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['getMessage', 'classes']);
 
   return createElement(
     Toolbar$2,
@@ -5119,25 +5125,20 @@ process.env.NODE_ENV !== 'production'
       classes: object.isRequired,
     })
   : void 0;
-var EmptyMessage = withStyles(styles$H, {
+const EmptyMessage = withStyles(styles$H, {
   name: 'EmptyMessage',
 })(EmptyMessageBase);
 
-var TableColumnVisibility = withComponents({
-  EmptyMessage: EmptyMessage,
+const TableColumnVisibility = withComponents({
+  EmptyMessage,
 })(TableColumnVisibility$1);
 
-var TableReorderingCell = function TableReorderingCell(_ref) {
-  var style = _ref.style,
-    getCellDimensions = _ref.getCellDimensions;
+const TableReorderingCell = function TableReorderingCell(_ref) {
+  const { style } = _ref;
+  const { getCellDimensions } = _ref;
 
-  var refHandler = function refHandler(node) {
-    return (
-      node &&
-      getCellDimensions(function () {
-        return getCellGeometries(node);
-      })
-    );
+  const refHandler = function refHandler(node) {
+    return node && getCellDimensions(() => getCellGeometries(node));
   };
 
   return createElement('td', {
@@ -5157,7 +5158,7 @@ TableReorderingCell.defaultProps = {
   style: null,
 };
 
-var styles$I = function styles() {
+const styles$I = function styles() {
   return {
     row: {
       visibility: 'hidden',
@@ -5165,10 +5166,10 @@ var styles$I = function styles() {
   };
 };
 
-var TableInvisibleRowBase = function TableInvisibleRowBase(_ref) {
-  var className = _ref.className,
-    classes = _ref.classes,
-    restParams = _objectWithoutProperties(_ref, ['className', 'classes']);
+const TableInvisibleRowBase = function TableInvisibleRowBase(_ref) {
+  const { className } = _ref;
+  const { classes } = _ref;
+  const restParams = _objectWithoutProperties(_ref, ['className', 'classes']);
 
   return createElement(
     TableRow,
@@ -5190,11 +5191,11 @@ process.env.NODE_ENV !== 'production'
 TableInvisibleRowBase.defaultProps = {
   className: undefined,
 };
-var TableInvisibleRow = withStyles(styles$I, {
+const TableInvisibleRow = withStyles(styles$I, {
   name: 'TableInvisibleRow',
 })(TableInvisibleRowBase);
 
-var TableColumnReordering = withComponents({
+const TableColumnReordering = withComponents({
   Row: TableInvisibleRow,
   Cell: TableReorderingCell,
 })(TableColumnReordering$1);
@@ -5206,7 +5207,7 @@ function _createSuper$4(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -5214,11 +5215,11 @@ function _createSuper$4(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -5228,10 +5229,10 @@ function _createSuper$4(Derived) {
     return _possibleConstructorReturn(this, result);
   };
 }
-var TableColumnResizing = /*#__PURE__*/ (function (_React$PureComponent) {
+const TableColumnResizing = /* #__PURE__ */ (function (_React$PureComponent) {
   _inherits(TableColumnResizing, _React$PureComponent);
 
-  var _super = _createSuper$4(TableColumnResizing);
+  const _super = _createSuper$4(TableColumnResizing);
 
   function TableColumnResizing() {
     _classCallCheck(this, TableColumnResizing);
@@ -5243,19 +5244,19 @@ var TableColumnResizing = /*#__PURE__*/ (function (_React$PureComponent) {
     {
       key: 'render',
       value: function render() {
-        var _this$props = this.props,
-          minColumnWidth = _this$props.minColumnWidth,
-          maxColumnWidth = _this$props.maxColumnWidth,
-          restProps = _objectWithoutProperties(_this$props, [
-            'minColumnWidth',
-            'maxColumnWidth',
-          ]);
+        const _this$props = this.props;
+        const { minColumnWidth } = _this$props;
+        const { maxColumnWidth } = _this$props;
+        const restProps = _objectWithoutProperties(_this$props, [
+          'minColumnWidth',
+          'maxColumnWidth',
+        ]);
 
         return createElement(
           TableColumnResizing$1,
           _extends({}, restProps, {
-            minColumnWidth: minColumnWidth,
-            maxColumnWidth: maxColumnWidth,
+            minColumnWidth,
+            maxColumnWidth,
           })
         );
       },
@@ -5275,7 +5276,7 @@ TableColumnResizing.defaultProps = {
   maxColumnWidth: Infinity,
 };
 
-var styles$J = function styles(theme) {
+const styles$J = function styles(theme) {
   return {
     toolbar: {
       borderBottom: getBorder(theme),
@@ -5284,23 +5285,23 @@ var styles$J = function styles(theme) {
   };
 };
 
-var ToolbarBase = function ToolbarBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    style = _ref.style,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-      'style',
-    ]);
+const ToolbarBase = function ToolbarBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const { style } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+    'style',
+  ]);
 
   return createElement(
     Toolbar$2,
     _extends(
       {
-        style: style,
+        style,
         className: classNames(classes.toolbar, className),
       },
       restProps
@@ -5321,11 +5322,11 @@ ToolbarBase.defaultProps = {
   className: undefined,
   style: null,
 };
-var Toolbar = withStyles(styles$J, {
+const Toolbar = withStyles(styles$J, {
   name: 'Toolbar',
 })(ToolbarBase);
 
-var FlexibleSpace = function FlexibleSpace() {
+const FlexibleSpace = function FlexibleSpace() {
   return createElement('div', {
     style: {
       flex: '0 0 0',
@@ -5334,12 +5335,12 @@ var FlexibleSpace = function FlexibleSpace() {
   });
 };
 
-var Toolbar$1 = withComponents({
+const Toolbar$1 = withComponents({
   Root: Toolbar,
-  FlexibleSpace: FlexibleSpace,
+  FlexibleSpace,
 })(Toolbar$3);
 
-var styles$K = function styles(theme) {
+const styles$K = function styles(theme) {
   return {
     button: {
       marginTop: '-1px',
@@ -5355,21 +5356,21 @@ var styles$K = function styles(theme) {
   };
 };
 
-var TableTreeExpandButtonBase = function TableTreeExpandButtonBase(_ref) {
-  var _classNames;
+const TableTreeExpandButtonBase = function TableTreeExpandButtonBase(_ref) {
+  let _classNames;
 
-  var visible = _ref.visible,
-    expanded = _ref.expanded,
-    classes = _ref.classes,
-    onToggle = _ref.onToggle,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'visible',
-      'expanded',
-      'classes',
-      'onToggle',
-      'className',
-    ]);
+  const { visible } = _ref;
+  const { expanded } = _ref;
+  const { classes } = _ref;
+  const { onToggle } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'visible',
+    'expanded',
+    'classes',
+    'onToggle',
+    'className',
+  ]);
 
   return createElement(
     IconButton,
@@ -5412,9 +5413,9 @@ TableTreeExpandButtonBase.defaultProps = {
   onToggle: function onToggle() {},
   className: undefined,
 };
-var TableTreeExpandButton = withStyles(styles$K)(TableTreeExpandButtonBase);
+const TableTreeExpandButton = withStyles(styles$K)(TableTreeExpandButtonBase);
 
-var styles$L = function styles(theme) {
+const styles$L = function styles(theme) {
   return {
     checkbox: {
       marginTop: '-1px',
@@ -5426,30 +5427,30 @@ var styles$L = function styles(theme) {
   };
 };
 
-var TableTreeCheckboxBase = function TableTreeCheckboxBase(_ref) {
-  var disabled = _ref.disabled,
-    checked = _ref.checked,
-    indeterminate = _ref.indeterminate,
-    onChange = _ref.onChange,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'disabled',
-      'checked',
-      'indeterminate',
-      'onChange',
-      'classes',
-      'className',
-    ]);
+const TableTreeCheckboxBase = function TableTreeCheckboxBase(_ref) {
+  const { disabled } = _ref;
+  const { checked } = _ref;
+  const { indeterminate } = _ref;
+  const { onChange } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'disabled',
+    'checked',
+    'indeterminate',
+    'onChange',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     Checkbox,
     _extends(
       {
         className: classNames(classes.checkbox, className),
-        checked: checked,
-        indeterminate: indeterminate,
-        disabled: disabled,
+        checked,
+        indeterminate,
+        disabled,
         onClick: function onClick(e) {
           if (disabled) return;
           e.stopPropagation();
@@ -5477,9 +5478,9 @@ TableTreeCheckboxBase.defaultProps = {
   onChange: function onChange() {},
   className: undefined,
 };
-var TableTreeCheckbox = withStyles(styles$L)(TableTreeCheckboxBase);
+const TableTreeCheckbox = withStyles(styles$L)(TableTreeCheckboxBase);
 
-var styles$M = function styles(theme) {
+const styles$M = function styles(theme) {
   return {
     indent: {
       marginLeft: theme.spacing(3),
@@ -5487,18 +5488,18 @@ var styles$M = function styles(theme) {
   };
 };
 
-var TableTreeIndentBase = memo(function (_ref) {
-  var level = _ref.level,
-    classes = _ref.classes;
+const TableTreeIndentBase = memo((_ref) => {
+  const { level } = _ref;
+  const { classes } = _ref;
   return Array.from({
     length: level,
-  }).map(function (value, currentLevel) {
-    return createElement('span', {
+  }).map((value, currentLevel) =>
+    createElement('span', {
       // eslint-disable-next-line react/no-array-index-key
       key: currentLevel,
       className: classes.indent,
-    });
-  });
+    })
+  );
 });
 TableTreeIndentBase.propTypes = {
   level: number,
@@ -5507,9 +5508,9 @@ TableTreeIndentBase.propTypes = {
 TableTreeIndentBase.defaultProps = {
   level: 0,
 };
-var TableTreeIndent = withStyles(styles$M)(TableTreeIndentBase);
+const TableTreeIndent = withStyles(styles$M)(TableTreeIndentBase);
 
-var styles$N = function styles() {
+const styles$N = function styles() {
   return {
     content: {
       width: '100%',
@@ -5519,15 +5520,15 @@ var styles$N = function styles() {
   };
 };
 
-var TableTreeContentBase = function TableTreeContentBase(_ref) {
-  var children = _ref.children,
-    classes = _ref.classes,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'children',
-      'classes',
-      'className',
-    ]);
+const TableTreeContentBase = function TableTreeContentBase(_ref) {
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'children',
+    'classes',
+    'className',
+  ]);
 
   return createElement(
     'div',
@@ -5555,9 +5556,9 @@ TableTreeContentBase.defaultProps = {
   children: undefined,
   className: undefined,
 };
-var TableTreeContent = withStyles(styles$N)(TableTreeContentBase);
+const TableTreeContent = withStyles(styles$N)(TableTreeContentBase);
 
-var styles$O = function styles(theme) {
+const styles$O = function styles(theme) {
   return {
     cell: {
       padding: theme.spacing(0.5, 1),
@@ -5582,27 +5583,27 @@ var styles$O = function styles(theme) {
   };
 };
 
-var TableTreeCellBase = function TableTreeCellBase(_ref) {
-  var _classNames;
+const TableTreeCellBase = function TableTreeCellBase(_ref) {
+  let _classNames;
 
-  var column = _ref.column,
-    value = _ref.value,
-    children = _ref.children,
-    classes = _ref.classes,
-    tableRow = _ref.tableRow,
-    tableColumn = _ref.tableColumn,
-    row = _ref.row,
-    className = _ref.className,
-    restProps = _objectWithoutProperties(_ref, [
-      'column',
-      'value',
-      'children',
-      'classes',
-      'tableRow',
-      'tableColumn',
-      'row',
-      'className',
-    ]);
+  const { column } = _ref;
+  const { value } = _ref;
+  const { children } = _ref;
+  const { classes } = _ref;
+  const { tableRow } = _ref;
+  const { tableColumn } = _ref;
+  const { row } = _ref;
+  const { className } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'column',
+    'value',
+    'children',
+    'classes',
+    'tableRow',
+    'tableColumn',
+    'row',
+    'className',
+  ]);
 
   return createElement(
     TableCell$1,
@@ -5663,9 +5664,9 @@ TableTreeCellBase.defaultProps = {
   tableColumn: undefined,
   className: undefined,
 };
-var TableTreeCell = withStyles(styles$O)(TableTreeCellBase);
+const TableTreeCell = withStyles(styles$O)(TableTreeCellBase);
 
-var TableTreeColumn = withComponents({
+const TableTreeColumn = withComponents({
   Cell: TableTreeCell,
   Content: TableTreeContent,
   Indent: TableTreeIndent,
@@ -5673,7 +5674,7 @@ var TableTreeColumn = withComponents({
   Checkbox: TableTreeCheckbox,
 })(TableTreeColumn$1);
 
-var styles$P = function styles(theme) {
+const styles$P = function styles(theme) {
   return {
     root: {
       display: 'flex',
@@ -5683,15 +5684,15 @@ var styles$P = function styles(theme) {
   };
 };
 
-var SearchPanelInputBase = function SearchPanelInputBase(_ref) {
-  var onValueChange = _ref.onValueChange,
-    value = _ref.value,
-    getMessage = _ref.getMessage,
-    restProps = _objectWithoutProperties(_ref, [
-      'onValueChange',
-      'value',
-      'getMessage',
-    ]);
+const SearchPanelInputBase = function SearchPanelInputBase(_ref) {
+  const { onValueChange } = _ref;
+  const { value } = _ref;
+  const { getMessage } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'onValueChange',
+    'value',
+    'getMessage',
+  ]);
 
   return createElement(
     Input,
@@ -5700,7 +5701,7 @@ var SearchPanelInputBase = function SearchPanelInputBase(_ref) {
         onChange: function onChange(e) {
           return onValueChange(e.target.value);
         },
-        value: value,
+        value,
         type: 'text',
         placeholder: getMessage('searchPlaceholder'),
       },
@@ -5728,9 +5729,9 @@ process.env.NODE_ENV !== 'production'
 SearchPanelInputBase.defaultProps = {
   value: '',
 };
-var SearchPanelInput = withStyles(styles$P)(SearchPanelInputBase);
+const SearchPanelInput = withStyles(styles$P)(SearchPanelInputBase);
 
-var SearchPanel = withComponents({
+const SearchPanel = withComponents({
   Input: SearchPanelInput,
 })(SearchPanel$1);
 
@@ -5741,7 +5742,7 @@ function _createSuper$5(Derived) {
     if (typeof Proxy === 'function') return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Date.prototype.toString.call(Reflect.construct(Date, [], () => {}));
       return true;
     } catch (e) {
       return false;
@@ -5749,11 +5750,11 @@ function _createSuper$5(Derived) {
   }
 
   return function () {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    const Super = _getPrototypeOf(Derived);
+    let result;
 
     if (isNativeReflectConstruct()) {
-      var NewTarget = _getPrototypeOf(this).constructor;
+      const NewTarget = _getPrototypeOf(this).constructor;
 
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
@@ -5764,7 +5765,7 @@ function _createSuper$5(Derived) {
   };
 }
 
-var styles$Q = function styles(theme) {
+const styles$Q = function styles(theme) {
   return {
     dividerRight: {
       borderRight: getBorder(theme),
@@ -5779,10 +5780,10 @@ var styles$Q = function styles(theme) {
   };
 };
 
-var FixedCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
+const FixedCellBase = /* #__PURE__ */ (function (_React$PureComponent) {
   _inherits(FixedCellBase, _React$PureComponent);
 
-  var _super = _createSuper$5(FixedCellBase);
+  const _super = _createSuper$5(FixedCellBase);
 
   function FixedCellBase() {
     _classCallCheck(this, FixedCellBase);
@@ -5794,29 +5795,29 @@ var FixedCellBase = /*#__PURE__*/ (function (_React$PureComponent) {
     {
       key: 'render',
       value: function render() {
-        var _classNames;
+        let _classNames;
 
-        var _this$props = this.props,
-          className = _this$props.className,
-          classes = _this$props.classes,
-          CellPlaceholder = _this$props.component,
-          position = _this$props.position,
-          selected = _this$props.selected,
-          showLeftDivider = _this$props.showLeftDivider,
-          showRightDivider = _this$props.showRightDivider,
-          side = _this$props.side,
-          style = _this$props.style,
-          restProps = _objectWithoutProperties(_this$props, [
-            'className',
-            'classes',
-            'component',
-            'position',
-            'selected',
-            'showLeftDivider',
-            'showRightDivider',
-            'side',
-            'style',
-          ]);
+        const _this$props = this.props;
+        const { className } = _this$props;
+        const { classes } = _this$props;
+        const CellPlaceholder = _this$props.component;
+        const { position } = _this$props;
+        const { selected } = _this$props;
+        const { showLeftDivider } = _this$props;
+        const { showRightDivider } = _this$props;
+        const { side } = _this$props;
+        const { style } = _this$props;
+        const restProps = _objectWithoutProperties(_this$props, [
+          'className',
+          'classes',
+          'component',
+          'position',
+          'selected',
+          'showLeftDivider',
+          'showRightDivider',
+          'side',
+          'style',
+        ]);
 
         return createElement(
           CellPlaceholder,
@@ -5876,11 +5877,11 @@ FixedCellBase.defaultProps = {
   showRightDivider: false,
   style: null,
 };
-var FixedCell = withStyles(styles$Q, {
+const FixedCell = withStyles(styles$Q, {
   name: 'TableFixedCell',
 })(FixedCellBase);
 
-var styles$R = function styles() {
+const styles$R = function styles() {
   return {
     cell: {
       border: 0,
@@ -5888,10 +5889,10 @@ var styles$R = function styles() {
   };
 };
 
-var TableBorderlessStubCellBase = function TableBorderlessStubCellBase(_ref) {
-  var className = _ref.className,
-    classes = _ref.classes,
-    restProps = _objectWithoutProperties(_ref, ['className', 'classes']);
+const TableBorderlessStubCellBase = function TableBorderlessStubCellBase(_ref) {
+  const { className } = _ref;
+  const { classes } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['className', 'classes']);
 
   return createElement(
     TableStubCell,
@@ -5913,13 +5914,13 @@ process.env.NODE_ENV !== 'production'
 TableBorderlessStubCellBase.defaultProps = {
   className: undefined,
 };
-var TableBorderlessStubCell = withStyles(styles$R, {
+const TableBorderlessStubCell = withStyles(styles$R, {
   name: 'TableBorderlessStubCell',
 })(TableBorderlessStubCellBase);
-var TableListenerCell = function TableListenerCell(_ref2) {
-  var listen = _ref2.listen,
-    onSizeChange = _ref2.onSizeChange,
-    restProps = _objectWithoutProperties(_ref2, ['listen', 'onSizeChange']);
+const TableListenerCell = function TableListenerCell(_ref2) {
+  const { listen } = _ref2;
+  const { onSizeChange } = _ref2;
+  const restProps = _objectWithoutProperties(_ref2, ['listen', 'onSizeChange']);
 
   return listen
     ? createElement(
@@ -5927,7 +5928,7 @@ var TableListenerCell = function TableListenerCell(_ref2) {
         _extends(
           {
             containerComponent: TableBorderlessStubCell,
-            onSizeChange: onSizeChange,
+            onSizeChange,
           },
           restProps
         )
@@ -5941,41 +5942,41 @@ process.env.NODE_ENV !== 'production'
     })
   : void 0;
 
-var TableFixedColumns = withComponents({
+const TableFixedColumns = withComponents({
   Cell: FixedCell,
   ListenerRow: TableInvisibleRow,
   ListenerCell: TableListenerCell,
 })(TableFixedColumns$1);
 
-var TableSummaryRow = withComponents({
+const TableSummaryRow = withComponents({
   TotalRow: TableRow,
   GroupRow: TableRow,
   TreeRow: TableRow,
   TotalCell: TableCell,
   GroupCell: TableCell,
   TreeCell: TableCell,
-  TableTreeCell: TableTreeCell,
-  TableTreeContent: TableTreeContent,
-  TableTreeIndent: TableTreeIndent,
+  TableTreeCell,
+  TableTreeContent,
+  TableTreeIndent,
   Item: TableSummaryItem,
 })(TableSummaryRow$1);
 TableSummaryRow.TREE_ROW_TYPE = TableSummaryRow$1.TREE_ROW_TYPE;
 TableSummaryRow.GROUP_ROW_TYPE = TableSummaryRow$1.GROUP_ROW_TYPE;
 TableSummaryRow.TOTAL_ROW_TYPE = TableSummaryRow$1.TOTAL_ROW_TYPE;
 
-var TableInlineCellEditing = withComponents({
+const TableInlineCellEditing = withComponents({
   Cell: EditCell,
 })(TableInlineCellEditing$1);
 
-var ToggleButton$2 = function ToggleButton(_ref) {
-  var onToggle = _ref.onToggle,
-    getMessage = _ref.getMessage,
-    buttonRef = _ref.buttonRef,
-    restProps = _objectWithoutProperties(_ref, [
-      'onToggle',
-      'getMessage',
-      'buttonRef',
-    ]);
+const ToggleButton$2 = function ToggleButton(_ref) {
+  const { onToggle } = _ref;
+  const { getMessage } = _ref;
+  const { buttonRef } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'onToggle',
+    'getMessage',
+    'buttonRef',
+  ]);
 
   return createElement(
     Tooltip,
@@ -6005,17 +6006,17 @@ process.env.NODE_ENV !== 'production'
     })
   : void 0;
 
-var Menu = function Menu(_ref) {
-  var visible = _ref.visible,
-    target = _ref.target,
-    onHide = _ref.onHide,
-    children = _ref.children,
-    restProps = _objectWithoutProperties(_ref, [
-      'visible',
-      'target',
-      'onHide',
-      'children',
-    ]);
+const Menu = function Menu(_ref) {
+  const { visible } = _ref;
+  const { target } = _ref;
+  const { onHide } = _ref;
+  const { children } = _ref;
+  const restProps = _objectWithoutProperties(_ref, [
+    'visible',
+    'target',
+    'onHide',
+    'children',
+  ]);
 
   return createElement(
     Menu$1,
@@ -6044,17 +6045,17 @@ Menu.defaultProps = {
   target: null,
 };
 
-var MenuItem = forwardRef(function (_ref, ref) {
-  var text = _ref.text,
-    onClick = _ref.onClick,
-    restProps = _objectWithoutProperties(_ref, ['text', 'onClick']);
+const MenuItem = forwardRef((_ref, ref) => {
+  const { text } = _ref;
+  const { onClick } = _ref;
+  const restProps = _objectWithoutProperties(_ref, ['text', 'onClick']);
 
   return createElement(
     MenuItem$1,
     _extends(
       {
-        onClick: onClick,
-        ref: ref,
+        onClick,
+        ref,
       },
       restProps
     ),
@@ -6069,10 +6070,10 @@ MenuItem.defaultProps = {
   onClick: function onClick() {},
 };
 
-var ExportPanel = withComponents({
+const ExportPanel = withComponents({
   ToggleButton: ToggleButton$2,
-  Menu: Menu,
-  MenuItem: MenuItem,
+  Menu,
+  MenuItem,
 })(ExportPanel$1);
 
 export {
@@ -6102,4 +6103,4 @@ export {
   Toolbar$1 as Toolbar,
   VirtualTable,
 };
-//# sourceMappingURL=dx-react-grid-material-ui.es.js.map
+// # sourceMappingURL=dx-react-grid-material-ui.es.js.map
