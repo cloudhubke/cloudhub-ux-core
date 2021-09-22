@@ -17,7 +17,13 @@ const getAnimation = (animation) => {
   }
 };
 
-const getStyles = ({ minHeight, height, fullScreen, colors, style }) => {
+const getStyles = ({
+  minHeight,
+  height = 'auto',
+  fullScreen,
+  colors,
+  style,
+}) => {
   const useStyles = makeStyles({
     paper: {
       ...(!fullScreen && { minHeight, height }),

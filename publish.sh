@@ -7,6 +7,7 @@ then
 else
     echo $(pwd)
     npm version minor --no-git-tag-version
+    cp -R tmp ./dist/tmp
     cp package.json ./dist/package.json
     cp .npmignore ./dist/.npmignore
     cp publish.sh ./dist/publish.sh

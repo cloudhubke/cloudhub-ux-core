@@ -1,6 +1,6 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.18.0",
+  "version": "0.20.0",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {
@@ -8,8 +8,9 @@
     "test": "mocha src/index.test.js -w --require babel-core/register",
     "test:single": "mocha src/index.test.js --require babel-core/register",
     "build": "npm-run-all --parallel build:*",
-    "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir ../core --ignore *.test.js src && cp package.json ../core/package.json",
+    "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir ./dist --ignore *.test.js src && cp package.json ./dist/package.json",
     "lint": "node ./node_modules/.bin/eslint ./src --max-warnings=0 && echo '✔  Your code looks good.'",
+    "postinstall": "cp ./tmp/dx-react-grid-material-ui.es.js ./node_modules/@devexpress/dx-react-grid-material-ui/dist/dx-react-grid-material-ui.es.js",
     "prepublishOnly": "./publish.sh",
     "semantic-release": "semantic-release"
   },

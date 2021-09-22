@@ -21,8 +21,9 @@ export default function useEventListener(eventName, handler, element = window) {
       if (!isSupported) return;
 
       // Create event listener that calls handler function stored in ref
-      const eventListener = event => {
+      const eventListener = (event) => {
         event.preventDefault();
+        savedHandler.current(event);
       };
 
       // Add event listener
