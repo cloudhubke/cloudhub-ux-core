@@ -19,6 +19,7 @@ const BaseWebSelect = (props) => {
     search,
     select,
     labelExtractor,
+    displayField,
     onSelectChange,
     getOptionLabel,
     getValueLabel,
@@ -180,7 +181,7 @@ const BaseWebSelect = (props) => {
         onChange={(params) => {
           let val;
 
-          if (params) {
+          if (params && params.option) {
             val =
               multi || isMulti
                 ? params.value.map((item) => rest.valueExtractor(item))
