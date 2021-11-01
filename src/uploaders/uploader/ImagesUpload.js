@@ -52,11 +52,11 @@ const getStyles = ({ cardStyles }) => {
   };
 };
 
-const ImagesCard = ({ cardStyles, children, flex, ...otherProps }) => {
+const ImagesCard = ({ cardStyles, children, ...otherProps }) => {
   const classes = getStyles({ cardStyles }).useStyles();
 
   return (
-    <Block flex={flex} row wrap className={classes.imagesList} {...otherProps}>
+    <Block row wrap className={classes.imagesList} {...otherProps}>
       {children}
     </Block>
   );
@@ -279,8 +279,18 @@ class ImagesUpload extends Component {
 
   render() {
     const { previewVisible, previewImage, fileList } = this.state;
-    const { limit, url, example } = this.props;
-    const { meta } = this.props;
+    const {
+      limit,
+      url,
+      example,
+      meta,
+      disabled,
+      onRemove,
+      maxWidth,
+      maxSize,
+      axiosinstance,
+      ...rest
+    } = this.props;
     const uploadButton = (
       <div
         style={{
@@ -322,7 +332,7 @@ class ImagesUpload extends Component {
 
     return (
       <Fragment>
-        <ImagesCard {...this.props}>
+        <ImagesCard {...rest}>
           <Upload
             accept="image/*"
             action={url}
@@ -335,7 +345,7 @@ class ImagesUpload extends Component {
             onChange={this.handleChange}
             onRemove={this.handleRemove}
             customRequest={this.customRequest}
-            disabled={this.props.disabled}
+            disabled={disabled}
             ref={(node) => {
               this.uploader = node;
             }}

@@ -29,6 +29,9 @@ const BaseWebSelect = (props) => {
     valueField,
     filterOptions,
     dropDownStyle,
+    openOnClick,
+    readOnly,
+    clearable,
     ...rest
   } = props;
 
@@ -220,6 +223,8 @@ const BaseWebSelect = (props) => {
             : undefined
         }
         onInputChange={rest.onInputChange || handleInputChange}
+        openOnClick={openOnClick === true && readOnly === false}
+        clearable={!readOnly && clearable}
         {...rest}
       />
 
@@ -248,6 +253,9 @@ BaseWebSelect.defaultProps = {
   //   isPlainObject(option) ? option.id || `option-${index}` : `option-${index}`,
   onSelectChange: () => {},
   dropDownStyle: { maxHeight: '350px' },
+  readOnly: false,
+  openOnClick: true,
+  clearable: true,
 };
 
 export default BaseWebSelect;

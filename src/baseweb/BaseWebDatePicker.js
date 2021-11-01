@@ -21,6 +21,8 @@ const BaseWebDatePicker = ({
   timeSelectStart,
   timeSelectEnd,
   borderWidth,
+  readOnly,
+  clearable,
   ...rest
 }) => {
   const val = input.value || value;
@@ -139,6 +141,9 @@ const BaseWebDatePicker = ({
           timeSelectEnd={Boolean(timeSelectEnd || showTime)}
           timeSelectStart={Boolean(timeSelectStart || showTime)}
           filterDate={(val) => {
+            if (readOnly) {
+              return false;
+            }
             if (typeof disabledDate === 'function') {
               const isDisabled = disabledDate(val);
               return !isDisabled;
@@ -148,6 +153,7 @@ const BaseWebDatePicker = ({
             }
           }}
           placeholder="DD/MM/YYYY"
+          clearable={!readOnly && clearable}
           {...rest}
         />
       </Block>
@@ -162,5 +168,6 @@ BaseWebDatePicker.defaultProps = {
   clearable: true,
   filterDate: () => true,
   meta: {},
+  readOnly: false,
 };
 export default BaseWebDatePicker;
