@@ -58,11 +58,14 @@ const BaseWebSelect = (props) => {
   if (returnkeys) {
     if (Array.isArray(returnkeys)) {
       rest.valueExtractor = (item) => {
-        const obj = {};
-        returnkeys.forEach((k) => {
-          obj[k] = item[k];
-        });
-        return obj;
+        if (item) {
+          const obj = {};
+          returnkeys.forEach((k) => {
+            obj[k] = item[k];
+          });
+          return obj;
+        }
+        return item;
       };
     }
   }
@@ -139,6 +142,11 @@ const BaseWebSelect = (props) => {
     if (labelExtractor) {
       return labelExtractor(option);
     }
+    if (displayField) {
+      return isPlainObject(option)
+        ? option[displayField] || `option-${index}`
+        : `${option}`;
+    }
     return getOptionLabel({ option, index });
   };
 
@@ -148,6 +156,12 @@ const BaseWebSelect = (props) => {
     }
     if (typeof labelExtractor === 'function' && option && index >= 0) {
       const valLabel = labelExtractor(option);
+      return <div>{valLabel}</div>;
+    }
+    if (displayField) {
+      const valLabel = isPlainObject(option)
+        ? option[displayField] || `option-${index}`
+        : `${option}`;
       return <div>{valLabel}</div>;
     }
     const valLabel = getOptionLabel({ option, index });
