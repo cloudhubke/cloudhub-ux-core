@@ -2,7 +2,6 @@ import React from 'react';
 import Block from './Block';
 import ThemeContext from './theme/ThemeContext';
 
-//comment
 const Divider = ({ children, height, style, ...props }) => {
   const { sizes } = React.useContext(ThemeContext);
 

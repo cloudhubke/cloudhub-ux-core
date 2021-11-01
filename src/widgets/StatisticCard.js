@@ -132,9 +132,9 @@ function StatisticPaper({
             <CountUp
               start={0}
               end={FIGURE}
+              separator=","
               duration={4}
               delay={2}
-              separator=""
               decimals={2}
               decimal="."
             />

@@ -92,7 +92,6 @@ const ActionPopoverButton = React.forwardRef(
         <Popover
           anchorEl={anchorEl}
           keepMounted
-          getContentAnchorEl={null}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right',

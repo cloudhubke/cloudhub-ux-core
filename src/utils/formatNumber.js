@@ -12,7 +12,7 @@ export function fPercent(number) {
 }
 
 export function fNumber(number) {
-  return numeral(number).format();
+  return numeral(number).format('0,0.00');
 }
 
 export function fShortenNumber(number) {

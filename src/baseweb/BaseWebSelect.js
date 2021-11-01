@@ -142,10 +142,10 @@ const BaseWebSelect = (props) => {
   };
 
   const valueLabelExtractor = ({ option, index }) => {
-    if (typeof getValueLabel === 'function') {
+    if (typeof getValueLabel === 'function' && option && index >= 0) {
       return getValueLabel({ option, index });
     }
-    if (labelExtractor) {
+    if (typeof labelExtractor === 'function' && option && index >= 0) {
       const valLabel = labelExtractor(option);
       return <div>{valLabel}</div>;
     }
@@ -178,10 +178,14 @@ const BaseWebSelect = (props) => {
         options={itemOptions || []}
         value={initialValue}
         onChange={(params) => {
-          const val =
-            multi || isMulti
-              ? params.value.map((item) => rest.valueExtractor(item))
-              : rest.valueExtractor(params.value[0] || null);
+          let val;
+
+          if (params) {
+            val =
+              multi || isMulti
+                ? params.value.map((item) => rest.valueExtractor(item))
+                : rest.valueExtractor(params.value[0] || null);
+          }
 
           if (typeof onChange === 'function') {
             onChange(val);
