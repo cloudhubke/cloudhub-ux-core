@@ -18,11 +18,13 @@ const BaseWebSelect = (props) => {
     showError = true,
     search,
     select,
+
     labelExtractor,
+    keyExtractor,
+    valueExtractor,
+
     displayField,
     onSelectChange,
-    getOptionLabel,
-    getValueLabel,
     placeholder,
     labelKey,
     valueKey,
@@ -115,13 +117,14 @@ const BaseWebSelect = (props) => {
                         (val && val === deletedText) ||
                         (typeof labelExtractor === 'function' &&
                           labelExtractor(val) === deletedText) ||
-                        getOptionLabel({ option: val, index }) === deletedText
+                        componentLabelExtractor({ option: val }) === deletedText
                       ) {
                         return null;
                       }
                       return val;
                     })
                     .filter(Boolean);
+
                   if (deletedText && typeof input.onChange === 'function') {
                     input.onChange(newVal);
                   }
@@ -138,34 +141,30 @@ const BaseWebSelect = (props) => {
     }
   }, [multi, isMulti]);
 
-  const optionLabelExtractor = ({ option, index }) => {
-    if (labelExtractor) {
-      return labelExtractor(option);
-    }
-    if (displayField) {
-      return isPlainObject(option)
-        ? option[displayField] || `option-${index}`
-        : `${option}`;
-    }
-    return getOptionLabel({ option, index });
-  };
+  const componentLabelExtractor = ({ option }) => {
+    const key = keyExtractor(option);
+    let labelFunction = labelExtractor;
 
-  const valueLabelExtractor = ({ option, index }) => {
-    if (typeof getValueLabel === 'function' && option && index >= 0) {
-      return getValueLabel({ option, index });
+    if (typeof labelFunction === 'function' && option && key) {
+      const label = labelFunction(option);
+      if (typeof label === 'string') {
+        labelFunction = () => <div>{label}</div>;
+      } else {
+        labelFunction = () => label;
+      }
     }
-    if (typeof labelExtractor === 'function' && option && index >= 0) {
-      const valLabel = labelExtractor(option);
-      return <div>{valLabel}</div>;
-    }
+
     if (displayField) {
-      const valLabel = isPlainObject(option)
-        ? option[displayField] || `option-${index}`
-        : `${option}`;
-      return <div>{valLabel}</div>;
+      labelFunction = () => {
+        const label = isPlainObject(option)
+          ? option[displayField] || `option-${key}`
+          : `${option}`;
+
+        return <div>{label}</div>;
+      };
     }
-    const valLabel = getOptionLabel({ option, index });
-    return <div>{valLabel}</div>;
+
+    return labelFunction();
   };
 
   const customFilter = (opts) => {
@@ -198,8 +197,8 @@ const BaseWebSelect = (props) => {
           if (params && params.option) {
             val =
               multi || isMulti
-                ? params.value.map((item) => rest.valueExtractor(item))
-                : rest.valueExtractor(params.value[0] || null);
+                ? params.value.map((item) => valueExtractor(item))
+                : valueExtractor(params.value[0] || null);
           }
 
           if (typeof onChange === 'function') {
@@ -226,8 +225,8 @@ const BaseWebSelect = (props) => {
           },
           ...tagProps,
         }}
-        getOptionLabel={optionLabelExtractor}
-        getValueLabel={valueLabelExtractor}
+        getOptionLabel={componentLabelExtractor}
+        getValueLabel={componentLabelExtractor}
         labelKey={labelKey || labelField}
         valueKey={valueKey || valueField}
         filterOptions={
@@ -266,10 +265,10 @@ BaseWebSelect.defaultProps = {
   meta: {},
   options: [],
   valueExtractor: (item) => item,
-  getOptionLabel: ({ option, index }) =>
-    isPlainObject(option) ? option.id || `option-${index}` : `${option}`,
-  // getValueLabel: ({ option, index }) =>
-  //   isPlainObject(option) ? option.id || `option-${index}` : `option-${index}`,
+  labelExtractor: (item, index) =>
+    isPlainObject(item) ? item.id || `option-${index}` : `${item}`,
+  keyExtractor: (item, index) =>
+    isPlainObject(item) ? item.id || `option-${index}` : `option-${index}`,
   onSelectChange: () => {},
   dropDownStyle: { maxHeight: '350px' },
   readOnly: false,
