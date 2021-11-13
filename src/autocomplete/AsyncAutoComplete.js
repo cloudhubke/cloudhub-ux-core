@@ -4,7 +4,7 @@ import AutoComplete from './AutoComplete';
 import { useDebounce } from '../customhooks';
 
 const AsyncAutocomplete = (props) => {
-  const { axiosinstance, url, ...rest } = props;
+  const { axiosinstance, url, readOnly, ...rest } = props;
   const cachedResults = React.useRef({});
   const [loading, setloading] = React.useState(false);
   const [filter, setfilter] = React.useState('');
@@ -15,7 +15,7 @@ const AsyncAutocomplete = (props) => {
   const getOptions = React.useCallback(async () => {
     try {
       const filterkey = `${url}${filter || ''}`;
-      if (url) {
+      if (url && !readOnly) {
         if (cachedResults.current[filterkey]) {
           setoptions(cachedResults.current[filterkey]);
           return;
@@ -35,7 +35,7 @@ const AsyncAutocomplete = (props) => {
         setloading(false);
       }
     } catch (error) {}
-  }, [url, debouncedFilter]);
+  }, [url, debouncedFilter, readOnly]);
 
   React.useEffect(() => {
     getOptions();
@@ -45,7 +45,7 @@ const AsyncAutocomplete = (props) => {
     <AutoComplete
       options={options}
       onInputChange={(val) => {
-        setfilter(val);
+        setfilter(val || '');
       }}
       loading={loading}
       {...rest}
