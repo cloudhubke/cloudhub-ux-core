@@ -2,7 +2,7 @@ import React from 'react';
 import Loadable from '@react-loadable/revised';
 import Box from '@mui/material/Box';
 import { ThemeProvider as MuiThemeProvider } from '@mui/styles';
-import { createMuiTheme } from '@mui/material/styles';
+import { createTheme as createMuiTheme } from '@mui/material/styles';
 import { getLightColors, getDarkColors } from './palette';
 
 import Loading from '../Loading';

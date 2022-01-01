@@ -4,7 +4,7 @@ import { Provider as StyletronProvider } from 'styletron-react';
 import { Server as Styletron } from 'styletron-engine-atomic';
 
 import { ThemeProvider as MuiThemeProvider } from '@mui/styles';
-import { createMuiTheme } from '@mui/material/styles';
+import { createTheme as createMuiTheme } from '@mui/material/styles';
 import ThemeContext from './ThemeContext';
 import localsizes from './Sizes';
 import localcolors from './Colors';

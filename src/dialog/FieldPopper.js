@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import MuiPopper from '@mui/material/Popper';
 import Paper from '@mui/material/Paper';
-import Collapse from '@mui/material/Collapse';
+import Fade from '@mui/material/Fade';
 
 import { ClickAwayListener } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -229,7 +229,7 @@ FieldPopper.defaultProps = {
   color: colors.white,
   disableClickAwayClose: false,
   paperStyle: {},
-  transitionComponent: Collapse,
+  transitionComponent: Fade,
   searchInputComponent: TextInput,
   onOpen: () => null,
 };
