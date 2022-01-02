@@ -9,6 +9,7 @@ const Header = ({
   onSearch,
   onSetSearchText,
   queryString,
+  url,
   ...props
 }) => {
   const [text, setText] = React.useState('');
@@ -40,6 +41,10 @@ const Header = ({
         onAdd={props.onAdd}
         onRefresh={props.onRefresh}
         onPrint={props.onPrint}
+        onExport={props.onExport}
+        url={url}
+        exportHeaders={props.exportHeaders}
+        defaultExport={props.defaultExport}
       />
     </Block>
   );
