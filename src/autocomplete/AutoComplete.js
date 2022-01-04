@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField, Autocomplete } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ThemeContext from '../theme/ThemeContext';
 import Block from '../Block';
 import Text from '../Text';
+import { useDebounce } from '../customhooks';
 
 const useStyles = ({ sizes, colors }) =>
   makeStyles({
@@ -39,10 +40,32 @@ const AutoComplete = ({
   showError = true,
   meta,
   readOnly,
+  valueExtractor,
+  labelExtractor,
+  keyExtractor,
+  getOptionLabel,
   onInputChange,
   ...rest
 }) => {
+  const incomingValue = value || input.value;
+  const [InputValue, setInputValue] = React.useState(incomingValue || '');
   const { sizes, colors } = React.useContext(ThemeContext);
+  const debouncedInputValue = useDebounce(InputValue, 1000);
+
+  React.useEffect(() => {
+    if (typeof onInputChange === 'function') {
+      onInputChange(debouncedInputValue);
+    }
+    // eslint-disable-next-line
+  }, [InputValue]);
+
+  const debouncedValue = useDebounce(incomingValue, 1000);
+
+  useEffect(() => {
+    if (typeof debouncedValue === 'string') {
+      setInputValue(debouncedValue);
+    }
+  }, [debouncedValue]);
 
   const classes = useStyles({ sizes, colors })();
   return (
@@ -52,24 +75,24 @@ const AutoComplete = ({
         id="auto-complete"
         size={size || 'medium'}
         onChange={(event, val) => {
+          let returnedVal = val;
+          if (typeof valueExtractor === 'function') {
+            returnedVal = valueExtractor(val);
+          }
           if (typeof input.onChange === 'function') {
-            input.onChange(val);
+            input.onChange(returnedVal);
           }
           if (typeof onChange === 'function') {
-            onChange(val);
+            onChange(returnedVal);
+          }
+          if (typeof labelExtractor === 'function') {
+            setInputValue(labelExtractor(val));
+          } else {
+            setInputValue(getOptionLabel(val));
           }
         }}
-        inputValue={input.value || value || ''}
+        inputValue={InputValue || ''}
         value={input.value || value || ''}
-        onInputChange={(event, val) => {
-          if (typeof input.onChange === 'function') {
-            input.onChange(val);
-          }
-          if (typeof onChange === 'function') {
-            onChange(val);
-          }
-          onInputChange(val);
-        }}
         renderInput={(params) => (
           <TextField
             margin="none"
@@ -85,13 +108,34 @@ const AutoComplete = ({
                 notchedOutline: classes.notchedOutline,
               },
             }}
+            autoComplete="off"
             // eslint-disable-next-line react/jsx-no-duplicate-props
             inputProps={{
-              autocomplete: 'new-password',
               ...(params.inputProps || {}),
+              autocomplete: 'off',
             }}
+            {...meta}
           />
         )}
+        getOptionLabel={(option) => {
+          if (typeof labelExtractor === 'function') {
+            return labelExtractor(option);
+          }
+          return getOptionLabel(option);
+        }}
+        onInputChange={(event, val) => {
+          setInputValue(val, ((event || {}).target || {}).value);
+        }}
+        onBlur={() => {
+          if ((rest || {}).freeSolo && InputValue) {
+            if (typeof onChange === 'function') {
+              onChange(InputValue);
+            }
+            if (typeof input.onChange === 'function') {
+              input.onChange(InputValue);
+            }
+          }
+        }}
         {...rest}
       />
       {showError && (
@@ -108,7 +152,7 @@ AutoComplete.defaultProps = {
     onChange: () => {},
   },
   onChange: () => {},
-  onInputChange: () => {},
   getOptionLabel: (option) => (option && option.id ? option.id : `${option}`),
+  valueExtractor: (option) => option,
 };
 export default AutoComplete;

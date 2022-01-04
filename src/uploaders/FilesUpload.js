@@ -169,7 +169,7 @@ class FilesUpload extends Component {
 
   render() {
     const { fileList } = this.state;
-    const { limit, classes, url } = this.props;
+    const { limit, classes, url, accept } = this.props;
 
     const { meta } = this.props;
     const uploadButton = (
@@ -200,6 +200,7 @@ class FilesUpload extends Component {
             return true;
           }}
           disabled={this.props.disabled}
+          {...(typeof accept === 'string' ? { accept } : {})}
         >
           {fileList.length >= limit ? null : uploadButton}
         </Upload>

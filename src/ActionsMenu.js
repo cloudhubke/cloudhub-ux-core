@@ -52,18 +52,17 @@ const ActionsMenu = ({
       <Menu
         open={open}
         anchorEl={anchorEl.current}
-        transition
         placement={placement}
         disablePortal={false}
-        modifiers={{
-          flip: {
-            enabled: true,
-          },
-          preventOverflow: {
-            enabled: false,
-            boundariesElement: 'scrollParent',
-          },
-        }}
+        // modifiers={{
+        //   flip: {
+        //     enabled: true,
+        //   },
+        //   preventOverflow: {
+        //     enabled: false,
+        //     boundariesElement: 'scrollParent',
+        //   },
+        // }}
         style={{ zIndex: 99 }}
       >
         <Paper>

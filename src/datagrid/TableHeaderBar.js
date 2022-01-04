@@ -1,16 +1,18 @@
 import React from 'react';
 import { withStyles } from '@mui/styles';
-
 import AddIcon from '@mui/icons-material/Add';
 import PrintIcon from '@mui/icons-material/Print';
 import RefreshIcon from '@mui/icons-material/Cached';
-
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { CSVLink } from 'react-csv';
 import Input from '../Input';
 import Button from '../Button';
 import { useDebounce } from '../customhooks';
 import Block from '../Block';
 import Text from '../Text';
 import ThemeContext from '../theme/ThemeContext';
+import useGridStore from './store/useGridStore';
+import ExportColumnSelector from './ExportColumnSelector';
 
 const styles = {
   buttonStyle: {
@@ -27,10 +29,25 @@ const TableHeaderBar = ({
   onRefresh,
   onSearchChange,
   onPrint,
+  url,
+  exportHeaders,
+  defaultExport,
 }) => {
   const { sizes } = React.useContext(ThemeContext);
+  const [exportlist, setexportlist] = React.useState([]);
+  const [exporting, setexporting] = React.useState(false);
+  const [headers, setHeaders] = React.useState([]);
   const [text, setText] = React.useState('');
   const debouncedText = useDebounce(text, 500);
+
+  const csvLinkElem = React.useRef();
+
+  const { selection } = useGridStore(
+    (state) =>
+      state[url] || {
+        selection: {},
+      }
+  );
 
   React.useEffect(() => {
     onSearchChange(debouncedText);
@@ -65,6 +82,36 @@ const TableHeaderBar = ({
         >
           <PrintIcon /> Print
         </Button>
+
+        {Array.isArray(exportHeaders) && exportHeaders.length > 0 && (
+          <CSVLink
+            data={exportlist}
+            headers={headers}
+            asyncOnClick
+            ref={csvLinkElem}
+          >
+            <Button
+              onClick={(event) => {
+                event.preventDefault();
+                setexporting(true);
+                setexportlist(
+                  Object.keys(selection || {}).map((key) => selection[key])
+                );
+              }}
+            >
+              <ListAltIcon /> Export
+            </Button>
+          </CSVLink>
+        )}
+        <ExportColumnSelector
+          exportHeaders={exportHeaders}
+          defaultExport={defaultExport}
+          headers={headers}
+          setHeaders={setHeaders}
+          open={exporting}
+          onCancel={() => setexporting(false)}
+          csvLinkElem={csvLinkElem}
+        />
       </Block>
     </Block>
   );

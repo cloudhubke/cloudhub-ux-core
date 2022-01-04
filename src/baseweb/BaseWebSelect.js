@@ -21,7 +21,6 @@ const BaseWebSelect = (props) => {
 
     labelExtractor,
     keyExtractor,
-    valueExtractor,
 
     displayField,
     onSelectChange,
@@ -97,7 +96,14 @@ const BaseWebSelect = (props) => {
         )
       );
     } else {
-      setitemOptions(options);
+      setitemOptions(
+        options.map((item, index) => {
+          if ((item || {}).id || !item) {
+            return item;
+          }
+          return { ...item, id: keyExtractor(item, index) };
+        })
+      );
     }
     // eslint-disable-next-line
   }, [JSON.stringify(options)]);
@@ -190,7 +196,16 @@ const BaseWebSelect = (props) => {
   return (
     <Block ref={containerRef}>
       <Select
-        options={itemOptions || []}
+        options={(itemOptions || []).filter((item) => {
+          const itemValue = rest.valueExtractor(item);
+          if ((multi || isMulti) && Array.isArray(initialValue)) {
+            const ind = initialValue.findIndex((val) =>
+              isEqual(val, itemValue)
+            );
+            return ind === -1;
+          }
+          return !isEqual(itemValue, initialValue);
+        })}
         value={initialValue}
         onChange={(params) => {
           let val;
@@ -198,8 +213,8 @@ const BaseWebSelect = (props) => {
           if (params && params.option) {
             val =
               multi || isMulti
-                ? params.value.map((item) => valueExtractor(item))
-                : valueExtractor(params.value[0] || null);
+                ? params.value.map((item) => rest.valueExtractor(item))
+                : rest.valueExtractor(params.value[0] || null);
           }
 
           if (typeof onChange === 'function') {
