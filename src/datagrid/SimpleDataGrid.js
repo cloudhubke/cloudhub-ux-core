@@ -17,6 +17,8 @@ import DialogContent from '@mui/material/DialogContent';
 
 import { makeStyles } from '@mui/styles';
 import Block from '../Block';
+import GridContainer from '../GridContainer';
+import GridItem from '../GridItem';
 import './grid.css';
 
 const useStyles = makeStyles({
@@ -75,15 +77,21 @@ const SimpleDataGrid = ({ style, ...props }) => {
     <Block flex={false} style={{ position: 'relative', ...style }}>
       <Block flex={false}>{renderHeader()}</Block>
       <Block flex={false} className={classes.gridContainer}>
-        <Grid rows={rows} columns={columns || []}>
-          <DragDropProvider />
-          <Table
-            cellComponent={cellComponent}
-            columnExtensions={columnExtensions}
-          />
-          <TableColumnReordering defaultOrder={columns.map((i) => i.name)} />
-          <TableHeaderRow />
-        </Grid>
+        <GridContainer>
+          <GridItem md={12} lg={12}>
+            <Grid rows={rows} columns={columns || []}>
+              <DragDropProvider />
+              <Table
+                cellComponent={cellComponent}
+                columnExtensions={columnExtensions}
+              />
+              <TableColumnReordering
+                defaultOrder={columns.map((i) => i.name)}
+              />
+              <TableHeaderRow />
+            </Grid>
+          </GridItem>
+        </GridContainer>
       </Block>
 
       <Dialog open={deletingRows.length > 0} onClose={cancelDelete}>

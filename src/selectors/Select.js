@@ -9,7 +9,6 @@ import uniq from 'lodash/uniq';
 const Select = React.forwardRef(
   (
     {
-      input,
       options,
       value,
       onChange,
@@ -91,9 +90,10 @@ const Select = React.forwardRef(
 
     const logChange = (val) => {
       if (!val || isEmpty(val)) {
-        onSelectChange(val);
-        return onChange(val);
+        onSelectChange(isMulti ? [] : null);
+        return onChange(isMulti ? [] : null);
       }
+
       if (isMulti) {
         if (val && Array.isArray(val)) {
           const options = val.map((item, index) => {

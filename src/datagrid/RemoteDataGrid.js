@@ -65,20 +65,21 @@ const styleSheet = () => ({
       paddingRight: '5px',
     },
     '& div::-webkit-scrollbar': {
-      width: '16px',
+      width: 14,
+      height: 14,
     },
     '& div::-webkit-scrollbar-track': {
-      background: 'grey',
-      borderTop: '7px solid white',
-      borderBottom: '7px solid white',
+      background: '#CCC',
+      borderTop: '6.5px solid white',
+      borderBottom: '6.5px solid white',
     },
     '& div::-webkit-scrollbar-thumb': {
-      background: 'grey',
+      backgroundColor: '#CCC',
       borderTop: '4px solid white',
       borderBottom: '4px solid white',
     },
     '& div::-webkit-scrollbar-thumb:hover': {
-      backgroundColor: '#aaa',
+      background: '#666',
     },
   },
 
@@ -338,12 +339,14 @@ const RemoteDataGrid = React.forwardRef(
       },
       reload,
       onDeleteSuccess: (deletedRows) => {
-        const deleted = [...deletedRows].map((r) => keyExtractor(r));
+        const deleted = [...deletedRows].map((r) =>
+          typeof r === 'string' ? r : keyExtractor(r)
+        );
         dispatch({
           url: props.url,
           type: 'update',
           payload: {
-            update: data.filter((r) => !includes(deleted, keyExtractor(r))),
+            data: data.filter((r) => !includes(deleted, keyExtractor(r))),
           },
         });
       },

@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => {
     filledSuccess: styleFilled('success'),
     filledWarning: styleFilled('warning'),
     filledError: styleFilled('error'),
+    filledDanger: styleFilled('error'),
 
     // Outlined
     outlined: {
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => {
     outlinedSuccess: styleOutlined('success'),
     outlinedWarning: styleOutlined('warning'),
     outlinedError: styleOutlined('error'),
+    outlinedDanger: styleOutlined('error'),
 
     // Ghost
     ghost: {
@@ -82,6 +84,7 @@ const useStyles = makeStyles((theme) => {
     ghostSuccess: styleGhost('success'),
     ghostWarning: styleGhost('warning'),
     ghostError: styleGhost('error'),
+    ghostDanger: styleGhost('error'),
   };
 });
 
@@ -124,6 +127,7 @@ MLabel.propTypes = {
     'info',
     'success',
     'warning',
+    'danger',
     'error',
   ]),
 

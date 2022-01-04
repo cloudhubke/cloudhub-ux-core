@@ -52,8 +52,8 @@ const Dialog = ({
   const { colors } = React.useContext(ThemeContext);
   const { height } = useMetrics();
   const classes = getStyles({
-    minHeight: minHeight > height ? height : minHeight,
-    maxHeight: maxHeight > height ? height : maxHeight,
+    minHeight: minHeight > height ? height - 30 : minHeight,
+    maxHeight: maxHeight > height ? height - 30 : maxHeight,
     fullScreen,
     colors,
   }).useStyles();
@@ -103,7 +103,7 @@ Dialog.defaultProps = {
   onClose: () => {},
   animation: 'slide',
   height: 'auto',
-  minHeight: 500,
+  minHeight: 1000,
   tabs: null,
   actions: null,
 };
