@@ -91,8 +91,8 @@ const RemoteSelector = React.forwardRef(
 
     const logChange = (val) => {
       if (!val || isEmpty(val)) {
-        onSelectChange(val);
-        return onChange(val);
+        onSelectChange(isMulti ? [] : null);
+        return onChange(isMulti ? [] : null);
       }
       if (isMulti) {
         if (val && Array.isArray(val)) {

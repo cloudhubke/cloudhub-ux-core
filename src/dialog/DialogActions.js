@@ -5,14 +5,18 @@ import ThemeContext from '../theme/ThemeContext';
 const DialogActions = ({ children, ...props }) => {
   const { sizes } = React.useContext(ThemeContext);
 
-  const childbuttons = React.Children.map(children, (child) => {
+  const childbuttons = React.Children.map(children, (child, index) => {
     if (!child) {
       return null;
     }
 
     return React.cloneElement(child, {
       ...child.props,
-      style: { ...(child.props.style || {}), marginLeft: 10 },
+      style: {
+        overflow: 'hidden',
+        ...(child.props.style || {}),
+        marginLeft: index > 0 ? 10 : 0,
+      },
     });
   });
 

@@ -27,6 +27,7 @@ const useStyles = ({ sizes, colors }) =>
       height: sizes.inputHeight,
     },
     cssOutlinedInput: {
+      backgroundColor: colors.white,
       '&$cssFocused $notchedOutline': {
         borderColor: colors.primary,
       },

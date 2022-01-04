@@ -1,14 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // material
-import { Card, CardHeader, Box, Typography } from '@mui/material';
+import { Card, CardHeader, Typography } from '@mui/material';
 import ThemeContext from './theme/ThemeContext';
+import Block from './Block';
 
 // ----------------------------------------------------------------------
-
-Label.propTypes = {
-  title: PropTypes.string,
-};
 
 export function Label({ title }) {
   return (
@@ -23,13 +19,7 @@ export function Label({ title }) {
   );
 }
 
-CardBlock.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
-  sx: PropTypes.object,
-};
-
-export default function CardBlock({ title, cardStyles, sx, children }) {
+export default function CardBlock({ title, cardStyles, style, children }) {
   const { sizes } = React.useContext(ThemeContext);
   return (
     <Card
@@ -37,22 +27,17 @@ export default function CardBlock({ title, cardStyles, sx, children }) {
         overflow: 'unset',
         position: 'unset',
         flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
       }}
       style={{
         margin: sizes.margin,
         ...cardStyles,
+        ...style,
       }}
     >
       {title && <CardHeader title={title} />}
-      <Box
-        sx={{
-          p: 3,
-          minHeight: 180,
-          ...sx,
-        }}
-      >
-        {children}
-      </Box>
+      <Block>{children}</Block>
     </Card>
   );
 }
