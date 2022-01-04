@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Popover, CardActions, Button } from '@mui/material';
+import { Popover } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Scrollbars from '../Scrollbars';
 import Text from '../Text';
 import CardToolbar from './CardToolbar';
+import useMetrics from '../customhooks/useMetrics';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,7 @@ const ActionPopoverButton = React.forwardRef(
   (
     {
       anchorComponent: AnchorComponent,
+      onOpen = () => null,
       actionsComponent,
       headerComponent,
       children,
@@ -42,6 +44,7 @@ const ActionPopoverButton = React.forwardRef(
     },
     ref
   ) => {
+    const { width: WIDTH } = useMetrics();
     const classes = useStyles();
     const anchorRef = React.useRef();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -76,6 +79,7 @@ const ActionPopoverButton = React.forwardRef(
         ...AnchorComponent.props,
         onClick: () => {
           setAnchorEl(anchorRef.current);
+          onOpen();
         },
       });
     };
@@ -104,7 +108,13 @@ const ActionPopoverButton = React.forwardRef(
           onClose={handleClose}
           {...props}
         >
-          <div className={`size-${width}`}>
+          <div
+            className={`size-${width}`}
+            style={{
+              maxWidth: WIDTH - 30,
+              overflowY: 'auto',
+            }}
+          >
             <CardToolbar>
               {typeof headerComponent === 'string' ? (
                 <Text header>{headerComponent}</Text>
@@ -116,7 +126,7 @@ const ActionPopoverButton = React.forwardRef(
             <Scrollbars
               className={clsx(`scroll-area-${size}`, classes.contentArea)}
             >
-              {children}
+              {anchorEl && children}
             </Scrollbars>
 
             <div className={classes.actionsComponent}>{actionsComponent}</div>

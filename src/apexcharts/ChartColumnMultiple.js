@@ -19,25 +19,34 @@ export default function ChartColumnMultiple({
   accumilator = 'Accumilator',
   value = 'Value',
   tooltipFormat = (val) => `${val}`,
+  filterItems = [],
 }) {
   const groupItems = uniq(data.map((item) => item[groupItemIdentifier]));
   const groupIdentifiers = uniq(data.map((item) => item[groupIdentifier]));
 
-  const CHART_DATA = groupItems.map((groupItemValue) => ({
-    name: groupItemValue,
-    data: groupIdentifiers.map((groupValue) => {
-      const ind = data.findIndex(
-        (i) =>
-          i[groupIdentifier] === groupValue &&
-          i[groupItemIdentifier] === groupItemValue
-      );
+  // console.log('====================================');
+  // console.log(groupItems, groupIdentifiers);
+  // console.log('====================================');
 
-      if (ind === -1) {
-        return 0;
-      }
-      return data[ind][value];
-    }),
-  }));
+  const CHART_DATA = React.useMemo(
+    () =>
+      groupItems.map((groupItemValue) => ({
+        name: groupItemValue,
+        data: groupIdentifiers.map((groupValue) => {
+          const ind = data.findIndex(
+            (i) =>
+              i[groupIdentifier] === groupValue &&
+              i[groupItemIdentifier] === groupItemValue
+          );
+
+          if (ind === -1) {
+            return 0;
+          }
+          return data[ind][value];
+        }),
+      })),
+    [groupItems.length, groupIdentifiers.join(','), filterItems.join(',')]
+  );
 
   const chartOptions = merge(BaseOptionChart(), {
     stroke: { show: true, width: 2, colors: ['transparent'] },
@@ -52,10 +61,12 @@ export default function ChartColumnMultiple({
     plotOptions: { bar: { columnWidth: '36%' } },
   });
 
+  const series = CHART_DATA.filter((item) => filterItems.includes(item.name));
+
   return (
     <ReactApexChart
       type="bar"
-      series={CHART_DATA}
+      series={series}
       options={chartOptions}
       height={320}
     />

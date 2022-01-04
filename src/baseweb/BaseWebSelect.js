@@ -38,6 +38,7 @@ const BaseWebSelect = (props) => {
   } = props;
 
   const val = input.value || value || [];
+
   const [initialValue, setValue] = React.useState(
     Array.isArray(val) ? val : [val]
   );
