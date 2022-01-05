@@ -174,26 +174,38 @@ const FieldPopper = ({
           placement={placement}
           disablePortal
           className={classes.popper}
-          modifiers={{
-            flip: {
-              enabled: flip,
+          modifiers={[
+            {
+              name: 'flip',
+              options: {
+                enabled: flip,
+              },
             },
-            arrow: {
-              enabled: arrow,
-              element: arrowRef,
+            {
+              name: 'arrow',
+              options: {
+                enabled: arrow,
+                element: arrowRef,
+              },
             },
 
-            preventOverflow: {
-              enabled: preventOverflow !== 'disabled',
-              boundariesElement:
-                preventOverflow === 'disabled'
-                  ? 'scrollParent'
-                  : preventOverflow,
+            {
+              name: 'preventOverflow',
+              options: {
+                enabled: preventOverflow !== 'disabled',
+                boundariesElement:
+                  preventOverflow === 'disabled'
+                    ? 'scrollParent'
+                    : preventOverflow,
+              },
             },
-            hide: {
-              enabled: false,
+            {
+              name: 'hide',
+              options: {
+                enabled: false,
+              },
             },
-          }}
+          ]}
           transition
           elevation={5}
         >

@@ -18,10 +18,9 @@ const BaseWebSelect = (props) => {
     showError = true,
     search,
     select,
-
     labelExtractor,
     keyExtractor,
-
+    valueExtractor,
     displayField,
     onSelectChange,
     placeholder,
@@ -34,6 +33,7 @@ const BaseWebSelect = (props) => {
     openOnClick,
     readOnly,
     clearable,
+    onInputChange,
     ...rest
   } = props;
 
@@ -53,107 +53,88 @@ const BaseWebSelect = (props) => {
     // eslint-disable-next-line
   }, [JSON.stringify(val)]);
   const [itemOptions, setitemOptions] = React.useState(options);
-  const [tagProps, settagProps] = React.useState({});
+  // const [tagProps, settagProps] = React.useState({});
 
   const containerRef = React.useRef();
 
-  if (returnkeys) {
-    if (Array.isArray(returnkeys)) {
-      rest.valueExtractor = (item) => {
-        if (item) {
-          const obj = {};
-          returnkeys.forEach((k) => {
-            obj[k] = item[k];
-          });
-          return obj;
-        }
-        return item;
-      };
-    }
-  }
-  if (
-    Array.isArray(options) &&
-    (typeof options[0] === 'string' ||
-      typeof options[0] === 'number' ||
-      typeof options[0] === 'boolean')
-  ) {
-    rest.valueExtractor = (item) => (item && item.id ? item.id : item);
-  }
   React.useEffect(() => {
-    if (
-      Array.isArray(options) &&
-      (typeof options[0] === 'string' ||
-        typeof options[0] === 'number' ||
-        typeof options[0] === 'boolean')
-    ) {
-      setitemOptions(
-        options.map((item) =>
-          typeof options[0] === 'string' ||
-          typeof options[0] === 'number' ||
-          typeof options[0] === 'boolean'
-            ? { id: item }
-            : item || { id: item }
-        )
-      );
-    } else {
-      setitemOptions(
-        options.map((item, index) => {
-          if ((item || {}).id || !item) {
-            return item;
-          }
-          return { ...item, id: keyExtractor(item, index) };
-        })
-      );
-    }
+    const items = options.map((option, index) => {
+      if (
+        typeof option === 'string' ||
+        typeof option === 'number' ||
+        typeof option === 'boolean'
+      ) {
+        return {
+          label: labelExtractor(option, index) || option,
+          item: option,
+          id: option,
+        };
+      }
+      if (isPlainObject(option)) {
+        const optionObj = {
+          item: option,
+        };
+        optionObj.label = labelExtractor(option, index) || option;
+        if (option.id) {
+          optionObj.id = option.id;
+        } else {
+          optionObj.id = keyExtractor(optionObj, index);
+        }
+        return optionObj;
+      }
+      return option;
+    });
+    setitemOptions(items);
     // eslint-disable-next-line
   }, [JSON.stringify(options)]);
 
-  React.useEffect(() => {
-    if (multi || isMulti) {
-      settagProps({
-        Tag: {
-          props: {
-            onActionClick: (event) => {
-              let deletedText;
-              try {
-                deletedText = event.currentTarget.previousSibling.textContent;
-                setValue((currentVal) => {
-                  const newVal = currentVal
-                    .map((val, index) => {
-                      if (
-                        (val && val === deletedText) ||
-                        (typeof labelExtractor === 'function' &&
-                          labelExtractor(val) === deletedText) ||
-                        componentLabelExtractor({ option: val }) === deletedText
-                      ) {
-                        return null;
-                      }
-                      return val;
-                    })
-                    .filter(Boolean);
+  // React.useEffect(() => {
+  //   if (multi || isMulti) {
+  //     settagProps({
+  //       Tag: {
+  //         props: {
+  //           onActionClick: (event) => {
+  //             let deletedText;
+  //             try {
+  //               deletedText = event.currentTarget.previousSibling.textContent;
+  //               setValue((currentVal) => {
+  //                 const newVal = currentVal
+  //                   .map((val) => {
+  //                     if (
+  //                       (val && val === deletedText) ||
+  //                       (typeof labelExtractor === 'function' &&
+  //                         labelExtractor(val) === deletedText) ||
+  //                       componentLabelExtractor({ option: val }) === deletedText
+  //                     ) {
+  //                       return null;
+  //                     }
+  //                     return val;
+  //                   })
+  //                   .filter(Boolean);
 
-                  if (deletedText && typeof input.onChange === 'function') {
-                    input.onChange(newVal);
-                  }
-                  if (deletedText && typeof onChange === 'function') {
-                    onChange(newVal);
-                  }
-                  return newVal;
-                });
-              } catch (error) {}
-            },
-          },
-        },
-      });
-    }
-  }, [multi, isMulti]);
+  //                 if (deletedText && typeof input.onChange === 'function') {
+  //                   input.onChange(newVal);
+  //                 }
+  //                 if (deletedText && typeof onChange === 'function') {
+  //                   onChange(newVal);
+  //                 }
+  //                 return newVal;
+  //               });
+  //             } catch (error) {}
+  //           },
+  //         },
+  //       },
+  //     });
+  //   }
+  // }, [multi, isMulti]);
 
   const componentLabelExtractor = ({ option }) => {
-    const key = keyExtractor(option);
+    const item = (option || {}).item || option;
+    const key = keyExtractor(item);
     let labelFunction = labelExtractor;
 
-    if (typeof labelFunction === 'function' && option && key) {
-      const label = labelFunction(option);
+    if (typeof labelFunction === 'function' && item && key) {
+      const label = labelFunction(item);
       if (typeof label === 'string') {
         labelFunction = () => <div>{label}</div>;
       } else {
@@ -163,9 +144,9 @@ const BaseWebSelect = (props) => {
 
     if (displayField) {
       labelFunction = () => {
-        const label = isPlainObject(option)
-          ? option[displayField] || `option-${key}`
-          : `${option}`;
+        const label = isPlainObject(item)
+          ? item[displayField] || `option-${key}`
+          : `${item}`;
 
         return <div>{label}</div>;
       };
@@ -175,8 +156,23 @@ const BaseWebSelect = (props) => {
   };
 
   const customFilter = (opts) => {
-    if (Array.isArray(opts) && searchTerm) {
-      return opts
+    const availableOptions = (opts || [])
+      .map((opt) => {
+        if ((multi || isMulti) && Array.isArray(initialValue)) {
+          const ind = initialValue.findIndex((val) => val && val.id === opt.id);
+          if (ind > -1) {
+            return null;
+          }
+          return opt;
+        }
+        return opt;
+      })
+      .filter((opt) => opt !== null);
+    if (filterOptions) {
+      return filterOptions(availableOptions);
+    }
+    if (searchTerm) {
+      return availableOptions
         .map((option) =>
           JSON.stringify(option || {})
             .toLowerCase()
@@ -186,35 +182,55 @@ const BaseWebSelect = (props) => {
         )
         .filter(Boolean);
     }
-    return opts;
+    return availableOptions;
   };
   const handleInputChange = (event) => {
-    const { target } = event;
-    setsearchTerm((target || {}).value || '');
+    if (typeof onInputChange === 'function') {
+      onInputChange(event);
+    } else {
+      const { target } = event;
+      setsearchTerm((target || {}).value || '');
+    }
   };
 
   return (
     <Block ref={containerRef}>
       <Select
-        options={(itemOptions || []).filter((item) => {
-          const itemValue = rest.valueExtractor(item);
-          if ((multi || isMulti) && Array.isArray(initialValue)) {
-            const ind = initialValue.findIndex((val) =>
-              isEqual(val, itemValue)
-            );
-            return ind === -1;
-          }
-          return !isEqual(itemValue, initialValue);
-        })}
+        options={itemOptions}
         value={initialValue}
         onChange={(params) => {
           let val;
 
-          if (params && params.option) {
-            val =
-              multi || isMulti
-                ? params.value.map((item) => rest.valueExtractor(item))
-                : rest.valueExtractor(params.value[0] || null);
+          if (params && Array.isArray(params.value)) {
+            if (Array.isArray(returnkeys)) {
+              if (multi || isMulti) {
+                val = params.value.map((item) => {
+                  if (item && item.item) {
+                    const obj = {};
+                    for (const key of returnkeys) {
+                      obj[key] = item.item[key];
+                    }
+                    return obj;
+                  }
+                  return item;
+                });
+              } else {
+                const opt = params.value[0];
+                if (opt && opt.item) {
+                  val = {};
+                  for (const key of returnkeys) {
+                    val[key] = opt.item[key];
+                  }
+                }
+              }
+            } else {
+              val =
+                multi || isMulti
+                  ? params.value.map((item) =>
+                      valueExtractor((item || {}).item || item)
+                    )
+                  : valueExtractor(params.value[0] || null);
+            }
           }
 
           if (typeof onChange === 'function') {
@@ -239,24 +255,14 @@ const BaseWebSelect = (props) => {
             // pass sizes as strings, "10px" rather than 10
             style: dropDownStyle,
           },
-          ...tagProps,
+          // ...tagProps,
         }}
         getOptionLabel={componentLabelExtractor}
         getValueLabel={componentLabelExtractor}
         labelKey={labelKey || labelField}
         valueKey={valueKey || valueField}
-        filterOptions={
-          filterOptions ||
-          ((options || [])[0] &&
-            typeof (options || [])[0] === 'object' &&
-            !labelKey &&
-            !valueKey &&
-            !labelField &&
-            !valueField)
-            ? customFilter
-            : undefined
-        }
-        onInputChange={rest.onInputChange || handleInputChange}
+        filterOptions={customFilter}
+        onInputChange={handleInputChange}
         openOnClick={openOnClick === true && readOnly === false}
         clearable={!readOnly && clearable}
         {...rest}
@@ -280,7 +286,7 @@ BaseWebSelect.defaultProps = {
   multi: false,
   meta: {},
   options: [],
-  valueExtractor: (item) => item,
+  valueExtractor: (item) => (item || {}).item || item,
   labelExtractor: (item, index) =>
     isPlainObject(item) ? item.id || `option-${index}` : `${item}`,
   keyExtractor: (item, index) =>
@@ -290,6 +296,7 @@ BaseWebSelect.defaultProps = {
   readOnly: false,
   openOnClick: true,
   clearable: true,
+  filterOutSelected: true,
 };
 
 export default BaseWebSelect;

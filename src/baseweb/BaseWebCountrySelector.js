@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseWebSelect from './BaseWebSelect_old';
+import BaseWebSelect from './BaseWebSelect';
 import countries from '../countrypicker/countries';
 
 const CountrySelector = ({ ...props }) => (

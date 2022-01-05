@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
-const useStyles = makeStyles(({ sizes }) => ({
+const useStyles = makeStyles({
   grid: {
     width: '100%',
     margin: 0,
@@ -14,7 +14,7 @@ const useStyles = makeStyles(({ sizes }) => ({
     paddingRight: 5,
     paddingLeft: 5,
   },
-}));
+});
 
 function GridContainer({ children, className, ...rest }) {
   const classes = useStyles();
