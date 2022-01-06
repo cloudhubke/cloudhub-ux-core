@@ -257,7 +257,6 @@ const BaseWebSelect = (props) => {
             // pass sizes as strings, "10px" rather than 10
             style: dropDownStyle,
           },
-          // ...tagProps,
         }}
         getOptionLabel={componentLabelExtractor}
         getValueLabel={componentLabelExtractor}
