@@ -184,6 +184,7 @@ const BaseWebSelect = (props) => {
     }
     return availableOptions;
   };
+
   const handleInputChange = (event) => {
     if (typeof onInputChange === 'function') {
       onInputChange(event);
@@ -193,56 +194,57 @@ const BaseWebSelect = (props) => {
     }
   };
 
+  const logChange = (params) => {
+    let val;
+    let selectvalue;
+
+    if (params && Array.isArray(params.value)) {
+      val = [...params.value].map((v) => v.item);
+      selectvalue = [...params.value].map((v) => v.item);
+
+      if (Array.isArray(returnkeys)) {
+        if (multi || isMulti) {
+          val = val.map((item) => {
+            const obj = {};
+            for (const key of returnkeys) {
+              obj[key] = item.item[key];
+            }
+
+            return obj;
+          });
+        } else {
+          const opt = val[0];
+          if (opt && opt.item) {
+            val = {};
+            for (const key of returnkeys) {
+              val[key] = opt.item[key];
+            }
+          }
+        }
+      } else {
+        val =
+          multi || isMulti
+            ? val.map((item) => valueExtractor(item))
+            : valueExtractor(val[0] || null);
+      }
+    }
+
+    if (typeof onChange === 'function') {
+      onChange(val);
+    }
+
+    onSelectChange(multi || isMulti ? selectvalue : selectvalue[0]);
+    input.onChange(val);
+    input.onBlur();
+    setValue(params.value);
+  };
+
   return (
     <Block ref={containerRef}>
       <Select
         options={itemOptions}
         value={initialValue}
-        onChange={(params) => {
-          let val;
-
-          if (params && Array.isArray(params.value)) {
-            if (Array.isArray(returnkeys)) {
-              if (multi || isMulti) {
-                val = params.value.map((item) => {
-                  if (item && item.item) {
-                    const obj = {};
-                    for (const key of returnkeys) {
-                      obj[key] = item.item[key];
-                    }
-                    return obj;
-                  }
-                  return item;
-                });
-              } else {
-                const opt = params.value[0];
-                if (opt && opt.item) {
-                  val = {};
-                  for (const key of returnkeys) {
-                    val[key] = opt.item[key];
-                  }
-                }
-              }
-            } else {
-              val =
-                multi || isMulti
-                  ? params.value.map((item) =>
-                      valueExtractor((item || {}).item || item)
-                    )
-                  : valueExtractor(params.value[0] || null);
-            }
-          }
-
-          if (typeof onChange === 'function') {
-            onChange(val);
-          }
-          onSelectChange(
-            multi || isMulti ? params.value : (params.value || [])[0]
-          );
-          input.onChange(val);
-          input.onBlur();
-          setValue(params.value);
-        }}
+        onChange={logChange}
         multi={Boolean(multi || isMulti)}
         type={search ? TYPE.search : TYPE.select}
         overrides={{
@@ -255,7 +257,6 @@ const BaseWebSelect = (props) => {
             // pass sizes as strings, "10px" rather than 10
             style: dropDownStyle,
           },
-          // ...tagProps,
         }}
         getOptionLabel={componentLabelExtractor}
         getValueLabel={componentLabelExtractor}
