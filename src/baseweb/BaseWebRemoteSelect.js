@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import BaseWebSelect from './BaseWebSelect';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 
 const BasewebRemoteSelect = ({
   axiosinstance,
