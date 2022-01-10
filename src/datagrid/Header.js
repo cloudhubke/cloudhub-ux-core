@@ -1,6 +1,6 @@
 import React from 'react';
 import Block from '../Block';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 import TableHeaderBar from './TableHeaderBar';
 
 const Header = ({

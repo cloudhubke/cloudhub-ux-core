@@ -7,7 +7,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import { CSVLink } from 'react-csv';
 import Input from '../Input';
 import Button from '../Button';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 import Block from '../Block';
 import Text from '../Text';
 import ThemeContext from '../theme/ThemeContext';

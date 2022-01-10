@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AutoComplete from './AutoComplete';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 
 const AsyncAutocomplete = (props) => {
   const { axiosinstance, url, readOnly, ...rest } = props;

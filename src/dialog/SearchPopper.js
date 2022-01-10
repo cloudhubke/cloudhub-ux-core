@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import Axios from 'axios';
 import { CircularProgress } from '@mui/material';
 import { Block, IconButton } from '..';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 import TextInput from '../TextInput';
 import FieldPopper from './FieldPopper';
 

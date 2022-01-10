@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiContainer from '@mui/material/Container';
-import { useMetrics } from './customhooks';
+import useMetrics from './customhooks/useMetrics';
 import ThemeContext from './theme/ThemeContext';
 
 let styles;

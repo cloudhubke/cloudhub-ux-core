@@ -1,5 +1,6 @@
 import React from 'react';
-import { merge, uniq } from 'lodash';
+import merge from 'lodash/merge';
+import uniq from 'lodash/uniq';
 import ReactApexChart from 'react-apexcharts';
 //
 import BaseOptionChart from './BaseOptionChart';

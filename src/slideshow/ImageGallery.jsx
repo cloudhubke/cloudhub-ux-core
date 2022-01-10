@@ -849,11 +849,8 @@ export default class ImageGallery extends React.Component {
   }
 
   handleSwiping({ event, absX, dir }) {
-    const {
-      preventDefaultTouchmoveEvent,
-      disableSwipe,
-      stopPropagation,
-    } = this.props;
+    const { preventDefaultTouchmoveEvent, disableSwipe, stopPropagation } =
+      this.props;
     const {
       galleryWidth,
       isTransitioning,
@@ -1014,8 +1011,8 @@ export default class ImageGallery extends React.Component {
       this.imageGallerySlideWrapper.current
     ) {
       this.setState({
-        gallerySlideWrapperHeight: this.imageGallerySlideWrapper.current
-          .offsetHeight,
+        gallerySlideWrapperHeight:
+          this.imageGallerySlideWrapper.current.offsetHeight,
       });
     }
 
@@ -1409,12 +1406,8 @@ export default class ImageGallery extends React.Component {
   }
 
   render() {
-    const {
-      currentIndex,
-      isFullscreen,
-      modalFullscreen,
-      isPlaying,
-    } = this.state;
+    const { currentIndex, isFullscreen, modalFullscreen, isPlaying } =
+      this.state;
 
     const {
       additionalClass,

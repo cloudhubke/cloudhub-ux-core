@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import ThemeContext from '../theme/ThemeContext';
 import Block from '../Block';
 import Text from '../Text';
-import { useDebounce } from '../customhooks';
+import useDebounce from '../customhooks/useDebounce';
 
 const useStyles = ({ sizes, colors }) =>
   makeStyles({

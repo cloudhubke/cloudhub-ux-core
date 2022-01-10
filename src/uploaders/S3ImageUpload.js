@@ -7,13 +7,14 @@ import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
 import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
-import { Block, Text, toastr, Dialog, Button, Form, Field, Input } from '..';
+import { Block, Text, toastr, Dialog, Button, Input } from '..';
 import { Tooltip } from '@mui/material';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
+import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialog';
 import AntProgress from '../ant/AntProgress';
 import ThemeContext from '../theme/ThemeContext';
-// import useDebounce from '../customhooks/useDebounce';
 
 const S3ImageUpload = ({
   dirname,
@@ -52,10 +53,15 @@ const S3ImageUpload = ({
 
   const elemId = uniq(5);
   React.useEffect(() => {
-    if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
-      setfileList(incominginput);
+    let val = incominginput;
+    if (isPlainObject(val)) {
+      val = [val];
+    }
+    if (!isEqual(val, fileList)) {
+      setfileList(val);
     }
   }, [incominginput]);
+
   React.useEffect(() => {
     if (uploaderror) {
       setTimeout(() => {
@@ -95,15 +101,24 @@ const S3ImageUpload = ({
   }, [confirmdelete, deleting]);
 
   const logChange = (fileUpdate) => {
-    const incominginput = input && input.value ? input.value : value || [];
-    if (
-      typeof input.onChange === 'function' &&
-      !isEqual(fileUpdate, incominginput)
-    ) {
-      input.onChange(fileUpdate || []);
+    const incominginput = input && input.value ? input.value : value;
+    let val;
+    let newval;
+    if (Array.isArray(incominginput)) {
+      val = incominginput;
+    } else if (isPlainObject(incominginput)) {
+      val = [incominginput];
     }
-    if (typeof onChange === 'function' && !isEqual(fileUpdate, incominginput)) {
-      onChange(fileUpdate || []);
+    if ((limit || 0) > 1 || !fileUpdate) {
+      newval = fileUpdate;
+    } else if (Array.isArray(fileUpdate)) {
+      newval = fileUpdate[0];
+    }
+    if (typeof input.onChange === 'function' && !isEqual(fileUpdate, val)) {
+      input.onChange(newval);
+    }
+    if (typeof onChange === 'function' && !isEqual(fileUpdate, val)) {
+      onChange(newval);
     }
   };
 

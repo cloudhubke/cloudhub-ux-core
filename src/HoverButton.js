@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChevronRight } from '@mui/icons-material';
 import Block from './Block';
-import Text from './Text';
 import hexToRgb from './theme/hexToRgb';
 import ThemeContext from './theme/ThemeContext';
 
@@ -28,7 +27,7 @@ const HoverButton = ({
 }) => {
   const [hover, sethover] = React.useState(false);
 
-  const { fonts, sizes, colors } = React.useContext(ThemeContext);
+  const { sizes, colors } = React.useContext(ThemeContext);
 
   const buttonhovercolor = hoverColor || `rgb(${hexToRgb(colors.dark)}, 0.5)`;
   const buttoncolor = color || colors.milkyWhite;

@@ -15,6 +15,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
 import { AttachFile, Attachment, Close } from '@mui/icons-material';
 import { DialogHeader, DialogContent, DialogActions } from '../dialog';
 import ThemeContext from '../theme/ThemeContext';
@@ -47,17 +48,34 @@ const S3Uploader = ({
   const elemId = uniq(5);
 
   React.useEffect(() => {
-    if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
-      setfileList(incominginput);
+    let val = incominginput;
+    if (isPlainObject(val)) {
+      val = [val];
+    }
+    if (!isEqual(val, fileList)) {
+      setfileList(val);
     }
   }, [incominginput]);
 
   const logChange = (fileUpdate) => {
-    if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+    const incominginput = input && input.value ? input.value : value;
+    let val;
+    let newval;
+    if (Array.isArray(incominginput)) {
+      val = incominginput;
+    } else if (isPlainObject(incominginput)) {
+      val = [incominginput];
     }
-    if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+    if ((limit || 0) > 1 || !fileUpdate) {
+      newval = fileUpdate;
+    } else if (Array.isArray(fileUpdate)) {
+      newval = fileUpdate[0];
+    }
+    if (typeof input.onChange === 'function' && !isEqual(fileUpdate, val)) {
+      input.onChange(newval);
+    }
+    if (typeof onChange === 'function' && !isEqual(fileUpdate, val)) {
+      onChange(newval);
     }
   };
 

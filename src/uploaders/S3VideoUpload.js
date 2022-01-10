@@ -15,17 +15,9 @@ import {
   InfoOutlined,
 } from '@mui/icons-material';
 import isEqual from 'lodash/isEqual';
-import {
-  Block,
-  Text,
-  toastr,
-  VideoThumbnail,
-  Button,
-  Dialog,
-  Form,
-  Field,
-  Input,
-} from '..';
+import isPlainObject from 'lodash/isPlainObject';
+import { Block, Text, toastr, VideoThumbnail, Button, Dialog, Input } from '..';
+import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialog';
 import ThemeContext from '../theme/ThemeContext';
 import AntProgress from '../ant/AntProgress';
@@ -70,8 +62,12 @@ const S3Uploader = ({
   const elemId = uniq(5);
 
   React.useEffect(() => {
-    if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
-      setfileList(incominginput);
+    let val = incominginput;
+    if (isPlainObject(val)) {
+      val = [val];
+    }
+    if (!isEqual(val, fileList)) {
+      setfileList(val);
     }
   }, [incominginput]);
 
@@ -91,11 +87,24 @@ const S3Uploader = ({
   }, [thumberror]);
 
   const logChange = (fileUpdate) => {
-    if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+    const incominginput = input && input.value ? input.value : value;
+    let val;
+    let newval;
+    if (Array.isArray(incominginput)) {
+      val = incominginput;
+    } else if (isPlainObject(incominginput)) {
+      val = [incominginput];
     }
-    if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+    if ((limit || 0) > 1 || !fileUpdate) {
+      newval = fileUpdate;
+    } else if (Array.isArray(fileUpdate)) {
+      newval = fileUpdate[0];
+    }
+    if (typeof input.onChange === 'function' && !isEqual(fileUpdate, val)) {
+      input.onChange(newval);
+    }
+    if (typeof onChange === 'function' && !isEqual(fileUpdate, val)) {
+      onChange(newval);
     }
   };
 
