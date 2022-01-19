@@ -53,7 +53,6 @@ const BaseWebSelect = (props) => {
     // eslint-disable-next-line
   }, [JSON.stringify(val)]);
   const [itemOptions, setitemOptions] = React.useState(options);
-  // const [tagProps, settagProps] = React.useState({});
 
   const containerRef = React.useRef();
 
@@ -88,46 +87,6 @@ const BaseWebSelect = (props) => {
     // eslint-disable-next-line
   }, [JSON.stringify(options)]);
 
-  // React.useEffect(() => {
-  //   if (multi || isMulti) {
-  //     settagProps({
-  //       Tag: {
-  //         props: {
-  //           onActionClick: (event) => {
-  //             let deletedText;
-  //             try {
-  //               deletedText = event.currentTarget.previousSibling.textContent;
-  //               setValue((currentVal) => {
-  //                 const newVal = currentVal
-  //                   .map((val) => {
-  //                     if (
-  //                       (val && val === deletedText) ||
-  //                       (typeof labelExtractor === 'function' &&
-  //                         labelExtractor(val) === deletedText) ||
-  //                       componentLabelExtractor({ option: val }) === deletedText
-  //                     ) {
-  //                       return null;
-  //                     }
-  //                     return val;
-  //                   })
-  //                   .filter(Boolean);
-
-  //                 if (deletedText && typeof input.onChange === 'function') {
-  //                   input.onChange(newVal);
-  //                 }
-  //                 if (deletedText && typeof onChange === 'function') {
-  //                   onChange(newVal);
-  //                 }
-  //                 return newVal;
-  //               });
-  //             } catch (error) {}
-  //           },
-  //         },
-  //       },
-  //     });
-  //   }
-  // }, [multi, isMulti]);
-
   const componentLabelExtractor = ({ option }) => {
     const item = (option || {}).item || option;
     const key = keyExtractor(item);
@@ -159,7 +118,9 @@ const BaseWebSelect = (props) => {
     const availableOptions = (opts || [])
       .map((opt) => {
         if ((multi || isMulti) && Array.isArray(initialValue)) {
-          const ind = initialValue.findIndex((val) => val && val.id === opt.id);
+          const ind = initialValue.findIndex(
+            (val) => val && val.id === (opt || {}).id
+          );
           if (ind > -1) {
             return null;
           }
@@ -186,15 +147,20 @@ const BaseWebSelect = (props) => {
   };
 
   const handleInputChange = (event) => {
-    if (typeof onInputChange === 'function') {
-      onInputChange(event);
-    } else {
-      const { target } = event;
-      setsearchTerm((target || {}).value || '');
+    if (!readOnly) {
+      if (typeof onInputChange === 'function') {
+        onInputChange(event);
+      } else {
+        const { target } = event;
+        setsearchTerm((target || {}).value || '');
+      }
     }
   };
 
   const logChange = (params) => {
+    if (readOnly) {
+      return;
+    }
     let val;
     let selectvalue;
 
@@ -214,11 +180,9 @@ const BaseWebSelect = (props) => {
           });
         } else {
           const opt = val[0];
-          if (opt && opt.item) {
-            val = {};
-            for (const key of returnkeys) {
-              val[key] = opt.item[key];
-            }
+          val = {};
+          for (const key of returnkeys) {
+            val[key] = opt[key];
           }
         }
       } else {
@@ -264,7 +228,7 @@ const BaseWebSelect = (props) => {
         valueKey={valueKey || valueField}
         filterOptions={customFilter}
         onInputChange={handleInputChange}
-        openOnClick={openOnClick === true && readOnly === false}
+        openOnClick={openOnClick === true && Boolean(readOnly) === false}
         clearable={!readOnly && clearable}
         {...rest}
       />

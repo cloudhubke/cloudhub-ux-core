@@ -9,6 +9,7 @@ const BasewebRemoteSelect = ({
   debounceTime,
   params,
   filterkey = 'filter',
+  readOnly,
   ...rest
 }) => {
   const cachedResults = React.useRef({});
@@ -57,15 +58,23 @@ const BasewebRemoteSelect = ({
     <BaseWebSelect
       options={options}
       onInputChange={(event) => {
+        if (readOnly) {
+          return;
+        }
         const { target } = event;
         setfilter(target.value);
       }}
-      onOpen={() => setdropdownOpen(true)}
+      onOpen={() => {
+        if (!readOnly) {
+          setdropdownOpen(true);
+        }
+      }}
       onClose={() => {
         setdropdownOpen(false);
         setfilter('');
       }}
       isLoading={isLoading}
+      readOnly={readOnly}
       {...rest}
     />
   );
@@ -75,6 +84,7 @@ BasewebRemoteSelect.defaultProps = {
   axiosinstance: () => axios.create({}),
   debounceTime: 1000,
   params: {},
+  readOnly: false,
 };
 
 export default BasewebRemoteSelect;
