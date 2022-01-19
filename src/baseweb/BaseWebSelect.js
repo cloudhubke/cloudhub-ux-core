@@ -39,14 +39,38 @@ const BaseWebSelect = (props) => {
 
   const val = input.value || value || [];
 
-  const [initialValue, setValue] = React.useState(
-    Array.isArray(val) ? val : [val]
-  );
+  const [initialValue, setValue] = React.useState();
   const [searchTerm, setsearchTerm] = React.useState('');
 
   // Effect clears displayed value on form reinitialize
   React.useEffect(() => {
-    const initVal = Array.isArray(val) ? val : [val];
+    let initVal = Array.isArray(val) ? val : [val];
+    initVal = initVal.map((option, index) => {
+      if (
+        typeof option === 'string' ||
+        typeof option === 'number' ||
+        typeof option === 'boolean'
+      ) {
+        return {
+          label: labelExtractor(option, index) || option,
+          item: option,
+          id: option,
+        };
+      }
+      if (isPlainObject(option)) {
+        const optionObj = {
+          item: option,
+        };
+        optionObj.label = labelExtractor(option, index) || option;
+        if ((option || {}).id) {
+          optionObj.id = (option || {}).id;
+        } else {
+          optionObj.id = keyExtractor(optionObj, index);
+        }
+        return optionObj;
+      }
+      return option;
+    });
     if (!isEqual(initVal, initialValue)) {
       setValue(initVal);
     }
@@ -74,8 +98,8 @@ const BaseWebSelect = (props) => {
           item: option,
         };
         optionObj.label = labelExtractor(option, index) || option;
-        if (option.id) {
-          optionObj.id = option.id;
+        if ((option || {}).id) {
+          optionObj.id = (option || {}).id;
         } else {
           optionObj.id = keyExtractor(optionObj, index);
         }
