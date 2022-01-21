@@ -5,10 +5,8 @@ import countries from '../countrypicker/countries';
 const CountrySelector = ({ ...props }) => (
   <BaseWebSelect
     options={countries}
-    getOptionLabel={({ option }) =>
-      option && option.name ? option.name : `${option}`
-    }
-    valueExtractor={(item) => item.name}
+    valueExtractor={(item) => item.name || item}
+    labelExtractor={(item) => item.name || item}
     placeholder="Select Country"
     {...props}
   />

@@ -88,46 +88,6 @@ const BaseWebSelect = (props) => {
     // eslint-disable-next-line
   }, [JSON.stringify(options)]);
 
-  // React.useEffect(() => {
-  //   if (multi || isMulti) {
-  //     settagProps({
-  //       Tag: {
-  //         props: {
-  //           onActionClick: (event) => {
-  //             let deletedText;
-  //             try {
-  //               deletedText = event.currentTarget.previousSibling.textContent;
-  //               setValue((currentVal) => {
-  //                 const newVal = currentVal
-  //                   .map((val) => {
-  //                     if (
-  //                       (val && val === deletedText) ||
-  //                       (typeof labelExtractor === 'function' &&
-  //                         labelExtractor(val) === deletedText) ||
-  //                       componentLabelExtractor({ option: val }) === deletedText
-  //                     ) {
-  //                       return null;
-  //                     }
-  //                     return val;
-  //                   })
-  //                   .filter(Boolean);
-
-  //                 if (deletedText && typeof input.onChange === 'function') {
-  //                   input.onChange(newVal);
-  //                 }
-  //                 if (deletedText && typeof onChange === 'function') {
-  //                   onChange(newVal);
-  //                 }
-  //                 return newVal;
-  //               });
-  //             } catch (error) {}
-  //           },
-  //         },
-  //       },
-  //     });
-  //   }
-  // }, [multi, isMulti]);
-
   const componentLabelExtractor = ({ option }) => {
     const item = (option || {}).item || option;
     const key = keyExtractor(item);

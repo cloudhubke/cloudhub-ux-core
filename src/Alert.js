@@ -3,8 +3,17 @@ import Loadable from '@react-loadable/revised';
 import Box from '@mui/material/Box';
 import AlertTitle from '@mui/material/AlertTitle';
 import Collapse from '@mui/material/Collapse';
+import { makeStyles } from '@mui/styles';
 import mui from '@mui/material/package.json';
 import Loading from './Loading';
+
+const useStyles = makeStyles({
+  alert: {
+    '& .MuiAlert-message': {
+      flex: 1,
+    },
+  },
+});
 
 const MuiAlert = mui.version.includes('4.')
   ? Loadable({
@@ -44,6 +53,7 @@ const Alert = ({
   ...props
 }) => {
   const [alertopen, setAlertOpen] = React.useState(open);
+  const classes = useStyles();
   let type = 'info';
 
   if (info) {
@@ -82,7 +92,12 @@ const Alert = ({
       }}
     >
       <Collapse in={alertopen}>
-        <MuiAlert severity={type} {...closeProps} {...props}>
+        <MuiAlert
+          className={classes.alert}
+          severity={type}
+          {...closeProps}
+          {...props}
+        >
           <AlertTitle>{`${title || type}`}</AlertTitle>
           {message || description || children}
         </MuiAlert>
