@@ -10,7 +10,7 @@ import {
   IntegratedPaging,
   IntegratedSorting,
   IntegratedSelection,
-} from '@devexpress/dx-react-grid';
+} from '@cloudhub-dx/dx-react-grid';
 import {
   Grid,
   Table,
@@ -26,7 +26,7 @@ import {
   TableFilterRow,
   TableColumnVisibility,
   ColumnChooser,
-} from '@devexpress/dx-react-grid-material-ui';
+} from '@cloudhub-dx/dx-react-grid-material-ui';
 import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';

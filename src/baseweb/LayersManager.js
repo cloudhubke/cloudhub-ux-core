@@ -3,7 +3,13 @@ import { LayersContext } from 'baseui/layer';
 import { styled } from 'baseui/styles';
 import { getOverrides } from 'baseui/helpers/overrides';
 
-const StyledAppContainer = styled('div', {});
+const StyledAppContainer = styled('div', {
+  flex: 1,
+  height: '100%',
+  width: '100%',
+  position: 'relative',
+  // backgroundColor: 'cyan',
+});
 const StyledLayersContainer = styled('div', {});
 
 const LayersManager = ({ children, zIndex, ...props }) => {

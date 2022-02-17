@@ -1,5 +1,5 @@
 /**
- * Bundle of @devexpress/dx-react-grid-material-ui
+ * Bundle of @cloudhub-dx/dx-react-grid-material-ui
  * Generated: 2021-03-04
  * Version: 2.7.5
  * License: https://js.devexpress.com/Licensing
@@ -59,7 +59,7 @@ import {
   TableSummaryRow as TableSummaryRow$1,
   TableInlineCellEditing as TableInlineCellEditing$1,
   ExportPanel as ExportPanel$1,
-} from '@devexpress/dx-react-grid';
+} from '@cloudhub-dx/dx-react-grid';
 import classNames from 'clsx';
 import { withStyles } from '@mui/styles';
 import {
@@ -68,7 +68,7 @@ import {
   Draggable,
   DragSource,
   Sizer,
-} from '@devexpress/dx-react-core';
+} from '@cloudhub-dx/dx-react-core';
 import Popover from '@mui/material/Popover';
 import List from '@mui/material/List';
 import IconButton from '@mui/material/IconButton';
@@ -89,7 +89,7 @@ import {
   lastRowOnPage,
   calculateStartPage,
   getCellGeometries,
-} from '@devexpress/dx-grid-core';
+} from '@cloudhub-dx/dx-grid-core';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import TableCell$1 from '@mui/material/TableCell';
 import ExpandMore from '@mui/icons-material/ExpandMore';

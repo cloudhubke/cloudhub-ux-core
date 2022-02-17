@@ -5,7 +5,7 @@ import {
   TableHeaderRow,
   DragDropProvider,
   TableColumnReordering,
-} from '@devexpress/dx-react-grid-material-ui';
+} from '@cloudhub-dx/dx-react-grid-material-ui';
 import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 

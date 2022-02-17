@@ -22,7 +22,7 @@ import { DialogHeader, DialogContent, DialogActions } from '../dialog';
 import ThemeContext from '../theme/ThemeContext';
 import FileIcon from './FileIcon';
 
-const S3Uploader = ({
+const S3FilesUploader = ({
   dirname,
   ACL,
   signaxiosinstance,
@@ -30,8 +30,6 @@ const S3Uploader = ({
   input,
   value,
   onChange,
-  signurl,
-  deleteurl,
   limit,
   maxSize,
   accept,
@@ -39,6 +37,8 @@ const S3Uploader = ({
   setuploading = () => null,
   disabled,
   readOnly,
+  signurl = '/media/upload/signput',
+  deleteurl = '/media/upload/deletefiles',
 }) => {
   const incominginput = input.value || value;
   const { colors } = React.useContext(ThemeContext);
@@ -58,10 +58,14 @@ const S3Uploader = ({
 
   const logChange = (fileUpdate) => {
     if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+      if (limit === 1) {
+        input.onChange((fileUpdate || [])[0]);
+      }
     }
     if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+      if (limit === 1) {
+        onChange((fileUpdate || [])[0]);
+      }
     }
   };
 
@@ -221,6 +225,9 @@ const S3Uploader = ({
 
     if (fileArray.length > 0) {
       const signedUrls = await getSignedUrl(fileArray).then((urls) => urls);
+      if (!signedUrls) {
+        return;
+      }
       signedUrls.filter(Boolean);
       const uploads = [...(files || [])].filter(Boolean).map(
         (file) =>
@@ -269,8 +276,6 @@ const S3Uploader = ({
           continue;
         }
       }
-
-      toastr.success('Upload successful');
     }
   };
 
@@ -408,7 +413,7 @@ const S3Uploader = ({
   );
 };
 
-S3Uploader.defaultProps = {
+S3FilesUploader.defaultProps = {
   onChange: () => {},
   input: {
     value: null,
@@ -417,4 +422,4 @@ S3Uploader.defaultProps = {
   setuploading: () => {},
   limit: 1,
 };
-export default S3Uploader;
+export default S3FilesUploader;

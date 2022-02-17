@@ -153,7 +153,7 @@ const FormField = ({
     }
 
     return (
-      <Block row middle wrap>
+      <Block flex={false} row middle wrap>
         {`${label && required ? '*' : ''}`}
         {label}
       </Block>

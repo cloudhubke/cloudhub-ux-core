@@ -11,6 +11,22 @@ import Form from '../form/Form';
 import Field from '../form/Field';
 import ThemeContext from '../theme/ThemeContext';
 
+function getChecked({ defaultExport, exportHeaders }) {
+  const defaultChecked = {};
+  if (Array.isArray(defaultExport) && defaultExport.length > 0) {
+    defaultExport.forEach((item) => {
+      defaultChecked[item] = true;
+    });
+  } else if (Array.isArray(exportHeaders)) {
+    exportHeaders.forEach((item) => {
+      const { key } = item;
+      defaultChecked[`${key}`.replace(/\./g, '__')] = true;
+    });
+  }
+
+  return defaultChecked;
+}
+
 const ExportColumnSelector = ({
   setHeaders = () => {},
   open,
@@ -20,35 +36,28 @@ const ExportColumnSelector = ({
   defaultExport,
 }) => {
   const { colors, sizes } = React.useContext(ThemeContext);
-  const [checked, setChecked] = React.useState({});
+  const [checked] = React.useState(
+    getChecked({ defaultExport, exportHeaders })
+  );
 
-  React.useEffect(() => {
-    if (Array.isArray(defaultExport)) {
-      const defaultChecked = {};
-      defaultExport.forEach((item) => {
-        defaultChecked[item] = true;
-      });
-      setTimeout(() => {
-        setChecked(defaultChecked);
-      });
-    }
-    // eslint-disable-next-line
-  }, [JSON.stringify(defaultExport)]);
   const exportList = (columns) => {
+    /*
+      Construct the react-csv export headers array
+      [{
+        label: 'label',
+        key: 'key',
+      }
+    */
     try {
-      const cols = [];
-      Object.keys(columns).forEach((col) => {
-        if (columns[col] === true) {
-          cols.push(col);
-        }
-        if (columns[col] && typeof columns[col] === 'object') {
-          Object.keys(columns[col]).forEach((subcol) => {
-            if (columns[col][subcol] === true) {
-              cols.push(`${col}.${subcol}`);
-            }
-          });
-        }
-      });
+      const cols = Object.keys(columns)
+        .map((col) => {
+          if (columns[col] === true) {
+            return `${col}`.replace(/__/g, '.');
+          }
+          return null;
+        })
+        .filter(Boolean);
+
       const tableHeaders = exportHeaders
         .map((item) => {
           if (typeof item === 'string' && cols.includes(item)) {
@@ -91,7 +100,7 @@ const ExportColumnSelector = ({
               {exportHeaders.map((col) => (
                 <Field
                   key={(col || {}).key || col}
-                  name={(col || {}).key || col}
+                  name={`${(col || {}).key || col}`.replace(/\./g, '__')}
                   component={CheckBox}
                   height={sizes.icons.small}
                   tag={(col || {}).label || col}

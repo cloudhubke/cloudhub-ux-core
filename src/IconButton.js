@@ -117,17 +117,14 @@ const IconButton = React.forwardRef((props, ref) => {
       backgroundColor: 'transparent',
       borderStyle: 'solid',
       borderWidth: 0.5,
-      display: 'flex',
     }),
     ...style,
   };
 
   return (
-    <Block row flex={false}>
-      <MuiIconButton ref={ref} {...rest} style={buttonStyles}>
-        {children}
-      </MuiIconButton>
-    </Block>
+    <MuiIconButton ref={ref} {...rest} style={buttonStyles}>
+      {children}
+    </MuiIconButton>
   );
 });
 const createStyles = ({ colors }) => ({

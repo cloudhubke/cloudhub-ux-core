@@ -1,6 +1,6 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.27.0",
+  "version": "0.31.0",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "build": "npm-run-all --parallel build:*",
     "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir ./dist --ignore *.test.js src && cp package.json ./dist/package.json",
     "lint": "node ./node_modules/.bin/eslint ./src --max-warnings=0 && echo '✔  Your code looks good.'",
-    "postinstall": "cp ./tmp/dx-react-grid-material-ui.es.js ./node_modules/@devexpress/dx-react-grid-material-ui/dist/dx-react-grid-material-ui.es.js",
     "prepublishOnly": "./publish.sh",
     "semantic-release": "semantic-release"
   },
@@ -40,15 +39,10 @@
     "react-dom": ">=16.8.1",
     "zustand": "^3.3.3"
   },
-  "bundledDependencies": [
-    "@devexpress/dx-react-core",
-    "@devexpress/dx-react-grid",
-    "@devexpress/dx-react-grid-material-ui"
-  ],
   "dependencies": {
-    "@devexpress/dx-react-core": "2.7.5",
-    "@devexpress/dx-react-grid": "2.7.5",
-    "@devexpress/dx-react-grid-material-ui": "2.7.5",
+    "@cloudhub-dx/dx-react-core": "2.7.8",
+    "@cloudhub-dx/dx-react-grid": "2.7.8",
+    "@cloudhub-dx/dx-react-grid-material-ui": "2.7.8",
     "@iconify-icons/ant-design": "^1.1.0",
     "@iconify-icons/eva": "^1.1.0",
     "@iconify-icons/ic": "^1.1.3",

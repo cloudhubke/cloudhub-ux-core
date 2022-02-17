@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -48,64 +48,68 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function DropDownMenu({
-  anchorComponent,
-  onClick: onMenuClick,
-  children,
-}) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  let anchorcomp;
+const DropDownMenu = React.forwardRef(
+  ({ anchorComponent, onClick: onMenuClick, children }, ref) => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    let anchorcomp;
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-    if (typeof onMenuClick === 'function') {
-      onMenuClick(event);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+      if (typeof onMenuClick === 'function') {
+        onMenuClick(event);
+      }
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    if (anchorComponent) {
+      anchorcomp = React.cloneElement(anchorComponent, {
+        onClick: handleClick,
+        disableElevation: true,
+        id: 'menu-button',
+        'aria-controls': 'menu-menu',
+        'aria-haspopup': 'true',
+        'aria-expanded': open ? 'true' : undefined,
+        endIcon: <KeyboardArrowDownIcon />,
+        ...anchorComponent.props,
+      });
     }
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
-  if (anchorComponent) {
-    anchorcomp = React.cloneElement(anchorComponent, {
-      onClick: handleClick,
-      disableElevation: true,
-      id: 'menu-button',
-      'aria-controls': 'menu-menu',
-      'aria-haspopup': 'true',
-      'aria-expanded': open ? 'true' : undefined,
-      endIcon: <KeyboardArrowDownIcon />,
-      ...anchorComponent.props,
-    });
-  }
+    React.useImperativeHandle(ref, () => ({
+      close: () => setAnchorEl(null),
+    }));
 
-  return (
-    <div>
-      {anchorcomp || (
-        <IconButton
-          id="menu-button"
-          aria-controls="menu-menu"
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
-          onClick={handleClick}
+    return (
+      <div>
+        {anchorcomp || (
+          <IconButton
+            id="menu-button"
+            aria-controls="menu-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            variant="contained"
+            disableElevation
+            onClick={handleClick}
+          >
+            <MoreHorizIcon />
+          </IconButton>
+        )}
+        <StyledMenu
+          id="menu-menu"
+          MenuListProps={{
+            'aria-labelledby': 'menu-button',
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
         >
-          <MoreHorizIcon />
-        </IconButton>
-      )}
-      <StyledMenu
-        id="menu-menu"
-        MenuListProps={{
-          'aria-labelledby': 'menu-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {children}
-      </StyledMenu>
-    </div>
-  );
-}
+          {children}
+        </StyledMenu>
+      </div>
+    );
+  }
+);
+
+export default DropDownMenu;

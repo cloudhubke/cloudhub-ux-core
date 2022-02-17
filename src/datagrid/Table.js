@@ -1,3 +1,3 @@
-import { Table } from '@devexpress/dx-react-grid-material-ui';
+import { Table } from '@cloudhub-dx/dx-react-grid-material-ui';
 
 export default Table;
