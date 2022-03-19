@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
+import spinner from './assets/images/spinner.gif';
 
 export default class Loading extends Component {
   static defaultProps = {
@@ -24,14 +25,8 @@ export default class Loading extends Component {
           alignItems: 'center',
         }}
       >
-        {
-          // <CircularProgress color="secondary" size={this.props.size} />
-        }
-        <img
-          alt="loading...."
-          src="assets/images/spinner.gif"
-          style={{ height: size * 2 }}
-        />
+        {/* <CircularProgress color="secondary" /> */}
+        <img alt="loading...." src={spinner} style={{ height: size * 2 }} />
       </div>
     );
   }

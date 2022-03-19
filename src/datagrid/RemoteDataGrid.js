@@ -16,11 +16,15 @@ import {
   IntegratedSelection,
   CustomPaging,
   RowDetailState,
+  SummaryState,
+  CustomSummary,
+  IntegratedSummary,
 } from '@cloudhub-dx/dx-react-grid';
 import {
   Grid,
   Table,
   TableHeaderRow,
+  TableSummaryRow,
   TableSelection,
   PagingPanel,
   TableGroupRow,
@@ -127,6 +131,8 @@ const staticColumns = [
   { name: 'actions', title: 'Actions', width: 140, align: 'right' },
 ];
 
+const Root = (props) => <Grid.Root {...props} style={{ flex: 1 }} />;
+
 const RemoteDataGrid = React.forwardRef(
   (
     {
@@ -134,11 +140,16 @@ const RemoteDataGrid = React.forwardRef(
       keyExtractor,
       dataExtractor,
       countExtractor,
+      summaryExtractor,
       pagingComponent = PagingComponent,
       stickyHeader = false,
       detailComponent,
       limit = 20,
       onRowClick,
+
+      showToolbar = true,
+      showFiltering = true,
+      summaryItemsExtractor,
       ...props
     },
     ref
@@ -149,22 +160,25 @@ const RemoteDataGrid = React.forwardRef(
       ...staticColumns,
     ]);
     const [defaultColumnWidths] = React.useState([
-      { columnName: 'counter', width: 70 },
-      { columnName: 'actions', width: 150 },
       ...props.columnWidths,
+      { columnName: 'counter', width: 50 },
+      { columnName: 'actions', width: 150 },
     ]);
 
     const dispatch = useGridStore((state) => state.dispatch);
-    const { data, selection, params, totalCount, loading } = useGridStore(
-      (state) =>
-        state[props.url] || {
-          data: [],
-          params: {},
-          selection: {},
-          totalCount: 0,
-          loading: false,
-        }
-    );
+
+    const { data, selection, params, totalCount, summary, loading } =
+      useGridStore(
+        (state) =>
+          state[props.url] || {
+            data: [],
+            params: {},
+            selection: {},
+            totalCount: 0,
+            summary: {},
+            loading: false,
+          }
+      );
 
     const [sorting, setSorting] = React.useState([]);
     const [currentPage, setCurrrentPage] = React.useState(0);
@@ -277,6 +291,7 @@ const RemoteDataGrid = React.forwardRef(
           payload: {
             data: dataArray,
             totalCount: countExtractor(data),
+            summary: summaryExtractor(data),
             loading: false,
           },
         });
@@ -388,6 +403,15 @@ const RemoteDataGrid = React.forwardRef(
       // return <TableCell>col</TableCell>;
     };
 
+    const getTotalSummaryValues = () => {
+      if (typeof summaryItemsExtractor === 'function' && data.length > 0) {
+        return summaryItemsExtractor({ data, summary, totalCount }).map(
+          (item) => item.value || 0
+        );
+      }
+      return [];
+    };
+
     const { classes, allowColumnResizing, hiddencolumns, rowComponent } = props;
 
     return (
@@ -409,7 +433,7 @@ const RemoteDataGrid = React.forwardRef(
               bottom: 0,
             }}
           >
-            <Grid rows={data} columns={columns}>
+            <Grid rows={data} columns={columns} rootComponent={Root}>
               <SelectionState
                 selection={selectedIndexes}
                 onSelectionChange={changeSelection}
@@ -437,8 +461,8 @@ const RemoteDataGrid = React.forwardRef(
               />
               <CustomPaging totalCount={totalCount} />
 
-              <IntegratedGrouping />
-              <IntegratedFiltering />
+              {showToolbar && <IntegratedGrouping />}
+              {showFiltering && <IntegratedFiltering />}
               <IntegratedSorting />
 
               <IntegratedSelection />
@@ -460,6 +484,7 @@ const RemoteDataGrid = React.forwardRef(
                 }}
                 cellComponent={cellComponent}
                 allowColumnReordering
+                style={{ backgroundColor: 'pink' }}
               />
 
               {allowColumnResizing && (
@@ -477,17 +502,33 @@ const RemoteDataGrid = React.forwardRef(
                 allowResizing={allowColumnResizing}
               />
 
-              <TableFilterRow
-                cellComponent={(props) => {
-                  if (
-                    props.column.name === 'actions' ||
-                    props.column.name === 'counter'
-                  ) {
-                    return <TableCell />;
-                  }
-                  return <TableFilterRow.Cell {...props} />;
-                }}
+              <SummaryState
+                totalItems={
+                  data.length > 0 && typeof summaryItemsExtractor === 'function'
+                    ? summaryItemsExtractor({
+                        data,
+                        totalCount,
+                        summary,
+                      })
+                    : []
+                }
               />
+              <CustomSummary totalValues={getTotalSummaryValues()} />
+              <TableSummaryRow />
+
+              {showFiltering && (
+                <TableFilterRow
+                  cellComponent={(props) => {
+                    if (
+                      props.column.name === 'actions' ||
+                      props.column.name === 'counter'
+                    ) {
+                      return <TableCell />;
+                    }
+                    return <TableFilterRow.Cell {...props} />;
+                  }}
+                />
+              )}
 
               {detailComponent && <RowDetailState />}
               {detailComponent && (
@@ -495,18 +536,18 @@ const RemoteDataGrid = React.forwardRef(
               )}
 
               <TableSelection showSelectAll />
-              <TableGroupRow />
+              {showToolbar && <TableGroupRow />}
 
-              <Toolbar />
+              {showToolbar && <Toolbar />}
 
               {hiddencolumns.length > 0 && (
                 <TableColumnVisibility
                   defaultHiddenColumnNames={hiddencolumns}
                 />
               )}
-              {hiddencolumns.length > 0 && <ColumnChooser />}
+              {hiddencolumns.length > 0 && showToolbar && <ColumnChooser />}
 
-              <GroupingPanel allowDragging />
+              {showToolbar && <GroupingPanel allowDragging />}
               {pagingComponent ? (
                 <PagingPanel
                   pageSizes={allowedPageSizes}
@@ -598,6 +639,7 @@ RemoteDataGrid.defaultProps = {
   keyExtractor: (row) => row.id,
   dataExtractor: (data) => data.items || data,
   countExtractor: (data) => data.totalCount,
+  summaryExtractor: (data) => data.summary,
   permissions: {
     allowadd: true,
     allowedit: true,

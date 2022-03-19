@@ -16,7 +16,7 @@ const sizes = {
   subHeader: 14,
   body: 16,
   caption: 12,
-  small: 12,
+  small: 11,
   button: 24,
 
   marginHorizontal: 10,

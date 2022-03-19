@@ -17,6 +17,7 @@ const CheckBox = ({
   height,
   meta,
   disabled,
+  onClick = () => null,
 }) => {
   const val = input.value || value;
   const { colors, sizes } = React.useContext(ThemeContext);
@@ -31,10 +32,10 @@ const CheckBox = ({
     },
   };
 
-  const onCheck = () => {
+  const onCheck = (e) => {
     input.onChange(!checkvalue);
     input.onBlur();
-
+    onClick(e);
     onChange(!checkvalue);
   };
 
@@ -51,6 +52,8 @@ const CheckBox = ({
           style={checkBoxStyles.checkBox}
           padding={[0, sizes.padding, 0, 0]}
           disabled={disabled}
+          disableRipple
+          disableFocusRipple
         >
           {checkvalue ? (
             <MuiCheckBox

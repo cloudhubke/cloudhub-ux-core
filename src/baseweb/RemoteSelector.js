@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import BaseWebSelect from './BaseWebSelect';
+import BaseWebSelect from './StaticListSelector';
 import { useDebounce } from '../customhooks';
 
 const BasewebRemoteSelect = React.forwardRef(

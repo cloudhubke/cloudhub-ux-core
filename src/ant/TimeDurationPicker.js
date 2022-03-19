@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import WatchLaterOutlined from '@mui/icons-material/WatchLaterOutlined';
-import Popper from '../dialog/Popper';
+import Popper from '../dialogs/Popper';
 import IconButton from '../IconButton';
 import Chips from '../Chips';
 import Block from '../Block';

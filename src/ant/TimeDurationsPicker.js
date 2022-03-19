@@ -4,7 +4,7 @@ import WatchLaterOutlined from '@mui/icons-material/WatchLaterOutlined';
 import isEqual from 'lodash/isEqual';
 import moment from 'moment';
 
-import Popper from '../dialog/Popper';
+import Popper from '../dialogs/Popper';
 import IconButton from '../IconButton';
 import Chips from '../Chips';
 import Block from '../Block';

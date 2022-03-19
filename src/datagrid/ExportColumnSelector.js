@@ -1,11 +1,11 @@
 import React from 'react';
-import Dialog from '../dialog/Dialog';
+import Dialog from '../dialogs/Dialog';
 import Button from '../Button';
 import CheckBox from '../CheckBox';
 import Text from '../Text';
-import DialogHeader from '../dialog/DialogHeader';
-import DialogContent from '../dialog/DialogContent';
-import DialogActions from '../dialog/DialogActions';
+import DialogHeader from '../dialogs/DialogHeader';
+import DialogContent from '../dialogs/DialogContent';
+import DialogActions from '../dialogs/DialogActions';
 
 import Form from '../form/Form';
 import Field from '../form/Field';

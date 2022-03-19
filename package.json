@@ -1,6 +1,6 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.31.0",
+  "version": "0.41.0",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {
@@ -42,7 +42,7 @@
   "dependencies": {
     "@cloudhub-dx/dx-react-core": "2.7.8",
     "@cloudhub-dx/dx-react-grid": "2.7.8",
-    "@cloudhub-dx/dx-react-grid-material-ui": "2.7.8",
+    "@cloudhub-dx/dx-react-grid-material-ui": "2.7.10",
     "@iconify-icons/ant-design": "^1.1.0",
     "@iconify-icons/eva": "^1.1.0",
     "@iconify-icons/ic": "^1.1.3",

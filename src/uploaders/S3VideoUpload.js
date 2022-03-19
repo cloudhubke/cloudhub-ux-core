@@ -15,18 +15,9 @@ import {
   InfoOutlined,
 } from '@mui/icons-material';
 import isEqual from 'lodash/isEqual';
-import {
-  Block,
-  Text,
-  toastr,
-  VideoThumbnail,
-  Button,
-  Dialog,
-  Form,
-  Field,
-  Input,
-} from '..';
-import { DialogHeader, DialogContent, DialogActions } from '../dialog';
+import { Block, Text, toastr, VideoThumbnail, Button, Dialog, Input } from '..';
+import { Form, Field } from '../form';
+import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import ThemeContext from '../theme/ThemeContext';
 import AntProgress from '../ant/AntProgress';
 

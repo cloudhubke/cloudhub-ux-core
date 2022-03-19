@@ -126,7 +126,7 @@ const ActionPopoverButton = React.forwardRef(
             <Scrollbars
               className={clsx(`scroll-area-${size}`, classes.contentArea)}
             >
-              {children}
+              {Boolean(anchorEl) && children}
             </Scrollbars>
 
             <div className={classes.actionsComponent}>{actionsComponent}</div>

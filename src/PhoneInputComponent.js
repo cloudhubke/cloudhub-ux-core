@@ -34,9 +34,10 @@ const useStyles = ({ sizes, colors }) =>
     cssLabel: {},
   });
 
-const PhoneInput = ({
+const PhoneInputComponent = ({
   input,
   value,
+  type,
   onPhoneChanged,
   meta,
   readOnly,
@@ -44,6 +45,7 @@ const PhoneInput = ({
   showCode,
   disabled,
   style,
+  placeholder: PLACEHOLDER,
   ...props
 }) => {
   const _mobilenumberInput = React.useRef();
@@ -55,9 +57,8 @@ const PhoneInput = ({
   const [callingCode, setCallingCode] = React.useState(
     props.callingCode || '254'
   );
-  const [text, setText] = React.useState('');
   const [phone, setPhone] = React.useState('');
-  const [placeholder, setPlaceholder] = React.useState('');
+  const [placeholder, setPlaceholder] = React.useState(PLACEHOLDER || '');
 
   React.useEffect(() => {
     let phone = input.value || value;
@@ -75,7 +76,7 @@ const PhoneInput = ({
     }
 
     function getPlaceHolder() {
-      if (!props.placeholder) {
+      if (!PLACEHOLDER) {
         const placeholder = PhoneNumber.getExample(
           cca2 || 'KE',
           'mobile'
@@ -131,7 +132,7 @@ const PhoneInput = ({
         return (
           <Block>
             <TextField
-              type="tel"
+              type={Number(phone) ? 'tel' : type || 'text'}
               variant="outlined"
               placeholder={placeholder}
               className={classes.margin}
@@ -181,14 +182,15 @@ const PhoneInput = ({
   );
 };
 
-PhoneInput.defaultProps = {
+PhoneInputComponent.defaultProps = {
   meta: {},
   input: {
     onChange: () => {},
+    onBlur: () => {},
     value: '',
   },
   onPhoneChanged: () => {},
   showCode: false,
 };
 
-export default PhoneInput;
+export default PhoneInputComponent;

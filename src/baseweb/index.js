@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
-export { default as Calendar } from './BaseWebCalendar';
-export { default as DatePicker } from './BaseWebDatePicker';
-export { default as DateRangePicker } from './BaseWebDaterangePicker';
-export { default as FormFieldPopover } from './BaseWebFormFieldPopover';
-export { default as StaticListSelector } from './BaseWebSelect';
-export { default as RemoteSelector } from './BaseWebRemoteSelect';
-export { default as Popover } from './BaseWebPopover';
-export { default as CountrySelector } from './BaseWebCountrySelector';
+export { default as Calendar } from './Calendar';
+export { default as DatePicker } from './DatePicker';
+export { default as DateRangePicker } from './DateRangePicker';
+export { default as FormFieldPopover } from './FormFieldPopover';
+export { default as StaticListSelector } from './StaticListSelector';
+export { default as RemoteSelector } from './RemoteSelector';
+export { default as Popover } from './Popover';
+export { default as CountrySelector } from './CountrySelector';
 export { default as LayersManager } from './LayersManager';

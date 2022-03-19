@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import isEqual from 'lodash/isEqual';
 import { Upload, Close } from '@mui/icons-material';
-import { DialogHeader, DialogContent, DialogActions } from '../dialog';
+import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import ThemeContext from '../theme/ThemeContext';
 import FileIcon from './FileIcon';
 

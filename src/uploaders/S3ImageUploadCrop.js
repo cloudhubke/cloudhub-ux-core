@@ -6,12 +6,13 @@ import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
 import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
-import { Block, Text, toastr, Dialog, Button, Form, Field, Input } from '..';
+import { Block, Text, toastr, Dialog, Button, Input } from '..';
 import { Tooltip } from '@mui/material';
 import isEqual from 'lodash/isEqual';
 import Cropper from 'cropperjs';
+import { Form, Field } from '../form';
 import 'cropperjs/dist/cropper.min.css';
-import { DialogHeader, DialogContent, DialogActions } from '../dialog';
+import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import AntProgress from '../ant/AntProgress';
 import ThemeContext from '../theme/ThemeContext';
 

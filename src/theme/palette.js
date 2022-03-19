@@ -1,7 +1,7 @@
-import { alpha, fade } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import getPalette from './palettes';
 
-const alphaFn = alpha || fade;
+const alphaFn = alpha;
 // ----------------------------------------------------------------------
 
 function createGradient(color1, color2) {

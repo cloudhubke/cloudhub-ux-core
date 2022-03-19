@@ -1,8 +1,15 @@
 import React from 'react';
-import { Card, CardHeader, Box, CardContent } from '@mui/material';
-import DEditor from './deditor';
+import Loadable from '@react-loadable/revised';
+
+import { Card, Box, CardContent } from '@mui/material';
+import Loading from '../Loading';
 import Block from '../Block';
 import ThemeContext from '../theme/ThemeContext';
+
+const DEditor = Loadable({
+  loader: () => import(/* webpackChunkName: "DEditor" */ './deditor'),
+  loading: Loading,
+});
 
 const Container = ({ children, container }) => {
   if (container === 'block') {

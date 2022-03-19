@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Datepicker } from 'baseui/datepicker';
 import en from 'date-fns/locale/en-US';
 import Block from '../Block';
@@ -11,7 +12,7 @@ const BaseWebDatePicker = ({
   onChange,
   overrides,
   meta,
-  showError,
+  showError = true,
   showTime,
   dateFormat = 'dd/MM/yyyy',
   formatString,
@@ -23,6 +24,8 @@ const BaseWebDatePicker = ({
   borderWidth,
   readOnly,
   clearable,
+  onDateChanged = () => null,
+  style,
   ...rest
 }) => {
   const val = input.value || value;
@@ -45,6 +48,10 @@ const BaseWebDatePicker = ({
       if (input && typeof input.onChange === 'function') {
         input.onChange(date);
       }
+
+      if (onDateChanged && typeof onDateChanged === 'function') {
+        onDateChanged(date);
+      }
     }
   }, [date]);
 
@@ -57,7 +64,7 @@ const BaseWebDatePicker = ({
     <Block>
       <Block
         flex={false}
-        style={{ height: sizes.inputHeight, position: 'relative' }}
+        style={{ height: sizes.inputHeight, position: 'relative', ...style }}
         ref={containerRef}
       >
         <Datepicker
@@ -157,9 +164,11 @@ const BaseWebDatePicker = ({
           {...rest}
         />
       </Block>
-      <Text small error style={{ height: 10 }}>
-        {meta.touched && meta.error && meta.error}
-      </Text>
+      {showError && (
+        <Text small error style={{ height: 10 }}>
+          {meta.touched && meta.error && meta.error}
+        </Text>
+      )}
     </Block>
   );
 };

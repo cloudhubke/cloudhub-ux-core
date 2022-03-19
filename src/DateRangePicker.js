@@ -6,7 +6,7 @@ import sizes from './theme/Sizes';
 
 const BaseWebDatePicker = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "BaseTheme" */ './baseweb/BaseWebDatePicker'),
+    import(/* webpackChunkName: "BaseWebDatePicker" */ './baseweb/DatePicker'),
   loading: () => (
     <Box
       borderColor={colors.gray}

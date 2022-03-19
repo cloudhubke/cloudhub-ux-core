@@ -2,7 +2,7 @@ import React from 'react';
 import Block from '../Block';
 import TextInput from '../TextInput';
 
-import BaseWebPopover from './BaseWebPopover';
+import BaseWebPopover from './Popover';
 import ThemeContext from '../theme/ThemeContext';
 
 const BaseWebFormFieldPopover = ({

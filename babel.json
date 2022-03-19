@@ -3,7 +3,8 @@
     [
       "@babel/preset-env",
       {
-        "modules": "commonjs"
+        "loose": true,
+        "modules": false
       }
     ],
     "@babel/preset-react",
@@ -45,7 +46,8 @@
         "libraryName": "antd",
         "libraryDirectory": "lib",
         "style": true
-      }
+      },
+      "antd"
     ]
   ]
 }

@@ -38,15 +38,19 @@ export { default as Rating } from './Rating';
 export { default as IconButton } from './IconButton';
 export { default as ActionsMenu } from './ActionsMenu';
 export { default as DropDownMenu } from './DropDownMenu';
-export * from './widgets';
 
 export { default as ListMenu } from './ListMenu';
+export { default as ListSubMenu } from './ListSubMenu';
+export { default as ListMenuItem } from './ListMenuItem';
+export { default as StatisticCard } from './StatisticCard';
+export { default as StatusLabel } from './StatusLabel';
+
 export { default as BulletListItem } from './BulletListItem';
 export { default as MenuItem } from './MenuItem';
 export { default as Tab } from './Tab';
 export { default as Tabs } from './Tabs';
 
-export { default as Dialog } from './dialog/Dialog';
+export { default as Dialog } from './Dialog';
 export { default as SlideComponent } from './SlideComponent';
 export { default as PleaseWait } from './PleaseWait';
 export { default as SpeechBubble } from './SpeechBubble';

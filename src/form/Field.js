@@ -182,7 +182,7 @@ const FormField = ({
       flex={flex}
     >
       <LabelComponent />
-      <Block>
+      <Block flex={false}>
         <FinalFormField
           validate={composeValidators(...validators)}
           component={component}

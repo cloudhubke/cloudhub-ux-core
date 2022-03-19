@@ -299,6 +299,25 @@ const Text = ({
     ...style, // rewrite predefined styles
   };
 
+  if (error) {
+    return (
+      <Typography
+        component="span"
+        onMouseEnter={() => sethovered(true)}
+        onMouseLeave={() => sethovered(false)}
+        style={{
+          ...textStyles,
+          lineHeight: '100%',
+          margin: 0,
+          padding: 0,
+        }}
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+
   if (cropped) {
     return (
       <span
