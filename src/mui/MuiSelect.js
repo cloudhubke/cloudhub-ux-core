@@ -172,6 +172,7 @@ const MuiSelect = React.forwardRef(
         onChange={(e, val) => {
           logChange(val);
         }}
+        disabled={disabled}
         disableCloseOnSelect={Boolean(isMulti)}
         getOptionLabel={(item) => item.label || item}
         isOptionEqualToValue={(option, value) => {

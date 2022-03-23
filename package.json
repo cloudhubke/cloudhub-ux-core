@@ -1,6 +1,6 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.41.0",
+  "version": "0.44.0",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {

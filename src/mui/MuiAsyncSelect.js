@@ -231,6 +231,7 @@ const RemoteSelector = React.forwardRef(
           onChange={(e, val) => {
             logChange(val);
           }}
+          disabled={disabled}
           disableCloseOnSelect={Boolean(isMulti)}
           getOptionLabel={(item) => item.label || item}
           filterOptions={(val) => val}
