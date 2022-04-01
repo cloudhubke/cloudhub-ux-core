@@ -18,7 +18,6 @@ import {
   RowDetailState,
   SummaryState,
   CustomSummary,
-  IntegratedSummary,
 } from '@cloudhub-dx/dx-react-grid';
 import {
   Grid,
@@ -141,9 +140,11 @@ const RemoteDataGrid = React.forwardRef(
       dataExtractor,
       countExtractor,
       summaryExtractor,
+      Graphqlmodel,
       pagingComponent = PagingComponent,
       stickyHeader = false,
       detailComponent,
+      saveActionButton,
       limit = 20,
       onRowClick,
 
@@ -165,12 +166,14 @@ const RemoteDataGrid = React.forwardRef(
       { columnName: 'actions', width: 150 },
     ]);
 
+    const urlLink = Graphqlmodel ? `${Graphqlmodel.toString()}` : props.url;
+
     const dispatch = useGridStore((state) => state.dispatch);
 
     const { data, selection, params, totalCount, summary, loading } =
       useGridStore(
         (state) =>
-          state[props.url] || {
+          state[urlLink] || {
             data: [],
             params: {},
             selection: {},
@@ -210,7 +213,7 @@ const RemoteDataGrid = React.forwardRef(
       }
 
       dispatch({
-        url: props.url,
+        url: urlLink,
         type: 'update',
         payload: { selection: selectedDocs },
       });
@@ -260,6 +263,7 @@ const RemoteDataGrid = React.forwardRef(
 
     const loadData = async (reload) => {
       const queryparams = getQueryParams();
+
       if (isEqual(queryparams, params) && data.length > 0 && !reload) {
         getSelectedIndexes();
         return;
@@ -267,16 +271,27 @@ const RemoteDataGrid = React.forwardRef(
 
       try {
         dispatch({
-          url: props.url,
+          url: urlLink,
           type: 'update',
           payload: {
             params: queryparams,
             loading: true,
           },
         });
-        const { data } = await props.axiosinstance().get(`${props.url}`, {
-          params: { ...queryparams },
-        });
+
+        let data = [];
+        if (Graphqlmodel) {
+          data = await Graphqlmodel()
+            .find({ ...queryparams }, ['_document'])
+            .toJson();
+        } else {
+          const { data: axiosdata } = await props
+            .axiosinstance()
+            .get(`${props.url}`, {
+              params: { ...queryparams },
+            });
+          data = axiosdata;
+        }
 
         const dataArray = dataExtractor(data).map((d, i) => ({
           ...d,
@@ -286,7 +301,7 @@ const RemoteDataGrid = React.forwardRef(
         // setData(dataArray);
 
         dispatch({
-          url: props.url,
+          url: urlLink,
           type: 'update',
           payload: {
             data: dataArray,
@@ -299,7 +314,7 @@ const RemoteDataGrid = React.forwardRef(
         getSelectedIndexes(dataArray);
       } catch (error) {
         dispatch({
-          url: props.url,
+          url: urlLink,
           type: 'update',
           payload: { loading: false },
         });
@@ -328,7 +343,7 @@ const RemoteDataGrid = React.forwardRef(
         );
         if (ind === -1) {
           dispatch({
-            url: props.url,
+            url: urlLink,
             type: 'update',
             payload: {
               data: [row, ...data].map((d, i) => ({
@@ -339,7 +354,7 @@ const RemoteDataGrid = React.forwardRef(
           });
         } else {
           dispatch({
-            url: props.url,
+            url: urlLink,
             type: 'update',
             payload: {
               data: [...data].map((r, i) => {
@@ -358,7 +373,7 @@ const RemoteDataGrid = React.forwardRef(
           typeof r === 'string' ? r : keyExtractor(r)
         );
         dispatch({
-          url: props.url,
+          url: urlLink,
           type: 'update',
           payload: {
             data: data.filter((r) => !includes(deleted, keyExtractor(r))),
@@ -392,6 +407,7 @@ const RemoteDataGrid = React.forwardRef(
               onDelete={(row) => setDeletingRows([row])}
               onView={props.onView}
               onEdit={props.onEdit}
+              saveActionButton={saveActionButton}
             />
           )
         );
@@ -421,6 +437,7 @@ const RemoteDataGrid = React.forwardRef(
           queryString={getQueryParams()}
           onSearch={(text) => setSearchTerm(text)}
           onRefresh={reload}
+          saveActionButton={saveActionButton}
           {...props}
         />
         <Block className={classes.gridContainer}>
