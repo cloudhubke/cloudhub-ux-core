@@ -101,84 +101,101 @@ const FormField = ({
   props,
   ...rest
 }) => {
-  const validators = [];
+  let validators = [];
   const fieldprops = {};
 
-  // if (notEmpty) {
-  //   validators = [...validators, notEmptyField];
-  // }
-  // if (required) {
-  //   validators = [...validators, requiredField];
-  // }
-  // if (email) {
-  //   validators = [...validators, validateEmail];
-  //   fieldprops.type = 'email';
-  // }
+  if (notEmpty) {
+    validators = [...validators, notEmptyField];
+  }
+  if (required) {
+    validators = [...validators, requiredField];
+  }
+  if (email) {
+    validators = [...validators, validateEmail];
+    fieldprops.type = 'email';
+  }
 
-  // if (alphabets) {
-  //   validators = [...validators, mustBeAlphabet];
-  // }
+  if (alphabets) {
+    validators = [...validators, mustBeAlphabet];
+  }
 
-  // if (number) {
-  //   validators = [...validators, mustBeNumber];
-  //   fieldprops.type = 'number';
-  // }
+  if (number) {
+    validators = [...validators, mustBeNumber];
+    fieldprops.type = 'number';
+  }
 
-  // if (min || min === 0) {
-  //   validators = [...validators, minFieldValue(min)];
-  // }
+  if (min || min === 0) {
+    validators = [...validators, minFieldValue(min)];
+  }
 
-  // if (max || max === 0) {
-  //   validators = [...validators, maxFieldValue(max)];
-  // }
+  if (max || max === 0) {
+    validators = [...validators, maxFieldValue(max)];
+  }
 
-  // // Duplicate
-  // if (minValue || minValue === 0) {
-  //   validators = [...validators, minFieldValue(minValue)];
-  // }
-  // if (maxValue || maxValue === 0) {
-  //   validators = [...validators, maxFieldValue(maxValue)];
-  // }
+  // Duplicate
+  if (minValue || minValue === 0) {
+    validators = [...validators, minFieldValue(minValue)];
+  }
+  if (maxValue || maxValue === 0) {
+    validators = [...validators, maxFieldValue(maxValue)];
+  }
 
-  // if (minLength) {
-  //   validators = [...validators, minFieldLength(minLength)];
-  // }
-  // if (maxLength) {
-  //   validators = [...validators, maxFieldLength(maxLength)];
-  // }
+  if (minLength) {
+    validators = [...validators, minFieldLength(minLength)];
+  }
+  if (maxLength) {
+    validators = [...validators, maxFieldLength(maxLength)];
+  }
 
-  const LabelComponent = React.useMemo(
-    () => () => {
-      if (typeof label === 'function') {
-        return label();
-      }
+  const LabelComponent = () => {
+    if (typeof label === 'function') {
+      return label();
+    }
 
-      return (
-        <Block flex={false} row middle wrap>
-          {`${label && required ? '*' : ''}`}
-          {label}
-        </Block>
-      );
-    },
-    [label, required]
-  );
+    return (
+      <Block flex={false} row middle wrap>
+        {`${label && required ? '*' : ''}`}
+        {label}
+      </Block>
+    );
+  };
 
-  const parseFn = React.useMemo(
-    () => (value) => {
-      if (number && value) {
-        return Number(value);
-      }
+  const parseFn = (value) => {
+    if (number && value) {
+      return Number(value);
+    }
 
-      if (email) {
-        return `${value || ''}`.toLocaleLowerCase().trim();
-      }
+    if (email) {
+      return `${value || ''}`.toLocaleLowerCase().trim();
+    }
 
-      return value;
-    },
-    []
-  );
+    return value;
+  };
 
-  return (
+  return wrap ? (
+    <Block
+      row={row}
+      style={{
+        alignItems: 'stretch',
+        ...containerStyle,
+      }}
+      flex={flex}
+    >
+      <LabelComponent />
+      <Block flex={false}>
+        <FinalFormField
+          validate={composeValidators(...validators)}
+          component={component}
+          label={null}
+          {...fieldprops}
+          required={required}
+          parse={parseFn}
+          {...props}
+          {...rest}
+        />
+      </Block>
+    </Block>
+  ) : (
     <FinalFormField
       validate={composeValidators(...validators)}
       component={component}
@@ -189,41 +206,6 @@ const FormField = ({
       {...rest}
     />
   );
-
-  // return wrap ? (
-  //   <Block
-  //     row={row}
-  //     style={{
-  //       alignItems: 'stretch',
-  //       ...containerStyle,
-  //     }}
-  //     flex={flex}
-  //   >
-  //     <LabelComponent />
-  //     <Block flex={false}>
-  //       <FinalFormField
-  //         validate={composeValidators(...validators)}
-  //         component={component}
-  //         label={null}
-  //         {...fieldprops}
-  //         required={required}
-  //         parse={parseFn}
-  //         {...props}
-  //         {...rest}
-  //       />
-  //     </Block>
-  //   </Block>
-  // ) : (
-  //   <FinalFormField
-  //     validate={composeValidators(...validators)}
-  //     component={component}
-  //     label={null}
-  //     parse={parseFn}
-  //     {...fieldprops}
-  //     {...props}
-  //     {...rest}
-  //   />
-  // );
 };
 
 export default FormField;
