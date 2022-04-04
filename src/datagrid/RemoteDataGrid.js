@@ -280,6 +280,7 @@ const RemoteDataGrid = React.forwardRef(
         });
 
         let data = [];
+
         if (Graphqlmodel) {
           data = await Graphqlmodel()
             .find({ ...queryparams }, ['_document'])
@@ -322,7 +323,7 @@ const RemoteDataGrid = React.forwardRef(
     };
     React.useEffect(() => {
       loadData();
-    }, [sorting, currentPage, searchTerm, pageSize]);
+    }, [sorting, currentPage, searchTerm, pageSize, Graphqlmodel]);
 
     const changePageSize = (pageSize) => {
       const count = totalCount || data.length;

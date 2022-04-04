@@ -37,18 +37,7 @@ const RowActions = ({
         </IconButton>
 
         {SaveActionButton ? (
-          <SaveActionButton
-            anchorComponent={
-              <IconButton
-                padding={2}
-                onClick={() => props.onEdit(row)}
-                title="Edit row"
-                disabled={!permissions.allowedit}
-              >
-                <EditIcon style={{ fontSize: 24, color: colors.secondary }} />
-              </IconButton>
-            }
-          />
+          <SaveActionButton editingRow={row} />
         ) : (
           <IconButton
             padding={2}
