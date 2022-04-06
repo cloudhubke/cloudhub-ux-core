@@ -9,7 +9,10 @@ import uniq from 'uid';
 import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
 import { Block, Text, toastr, Dialog, Button, Input } from '..';
 import { Tooltip } from '@mui/material';
+import axios from 'axios';
 import isEqual from 'lodash/isEqual';
+import isEmpty from 'lodash/isEmpty';
+import isPlainObject from 'lodash/isPlainObject';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import AntProgress from '../ant/AntProgress';
@@ -53,10 +56,19 @@ const S3ImageUpload = ({
 
   const elemId = uniq(5);
   React.useEffect(() => {
+    console.log(incominginput);
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
+    }
   }, [incominginput]);
+
   React.useEffect(() => {
     if (uploaderror) {
       setTimeout(() => {
@@ -97,14 +109,18 @@ const S3ImageUpload = ({
 
   const logChange = (fileUpdate) => {
     const incominginput = input && input.value ? input.value : value || [];
+    let newValue = fileUpdate || [];
+    if ((!limit || limit === 1) && Array.isArray(fileUpdate)) {
+      newValue = fileUpdate[0] || {};
+    }
     if (
       typeof input.onChange === 'function' &&
-      !isEqual(fileUpdate, incominginput)
+      !isEqual(newValue, incominginput)
     ) {
-      input.onChange(fileUpdate || []);
+      input.onChange(newValue);
     }
-    if (typeof onChange === 'function' && !isEqual(fileUpdate, incominginput)) {
-      onChange(fileUpdate || []);
+    if (typeof onChange === 'function' && !isEqual(newValue, incominginput)) {
+      onChange(newValue);
     }
   };
 
@@ -211,15 +227,15 @@ const S3ImageUpload = ({
       if (
         limit &&
         Array.isArray(fileList) &&
-        Array.isArray(files) &&
         files.length + fileList.length > limit
       ) {
         return toastr.error(`Only a maximum of ${limit} files allowed`);
       }
-      const fileObjArray = await [...(files || [])].filter(Boolean).map(
-        async (file) =>
+      const fileObjArray = await new Array(files.length).fill(1).map(
+        async (item, index) =>
           new Promise((resolve, reject) => {
             const img = new Image();
+            const file = files[index];
             img.src = URL.createObjectURL(file);
             img.onload = () => {
               if (minWidth && img.width < minWidth) {
@@ -527,22 +543,24 @@ const S3ImageUpload = ({
               )}
             </Block>
           ))}
-        <label htmlFor={`fileElem${elemId}`} style={{ cursor: 'pointer' }}>
-          <Block
-            paper
-            shadowhover
-            middle
-            center
-            margin={[0, sizes.baseMargin]}
-            style={{
-              width: previewWidth || 150,
-              height: previewHeight || 150,
-            }}
-          >
-            <AddAPhotoSharp />
-            <Text caption>upload</Text>
-          </Block>
-        </label>
+        {fileList.length < Number(limit || 1) && (
+          <label htmlFor={`fileElem${elemId}`} style={{ cursor: 'pointer' }}>
+            <Block
+              paper
+              shadowhover
+              middle
+              center
+              margin={[0, sizes.baseMargin]}
+              style={{
+                width: previewWidth || 150,
+                height: previewHeight || 150,
+              }}
+            >
+              <AddAPhotoSharp />
+              <Text caption>upload</Text>
+            </Block>
+          </label>
+        )}
       </Block>
       <Dialog
         maxWidth="sm"
@@ -662,5 +680,7 @@ S3ImageUpload.defaultProps = {
     onChange: () => {},
   },
   setuploading: () => {},
+  uploadaxiosinstance: axios.create(),
+  signaxiosinstance: axios.create(),
 };
 export default S3ImageUpload;

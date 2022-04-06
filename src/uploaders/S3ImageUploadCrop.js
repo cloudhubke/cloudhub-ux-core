@@ -8,7 +8,10 @@ import uniq from 'uid';
 import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
 import { Block, Text, toastr, Dialog, Button, Input } from '..';
 import { Tooltip } from '@mui/material';
+import axios from 'axios';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
 import Cropper from 'cropperjs';
 import { Form, Field } from '../form';
 import 'cropperjs/dist/cropper.min.css';
@@ -57,7 +60,14 @@ const S3ImageUpload = ({
   const elemId = uniq(5);
   React.useEffect(() => {
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
-      setfileList(incominginput || []);
+      setfileList(incominginput);
+    }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
     }
   }, [incominginput]);
 
@@ -100,14 +110,19 @@ const S3ImageUpload = ({
   }, [confirmdelete, deleting]);
 
   const logChange = (fileUpdate) => {
+    const incominginput = input && input.value ? input.value : value || [];
+    let newValue = fileUpdate || [];
+    if ((!limit || limit === 1) && Array.isArray(fileUpdate)) {
+      newValue = fileUpdate[0] || {};
+    }
     if (
       typeof input.onChange === 'function' &&
-      !isEqual(fileUpdate, incominginput)
+      !isEqual(newValue, incominginput)
     ) {
-      input.onChange(fileUpdate || []);
+      input.onChange(newValue);
     }
-    if (typeof onChange === 'function' && !isEqual(fileUpdate, incominginput)) {
-      onChange(fileUpdate || []);
+    if (typeof onChange === 'function' && !isEqual(newValue, incominginput)) {
+      onChange(newValue);
     }
   };
 
@@ -726,5 +741,7 @@ S3ImageUpload.defaultProps = {
     name: '',
   },
   setuploading: () => {},
+  uploadaxiosinstance: axios.create(),
+  signaxiosinstance: axios.create(),
 };
 export default S3ImageUpload;

@@ -14,7 +14,10 @@ import {
   Close,
   InfoOutlined,
 } from '@mui/icons-material';
+import axios from 'axios';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
 import { Block, Text, toastr, VideoThumbnail, Button, Dialog, Input } from '..';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
@@ -64,6 +67,13 @@ const S3Uploader = ({
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
+    }
   }, [incominginput]);
 
   React.useEffect(() => {
@@ -82,11 +92,19 @@ const S3Uploader = ({
   }, [thumberror]);
 
   const logChange = (fileUpdate) => {
-    if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+    const incominginput = input && input.value ? input.value : value || [];
+    let newValue = fileUpdate || [];
+    if ((!limit || limit === 1) && Array.isArray(fileUpdate)) {
+      newValue = fileUpdate[0] || {};
     }
-    if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+    if (
+      typeof input.onChange === 'function' &&
+      !isEqual(newValue, incominginput)
+    ) {
+      input.onChange(newValue);
+    }
+    if (typeof onChange === 'function' && !isEqual(newValue, incominginput)) {
+      onChange(newValue);
     }
   };
 
@@ -863,5 +881,7 @@ S3Uploader.defaultProps = {
     onChange: () => {},
   },
   setuploading: () => {},
+  uploadaxiosinstance: axios.create(),
+  signaxiosinstance: axios.create(),
 };
 export default S3Uploader;
