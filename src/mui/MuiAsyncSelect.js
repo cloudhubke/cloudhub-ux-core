@@ -47,6 +47,7 @@ const RemoteSelector = React.forwardRef(
       onChange,
       onSelectChange,
       axiosinstance,
+      Graphqlmodel,
       returnkeys,
       valueField,
       displayField,
@@ -83,58 +84,77 @@ const RemoteSelector = React.forwardRef(
 
     const debouncedSearchText = useDebounce(searchText, debounceTime);
 
-    const getOptions = async (searchText) => {
-      try {
-        if (!loaded) {
-          setLoaded(true);
-        }
-        setLoading(true);
-        const { data } = await axiosinstance().get(url, {
-          params: { ...params, [filterKey]: `${searchText || ''}`.trim() },
-        });
+    const getOptions = React.useMemo(
+      () => async (searchText) => {
+        try {
+          if (!loaded) {
+            setLoaded(true);
+          }
+          setLoading(true);
 
-        const array = data ? data.items || data : [];
-        let valoptions = [];
-        if (!isEmpty(value)) {
-          valoptions = Array.isArray(value) ? value : [value];
-        }
+          let data;
+          if (Graphqlmodel) {
+            try {
+              data = await Graphqlmodel()
+                .find({
+                  ...params,
+                  filter: `${searchText || ''}`.trim(),
+                })
+                .toJson();
+            } catch (error) {
+              console.log(error.toString());
+            }
+          } else {
+            const { data: axiosdata } = await axiosinstance().get(url, {
+              params: { ...params, [filterKey]: `${searchText || ''}`.trim() },
+            });
 
-        const options = uniqBy(
-          [...array, ...valoptions, ...otheroptions].map((item, index) => ({
-            value: keyExtractor(item, index),
-            label: labelExtractor(item, index),
-            item,
-          })),
-          'value'
-        );
+            data = axiosdata;
+          }
 
-        if (firstoptions.length === 0) {
-          setFirstOptions(options);
-          setOptions(options);
-        } else {
-          setOptions(options);
+          const array = data ? data.items || data : [];
+          let valoptions = [];
+          if (!isEmpty(value)) {
+            valoptions = Array.isArray(value) ? value : [value];
+          }
+
+          const options = uniqBy(
+            [...array, ...valoptions, ...otheroptions].map((item, index) => ({
+              value: keyExtractor(item, index),
+              label: labelExtractor(item, index),
+              item,
+            })),
+            'value'
+          );
+
+          if (firstoptions.length === 0) {
+            setFirstOptions(options);
+            setOptions(options);
+          } else {
+            setOptions(options);
+          }
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          // do nothing
         }
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        // do nothing
-      }
-    };
+      },
+      [JSON.stringify(params), loaded, axiosinstance, url, firstoptions.length]
+    );
 
     useEffect(() => {
       if (!loaded) {
         return;
       }
+
       if (!debouncedSearchText) {
         if (firstoptions.length > 0) {
           setOptions([...firstoptions]);
-        } else {
-          getOptions('');
         }
       } else {
         getOptions(debouncedSearchText);
       }
-    }, [debouncedSearchText, loaded, JSON.stringify(firstoptions)]);
+    }, [debouncedSearchText, firstoptions.length]);
 
     useEffect(() => {
       if (!value || isEmpty(value)) {
@@ -199,7 +219,7 @@ const RemoteSelector = React.forwardRef(
 
     const onMenuOpen = () => {
       if (!loaded) {
-        getOptions('');
+        getOptions(debouncedSearchText || '');
       }
     };
 

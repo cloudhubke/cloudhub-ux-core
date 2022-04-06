@@ -9,7 +9,13 @@ import IconButton from '../IconButton';
 import Block from '../Block';
 import ThemeContext from '../theme/ThemeContext';
 
-const RowActions = ({ row, column, permissions, ...props }) => {
+const RowActions = ({
+  row,
+  column,
+  permissions,
+  saveActionButton: SaveActionButton,
+  ...props
+}) => {
   const { colors } = React.useContext(ThemeContext);
 
   return (
@@ -30,14 +36,18 @@ const RowActions = ({ row, column, permissions, ...props }) => {
           <Visibility style={{ fontSize: 24, color: colors.primary }} />
         </IconButton>
 
-        <IconButton
-          padding={2}
-          onClick={() => props.onEdit(row)}
-          title="Edit row"
-          disabled={!permissions.allowedit}
-        >
-          <EditIcon style={{ fontSize: 24, color: colors.secondary }} />
-        </IconButton>
+        {SaveActionButton ? (
+          <SaveActionButton editingRow={row} />
+        ) : (
+          <IconButton
+            padding={2}
+            onClick={() => props.onEdit(row)}
+            title="Edit row"
+            disabled={!permissions.allowedit}
+          >
+            <EditIcon style={{ fontSize: 24, color: colors.secondary }} />
+          </IconButton>
+        )}
         <IconButton
           padding={2}
           onClick={() => props.onDelete(row)}

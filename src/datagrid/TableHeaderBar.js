@@ -26,6 +26,7 @@ const TableHeaderBar = ({
   onAdd,
   onRefresh,
   onSearchChange,
+  saveActionButton: SaveActionButton,
   onExportExcel,
   onPrint,
 }) => {
@@ -54,9 +55,27 @@ const TableHeaderBar = ({
           showError={false}
         />
 
-        <Button onClick={onAdd} style={styles.buttonStyle} disabled={!allowadd}>
-          <AddIcon /> Add
-        </Button>
+        {SaveActionButton ? (
+          <SaveActionButton
+            anchorComponent={
+              <Button
+                onClick={onAdd}
+                style={styles.buttonStyle}
+                disabled={!allowadd}
+              >
+                <AddIcon /> Add
+              </Button>
+            }
+          />
+        ) : (
+          <Button
+            onClick={onAdd}
+            style={styles.buttonStyle}
+            disabled={!allowadd}
+          >
+            <AddIcon /> Add
+          </Button>
+        )}
         <Button onClick={onRefresh} style={styles.buttonStyle}>
           <RefreshIcon /> Refresh
         </Button>

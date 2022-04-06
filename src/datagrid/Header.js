@@ -12,6 +12,7 @@ const Header = ({
   onSearch,
   onSetSearchText,
   queryString,
+  saveActionButton,
   url,
   exportHeaders,
   defaultExport,
@@ -77,6 +78,7 @@ const Header = ({
           exportHeaders={props.exportHeaders}
           defaultExport={props.defaultExport}
           onExportExcel={onExportExcel}
+          saveActionButton={saveActionButton}
         />
       )}
 

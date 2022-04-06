@@ -67,22 +67,25 @@ const ActionPopoverButton = React.forwardRef(
       }
     };
 
-    const Anchor = () => {
-      if (!AnchorComponent) {
-        return null;
-      }
-      if (typeof AnchorComponent === 'function') {
-        return AnchorComponent();
-      }
+    const Anchor = React.useMemo(
+      () => () => {
+        if (!AnchorComponent) {
+          return null;
+        }
+        if (typeof AnchorComponent === 'function') {
+          return AnchorComponent();
+        }
 
-      return React.cloneElement(AnchorComponent, {
-        ...AnchorComponent.props,
-        onClick: () => {
-          setAnchorEl(anchorRef.current);
-          onOpen();
-        },
-      });
-    };
+        return React.cloneElement(AnchorComponent, {
+          ...AnchorComponent.props,
+          onClick: () => {
+            setAnchorEl(anchorRef.current);
+            onOpen();
+          },
+        });
+      },
+      [AnchorComponent]
+    );
 
     React.useImperativeHandle(ref, () => ({
       close: () => setAnchorEl(null),
