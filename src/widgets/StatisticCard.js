@@ -1,15 +1,25 @@
 import React from 'react';
 import clsx from 'clsx';
 import CountUp from 'react-countup';
+import Loadable from '@react-loadable/revised';
 import { makeStyles } from '@mui/styles';
+import { Loading } from '@cloudhub-ux/core';
 import { alpha, useTheme } from '@mui/material/styles';
 import { Box, Paper, Typography } from '@mui/material';
 import { Icon } from '@iconify/react';
-import ReactApexChart from 'react-apexcharts';
 import trendingUpFill from '@iconify-icons/eva/trending-up-fill';
 import trendingDownFill from '@iconify-icons/eva/trending-down-fill';
 import { fNumber, fPercent } from '../utils/formatNumber';
 import Text from '../Text';
+
+const ReactApexChart = Loadable({
+  loader: () => import('react-apexcharts'),
+  loading: () => (
+    <Box justifyContent="center" alignItems="center">
+      <Loading />
+    </Box>
+  ),
+});
 
 // ----------------------------------------------------------------------
 

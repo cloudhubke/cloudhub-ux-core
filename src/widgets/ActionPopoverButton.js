@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Popover } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Close } from '@mui/icons-material';
 import Scrollbars from '../Scrollbars';
 import Text from '../Text';
+import Block from '../Block';
+import IconButton from '../IconButton';
 import CardToolbar from './CardToolbar';
 import useMetrics from '../customhooks/useMetrics';
 
@@ -36,7 +39,7 @@ const ActionPopoverButton = React.forwardRef(
       actionsComponent,
       headerComponent,
       children,
-      actionButtons = [],
+      useCloseButton = true,
       size = 'md',
       width = 'xl',
       className,
@@ -55,8 +58,14 @@ const ActionPopoverButton = React.forwardRef(
     //     console.log('====================================');
     //     setAnchorEl(event.currentTarget);
     //   }
-    function handleClose() {
-      setAnchorEl(null);
+    function handleClose(event, reason) {
+      // reason Can be: "escapeKeyDown", "backdropClick"
+      if (reason === 'escapeKeyDown') {
+        setAnchorEl(null);
+      }
+      if (reason === 'backdropClick' && !useCloseButton) {
+        setAnchorEl(null);
+      }
     }
 
     const onMenuKeyDown = (event) => {
@@ -119,11 +128,22 @@ const ActionPopoverButton = React.forwardRef(
             }}
           >
             <CardToolbar>
-              {typeof headerComponent === 'string' ? (
-                <Text header>{headerComponent}</Text>
-              ) : (
-                headerComponent
-              )}
+              <Block>
+                {typeof headerComponent === 'string' ? (
+                  <Text header>{headerComponent}</Text>
+                ) : (
+                  headerComponent
+                )}
+              </Block>
+              <Block flex={false}>
+                <IconButton
+                  onClick={() => {
+                    setAnchorEl(null);
+                  }}
+                >
+                  <Close />
+                </IconButton>
+              </Block>
             </CardToolbar>
 
             <Scrollbars

@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: 65,
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     padding: theme.spacing(0, 1, 0, 3),
   },

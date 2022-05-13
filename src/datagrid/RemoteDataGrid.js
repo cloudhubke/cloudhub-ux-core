@@ -166,7 +166,7 @@ const RemoteDataGrid = React.forwardRef(
       { columnName: 'actions', width: 150 },
     ]);
 
-    const urlLink = Graphqlmodel ? `${Graphqlmodel.toString()}` : props.url;
+    const urlLink = Graphqlmodel ? `/${Graphqlmodel().globalId}` : props.url;
 
     const dispatch = useGridStore((state) => state.dispatch);
 
@@ -323,7 +323,14 @@ const RemoteDataGrid = React.forwardRef(
     };
     React.useEffect(() => {
       loadData();
-    }, [sorting, currentPage, searchTerm, pageSize, Graphqlmodel]);
+    }, [
+      sorting,
+      currentPage,
+      searchTerm,
+      pageSize,
+      Graphqlmodel,
+      JSON.stringify(props.params),
+    ]);
 
     const changePageSize = (pageSize) => {
       const count = totalCount || data.length;

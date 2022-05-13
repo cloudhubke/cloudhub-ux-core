@@ -67,7 +67,7 @@ const colors = {
   transparent: 'rgba(0,0,0,0)',
   silver: '#F7F7F7',
   steel: '#CCCCCC',
-  error: 'rgba(200, 0, 0, 0.8)',
+  error: '#FF4842',
   ricePaper: 'rgba(255,255,255, 0.75)',
   frost: '#D8D8D8',
   cloud: 'rgba(200,200,200, 0.35)',
@@ -90,6 +90,7 @@ const colors = {
   tertiaryColors: {},
   textColors: {},
   backgroundColors: {},
+
   whiteColor: '#FFF',
   blackColor: '#000',
   twitterColor: '#55acee',
@@ -115,10 +116,10 @@ const colors = {
   instagram: '#125688',
 
   success: '#4caf50',
-  info: '#00acc1',
-  rose: '#e91e63',
-  warning: '#ff9800',
-  danger: '#f44336',
+  info: '#1890FF',
+  rose: '#54D62C',
+  warning: '#FFC107',
+  danger: '#FF4842',
 };
 
 export default colors;

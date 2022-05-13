@@ -56,6 +56,7 @@ const MuiSelect = React.forwardRef(
       isMulti,
       creatable,
       renderOption,
+      onMenuOpen = () => null,
       ...props
     },
     ref
@@ -173,6 +174,7 @@ const MuiSelect = React.forwardRef(
           logChange(val);
         }}
         disabled={disabled}
+        onOpen={onMenuOpen}
         disableCloseOnSelect={Boolean(isMulti)}
         getOptionLabel={(item) => item.label || item}
         isOptionEqualToValue={(option, value) => {

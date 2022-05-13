@@ -1,7 +1,7 @@
 import React from 'react';
 import Loadable from '@react-loadable/revised';
 
-import { Card, Box, CardContent } from '@mui/material';
+import { Card, Box } from '@mui/material';
 import Loading from '../Loading';
 import Block from '../Block';
 import ThemeContext from '../theme/ThemeContext';
@@ -11,27 +11,39 @@ const DEditor = Loadable({
   loading: Loading,
 });
 
-const Container = ({ children, container }) => {
+const Container = ({ children, container, style }) => {
   if (container === 'block') {
-    return <Box>{children}</Box>;
+    return <Box style={style}>{children}</Box>;
   }
 
-  return <Card style={{ overflow: 'visible' }}>{children}</Card>;
+  return <Card style={{ display: 'flex', ...style }}>{children}</Card>;
 };
 
-const DraftEditor = ({ subject = '', input, container = 'card', ...props }) => {
+const DraftEditor = ({
+  subject = '',
+  input,
+  container = 'card',
+  editorContainerStyle = {
+    minHeight: 420,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  ...props
+}) => {
   const { sizes } = React.useContext(ThemeContext);
 
   return (
-    <Container container={container}>
+    <Container container={container} style={editorContainerStyle}>
       {subject && (
         <Block flex={false} padding={sizes.padding}>
           {subject}
         </Block>
       )}
-      <CardContent>
-        <DEditor {...input} {...props} />
-      </CardContent>
+      <Block>
+        <Block absolute padding={sizes.padding}>
+          <DEditor {...input} {...props} />
+        </Block>
+      </Block>
     </Container>
   );
 };
