@@ -21,12 +21,48 @@ import {
 } from '@mui/material/colors';
 
 const colors = {
-  primaryColors: {},
-  secondaryColors: {},
-  warningColors: {},
-  dangerColors: {},
-  successColors: {},
-  infoColors: {},
+  primaryColors: {
+    lighter: '#C8FACD',
+    light: '#5BE584',
+    main: '#00AB55',
+    dark: '#007B55',
+    darker: '#005249',
+  },
+  secondaryColors: {
+    lighter: '#D6E4FF',
+    light: '#84A9FF',
+    main: '#3366FF',
+    dark: '#1939B7',
+    darker: '#091A7A',
+  },
+  successColors: {
+    lighter: '#DCFCD7',
+    light: '#85EF8A',
+    main: '#35CC5A',
+    dark: '#1A924F',
+    darker: '#0A6141',
+  },
+  infoColors: {
+    lighter: '#D5E2FE',
+    light: '#81A2FB',
+    main: '#2E5BF2',
+    dark: '#1732AE',
+    darker: '#081774',
+  },
+  warningColors: {
+    lighter: '#FFF8CD',
+    light: '#FFE269',
+    main: '#FFC405',
+    dark: '#B78402',
+    darker: '#7A5100',
+  },
+  dangerColors: {
+    lighter: '#FFE5DA',
+    light: '#FFA090',
+    main: '#FF474D',
+    dark: '#B72342',
+    darker: '#7A0D37',
+  },
 
   tertiaryColors: {},
 
