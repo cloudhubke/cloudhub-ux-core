@@ -21,9 +21,23 @@ import {
 } from '@mui/material/colors';
 
 const colors = {
-  primary: '#37b38b', // '#0976b4',
-  secondary: '#6EB2FB',
-  tertiary: '#F1AD3D',
+  primaryColors: {},
+  secondaryColors: {},
+  warningColors: {},
+  dangerColors: {},
+  successColors: {},
+  infoColors: {},
+
+  tertiaryColors: {},
+
+  primary: colors.primaryColors.main || '#FC4C69',
+  secondary: colors.secondaryColors.main || '#AAF27F',
+  tertiary: colors.tertiaryColors.main || '#909CEF',
+  success: colors.successColors.main || '#4caf50',
+  info: colors.infoColors.main || '#1890FF',
+  warning: colors.warningColors.main || '#FFC107',
+  danger: colors.dangerColors.main || '#FF4842',
+
   accent: '#FF4957',
   blueGreen: '#00D3CA',
   jungleGreen: '#37b38b',
@@ -39,25 +53,25 @@ const colors = {
   mistyWhite: '#FFF6FF',
   milkyWhite: '#FFFCFF',
 
-  red: red[500],
-  pink: pink[500],
-  purple: purple[500],
-  deepPurple: deepPurple[500],
-  indigo: indigo[500],
-  blue: blue[500],
-  lightBlue: lightBlue[500],
-  cyan: cyan[500],
-  teal: teal[500],
-  green: green[500],
-  lightGreen: lightGreen[500],
-  lime: lime[500],
-  yellow: yellow[500],
-  amber: amber[500],
-  orange: orange[500],
-  deepOrange: deepOrange[500],
-  brown: brown[500],
-  grey: grey[500],
-  blueGrey: blueGrey[500],
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  yellow,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey,
 
   background: '#FFFFFC',
 
@@ -85,9 +99,6 @@ const colors = {
   banner: '#5F3E63',
   text: '#E0D7E5',
 
-  primaryColors: {},
-  secondaryColors: {},
-  tertiaryColors: {},
   textColors: {},
   backgroundColors: {},
 
@@ -114,12 +125,7 @@ const colors = {
   dribbble: '#ea4c89',
   reddit: '#ff4500',
   instagram: '#125688',
-
-  success: '#4caf50',
-  info: '#1890FF',
   rose: '#54D62C',
-  warning: '#FFC107',
-  danger: '#FF4842',
 };
 
 export default colors;

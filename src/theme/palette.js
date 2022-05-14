@@ -90,17 +90,55 @@ const getColors = (colors) => {
     primaryColors,
     secondaryColors,
     tertiaryColors,
+    warningColors,
+    dangerColors,
+    successColors,
+    infoColors,
+
     textColors,
     backgroundColors,
   } = colors || {};
 
+  const PRIMARY_COLORS = {
+    ...PRIMARY,
+    ...primaryColors,
+  };
+  const SECONDARY_COLORS = {
+    ...SECONDARY,
+    ...secondaryColors,
+  };
+  const TERTIARY_COLORS = {
+    ...ALTERNATE,
+    ...tertiaryColors,
+  };
+
+  const WARNING_COLORS = {
+    ...WARNING,
+    ...warningColors,
+  };
+
+  const ERROR_COLORS = {
+    ...ERROR,
+    ...dangerColors,
+  };
+
+  const SUCCESS_COLORS = {
+    ...SUCCESS,
+    ...successColors,
+  };
+
+  const INFO_COLORS = {
+    ...INFO,
+    ...infoColors,
+  };
+
   const GRADIENTS = {
-    primary: createGradient(PRIMARY.light, PRIMARY.main),
-    info: createGradient(INFO.light, INFO.main),
-    success: createGradient(SUCCESS.light, SUCCESS.main),
-    warning: createGradient(WARNING.light, WARNING.main),
-    danger: createGradient(ERROR.light, ERROR.main),
-    error: createGradient(ERROR.light, ERROR.main),
+    primary: createGradient(PRIMARY_COLORS.light, PRIMARY_COLORS.main),
+    info: createGradient(INFO_COLORS.light, INFO_COLORS.main),
+    success: createGradient(SUCCESS_COLORS.light, SUCCESS_COLORS.main),
+    warning: createGradient(WARNING_COLORS.light, WARNING_COLORS.main),
+    danger: createGradient(ERROR_COLORS.light, ERROR_COLORS.main),
+    error: createGradient(ERROR_COLORS.light, ERROR_COLORS.main),
   };
 
   const CHART_COLORS = {
@@ -113,17 +151,17 @@ const getColors = (colors) => {
 
   const COMMON = {
     common: { black: '#000', white: '#fff' },
-    primary: { ...PRIMARY, contrastText: '#fff', ...primaryColors },
-    secondary: { ...SECONDARY, contrastText: '#fff', ...secondaryColors },
+    primary: { ...PRIMARY_COLORS, contrastText: '#fff' },
+    secondary: { ...SECONDARY_COLORS, contrastText: '#fff' },
     tertiary: { ...tertiaryColors },
-    alternate: { main: '#f7f9fc', dark: '#edf1f7', ...ALTERNATE },
+    alternate: { main: '#f7f9fc', dark: '#edf1f7', ...TERTIARY_COLORS },
     background: { ...backgroundColors },
     text: { ...textColors },
-    info: { ...INFO, contrastText: '#fff' },
-    success: { ...SUCCESS, contrastText: GREY['800'] },
-    warning: { ...WARNING, contrastText: GREY['800'] },
-    danger: { ...ERROR, contrastText: '#fff' },
-    error: { ...ERROR, contrastText: '#fff' },
+    info: { ...INFO_COLORS, contrastText: '#fff' },
+    success: { ...SUCCESS_COLORS, contrastText: GREY['800'] },
+    warning: { ...WARNING_COLORS, contrastText: GREY['800'] },
+    danger: { ...ERROR_COLORS, contrastText: '#fff' },
+    error: { ...ERROR_COLORS, contrastText: '#fff' },
     grey: GREY,
     gradients: GRADIENTS,
     chart: CHART_COLORS,
