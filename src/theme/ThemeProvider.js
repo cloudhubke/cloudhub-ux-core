@@ -15,24 +15,11 @@ import useSettings from './context/useSettings';
 import shadows, { customShadows } from './shadows';
 import shape from './shape';
 
-// import Loading from '../Loading';
-
 import ThemeContext from './ThemeContext';
 import localsizes from './Sizes';
 import localcolors from './Colors';
 import localfonts from './Fonts';
 import { ToastContainer } from '../toastr';
-
-import BaseTheme from '../baseweb/theme/BaseTheme';
-// const BaseTheme = Loadable({
-//   loader: () =>
-//     import(/* webpackChunkName: "BaseTheme" */ '../baseweb/theme/BaseTheme'),
-//   loading: () => (
-//     <Box justifyContent="center" alignItems="center">
-//       <Loading />
-//     </Box>
-//   ),
-// });
 
 const ThemeProvider = ({
   children,

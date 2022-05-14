@@ -34,6 +34,15 @@ const Block = React.forwardRef((props, ref) => {
       };
     }
 
+    if (typeof margin === 'boolean' && margin) {
+      return {
+        marginTop: sizes.margin || 15,
+        marginRight: sizes.margin || 15,
+        marginBottom: sizes.margin || 15,
+        marginLeft: sizes.margin || 15,
+      };
+    }
+
     if (typeof margin === 'object') {
       const marginSize = Object.keys(margin).length;
       switch (marginSize) {
@@ -78,6 +87,15 @@ const Block = React.forwardRef((props, ref) => {
         paddingRight: padding,
         paddingBottom: padding,
         paddingLeft: padding,
+      };
+    }
+
+    if (typeof padding === 'boolean' && padding) {
+      return {
+        paddingTop: sizes.padding || 15,
+        paddingRight: sizes.padding || 15,
+        paddingBottom: sizes.padding || 15,
+        paddingLeft: sizes.padding || 15,
       };
     }
 
@@ -144,6 +162,7 @@ const Block = React.forwardRef((props, ref) => {
     paper,
     visible,
     children,
+    borderRadius,
     ...rest
   } = props;
 
@@ -176,6 +195,12 @@ const Block = React.forwardRef((props, ref) => {
     ...(space && { justifyContent: `space-${space}` }),
     ...(color && styles[color]), // predefined styles colors for backgroundColor
     ...(color && !styles[color] && { backgroundColor: color }), // custom backgroundColor
+    ...(borderRadius && typeof borderRadius === 'number'
+      ? { borderRadius }
+      : {}),
+    ...(borderRadius && typeof borderRadius === 'boolean'
+      ? { borderRadius: sizes.borderRadius }
+      : {}),
     ...style, // rewrite predefined styles
   };
 

@@ -63,7 +63,7 @@ const ListMenuItem = ({
   const { location } = useLocation();
   const classes = useStyles();
 
-  const isActive = location.pathname.includes(linkto);
+  const isActive = `${location.pathname}`.endsWith(linkto);
 
   return (
     <React.Fragment>
