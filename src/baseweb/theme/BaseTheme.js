@@ -3,12 +3,13 @@ import { Client as Styletron } from 'styletron-engine-atomic';
 import { BaseProvider } from 'baseui';
 import { Provider as StyletronProvider } from 'styletron-react';
 import customBaseuiTheme from './BaseWebTheme';
+import ThemeContext from '../../theme/ThemeContext';
 
-const engine = new Styletron({
-  hydrate: document.getElementsByClassName('_styletron_hydrate_'),
-});
+const engine = new Styletron({});
 
-const BaseTheme = ({ children, colors, fonts, sizes }) => {
+const BaseTheme = ({ children }) => {
+  const { colors, fonts, sizes } = React.useContext(ThemeContext);
+
   return (
     <StyletronProvider value={engine}>
       <BaseProvider

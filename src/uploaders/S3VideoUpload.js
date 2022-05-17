@@ -693,7 +693,7 @@ const S3Uploader = ({
                             type="circle"
                             percent={addingThumbnail.progress}
                             width={40}
-                            strokeColor={colors.blue}
+                            strokeColor={colors.blue[500]}
                             style={{
                               marginTop: 'auto',
                               marginBottom: 'auto',

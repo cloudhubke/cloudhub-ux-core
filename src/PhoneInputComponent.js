@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import PhoneNumber from 'awesome-phonenumber';
 
 import PickCountry from './countrypicker/PickCountry';
+import countries from './countrypicker/data/countries.json';
 
 import Block from './Block';
 import Text from './Text';
@@ -46,9 +47,10 @@ const PhoneInputComponent = ({
   disabled,
   style,
   placeholder: PLACEHOLDER,
+  validatePhone = true,
   ...props
 }) => {
-  const _mobilenumberInput = React.useRef();
+  const mobilenumberInput = React.useRef();
   const { sizes, colors } = React.useContext(ThemeContext);
 
   const classes = useStyles({ sizes, colors })();
@@ -57,6 +59,8 @@ const PhoneInputComponent = ({
   const [callingCode, setCallingCode] = React.useState(
     props.callingCode || '254'
   );
+  const [currency, setCurrency] = React.useState(props.currency || 'KES');
+  const [country, setCountry] = React.useState(props.country || 'Kenya');
   const [phone, setPhone] = React.useState('');
   const [placeholder, setPlaceholder] = React.useState(PLACEHOLDER || '');
 
@@ -92,6 +96,10 @@ const PhoneInputComponent = ({
   }, [input.value, value]);
 
   const onCallingCodeChanged = ({ cca2, callingCode }) => {
+    const country = countries[cca2 || 'KE'];
+    const countrynames = country.name || {};
+    const countryName = countrynames.common || 'Kenya';
+
     const placeholder = PhoneNumber.getExample(
       cca2 || 'KE',
       'mobile'
@@ -99,25 +107,83 @@ const PhoneInputComponent = ({
 
     setCallingCode(callingCode || '254');
     setCca2(cca2 || 'KE');
+    setCurrency(country.currency || 'KES');
+    setCountry(countryName);
     setPlaceholder(placeholder);
 
-    _mobilenumberInput.current.focus();
+    mobilenumberInput.current.focus();
   };
 
   const onPhoneChange = (phone) => {
     if (phone) {
       const pn = new PhoneNumber(phone, cca2);
 
-      if (pn.isValid()) {
-        onPhoneChanged({ text: phone, phone: pn.getNumber() });
+      const cc = pn.getRegionCode();
+
+      const country = countries[cc || cca2 || 'KE'];
+      const countrynames = country.name || {};
+
+      const currency = country.currency || 'KES';
+      const countryName = countrynames.common || 'Kenya';
+      const placeholder = PhoneNumber.getExample(
+        cc || cca2 || 'KE',
+        'mobile'
+      ).getNumber('national');
+
+      setCca2(cc || cca2 || 'KE');
+      setCountry(countryName);
+      setCurrency(currency);
+      setCallingCode(country.callingCode || '254');
+
+      setPlaceholder(placeholder);
+
+      if (pn.isValid() && !`${phone}`.includes('/')) {
+        onPhoneChanged({
+          text: phone,
+          phone: pn.getNumber(),
+          cca2: cc || cca2,
+          currency,
+          country: countryName,
+        });
         input.onChange(pn.getNumber());
         input.onBlur();
-      } else {
-        onPhoneChanged({ text: phone, phone: '' });
+        props.onChange(pn.getNumber());
+      } else if (validatePhone) {
+        onPhoneChanged({
+          text: phone,
+          phone: '',
+          cca2: cc || cca2,
+          currency,
+          country: countryName,
+        });
         input.onChange('');
+        props.onChange('');
+        input.onBlur();
+      } else {
+        onPhoneChanged({
+          text: phone,
+          phone,
+          cca2: cc || cca2,
+          currency,
+          country: countryName,
+        });
+        input.onChange(phone);
+        props.onChange(phone);
         input.onBlur();
       }
+    } else {
+      onPhoneChanged({
+        text: phone,
+        phone: '',
+        cca2,
+        currency,
+        country,
+      });
+      input.onChange('');
+      props.onChange('');
+      input.onBlur();
     }
+
     setPhone(phone);
   };
 
@@ -136,7 +202,7 @@ const PhoneInputComponent = ({
               variant="outlined"
               placeholder={placeholder}
               className={classes.margin}
-              inputRef={_mobilenumberInput}
+              inputRef={mobilenumberInput}
               InputLabelProps={{
                 classes: {
                   root: classes.cssLabel,
@@ -190,7 +256,12 @@ PhoneInputComponent.defaultProps = {
     value: '',
   },
   onPhoneChanged: () => {},
+  onChange: () => {},
   showCode: false,
+  cca2: 'KE',
+  callingCode: '254',
+  currency: 'KES',
+  country: 'Kenya',
 };
 
 export default PhoneInputComponent;

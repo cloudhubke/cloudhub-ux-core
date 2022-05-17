@@ -21,6 +21,15 @@ const useStyles = makeStyles((theme) => {
     root: {
       borderRadius: theme.shape.borderRadius,
       border: `solid 1px ${theme.palette.grey['300']}`,
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      // position: 'absolute',
+      // top: 1,
+      // left: 1,
+      // right: 1,
+      // bottom: 1,
+      overflow: 'auto',
 
       // Toggle
       '& .toggle': {
@@ -300,6 +309,8 @@ const useStyles = makeStyles((theme) => {
     },
     editor: {
       minHeight: 200,
+      position: 'relative',
+      flex: 1,
       padding: theme.spacing(0, 2),
       '& .public-DraftEditorPlaceholder-root': {
         color: theme.palette.text.disabled,

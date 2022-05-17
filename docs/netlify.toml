@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/uibakery"
+  to = "https://app.uibakery.io/api/painter/support"
+  status = 200
+  force = true
