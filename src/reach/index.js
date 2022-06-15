@@ -1,6 +1,5 @@
 import Portal from '@reach/portal';
 import {
-  Link,
   Router,
   navigate,
   Redirect,
@@ -8,8 +7,10 @@ import {
   createHistory,
   useParams,
 } from '@reach/router';
+
 import Rect from '@reach/rect';
 import WindowSize from '@reach/window-size';
+import Link from './Link';
 
 export {
   Portal,

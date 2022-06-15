@@ -22,6 +22,7 @@ import {
 import {
   Grid,
   Table,
+  VirtualTable,
   TableHeaderRow,
   TableSummaryRow,
   TableSelection,
@@ -38,6 +39,7 @@ import {
   TableRowDetail,
 } from '@cloudhub-dx/dx-react-grid-material-ui';
 import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -66,23 +68,6 @@ const styleSheet = () => ({
       textOverflow: 'ellipsis',
       paddingLeft: '5px',
       paddingRight: '5px',
-    },
-    '& div::-webkit-scrollbar': {
-      width: 14,
-      height: 14,
-    },
-    '& div::-webkit-scrollbar-track': {
-      background: '#CCC',
-      borderTop: '6.5px solid white',
-      borderBottom: '6.5px solid white',
-    },
-    '& div::-webkit-scrollbar-thumb': {
-      backgroundColor: '#CCC',
-      borderTop: '4px solid white',
-      borderBottom: '4px solid white',
-    },
-    '& div::-webkit-scrollbar-thumb:hover': {
-      background: '#666',
     },
   },
 
@@ -395,7 +380,7 @@ const RemoteDataGrid = React.forwardRef(
       }),
     }));
 
-    const cellComponent = ({ row: r, column, style }) => {
+    const cellComponent = ({ row: r, column, style, ...rowprops }) => {
       const row = { ...r };
 
       if (column.name === 'actions' && !props.actions) {
@@ -407,6 +392,7 @@ const RemoteDataGrid = React.forwardRef(
             onDelete: (row) => setDeletingRows([row]),
             onView: props.onView,
             onEdit: props.onEdit,
+            ...rowprops,
           }) || (
             <RowActions
               permissions={permissions}
@@ -416,14 +402,12 @@ const RemoteDataGrid = React.forwardRef(
               onView={props.onView}
               onEdit={props.onEdit}
               saveActionButton={saveActionButton}
+              {...rowprops}
             />
           )
         );
       }
-      if (column.name === 'counter') {
-        return <TableCell>{`${row.counter}`}</TableCell>;
-      }
-      return props.cellComponent({ row, column, style });
+      return props.cellComponent({ row, column, style, ...rowprops });
       // return <TableCell>col</TableCell>;
     };
 
@@ -494,7 +478,7 @@ const RemoteDataGrid = React.forwardRef(
 
               <DragDropProvider />
 
-              <Table
+              <VirtualTable
                 stickyHeader={stickyHeader}
                 rowComponent={(props) => {
                   const isSelected = Object.keys(selection).includes(
@@ -509,7 +493,6 @@ const RemoteDataGrid = React.forwardRef(
                 }}
                 cellComponent={cellComponent}
                 allowColumnReordering
-                style={{ backgroundColor: 'pink' }}
               />
 
               {allowColumnResizing && (
@@ -634,6 +617,42 @@ const cellComponent = ({ row, column }) => (
   </TableCell>
 );
 
+const rowComponent = ({ selected, onRowClick, children, ...restProps }) => {
+  const [isShown, setIsShown] = React.useState(false);
+
+  const fn = (child, index) => {
+    if (!child) {
+      return child;
+    }
+
+    return React.cloneElement(child, {
+      ...child.props,
+      tableRow: {
+        ...child.props.tableRow,
+        hovered: isShown,
+      },
+    });
+  };
+
+  const childitems = React.Children.map(children, fn);
+
+  return (
+    <Table.Row
+      selected={selected}
+      hover
+      onClick={() => onRowClick(restProps.row)}
+      onMouseEnter={() => {
+        setIsShown(true);
+      }}
+      onMouseLeave={() => {
+        setIsShown(false);
+      }}
+    >
+      {childitems}
+    </Table.Row>
+  );
+};
+
 RemoteDataGrid.defaultProps = {
   title: 'Table title',
   editTitle: 'Edit Record',
@@ -642,14 +661,7 @@ RemoteDataGrid.defaultProps = {
   columnWidths: [],
   allowColumnResizing: true,
   detailComponent: null,
-  rowComponent: ({ selected, onRowClick, ...restProps }) => (
-    <Table.Row
-      selected={selected}
-      hover
-      onClick={() => onRowClick(restProps.row)}
-      {...restProps}
-    />
-  ),
+  rowComponent,
   cellComponent,
   actionsComponent: () => null,
   onEdit: () => null,
