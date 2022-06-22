@@ -66,14 +66,6 @@ const colors = {
 
   tertiaryColors: {},
 
-  primary: colors.primaryColors.main || '#FC4C69',
-  secondary: colors.secondaryColors.main || '#AAF27F',
-  tertiary: colors.tertiaryColors.main || '#909CEF',
-  success: colors.successColors.main || '#4caf50',
-  info: colors.infoColors.main || '#1890FF',
-  warning: colors.warningColors.main || '#FFC107',
-  danger: colors.dangerColors.main || '#FF4842',
-
   accent: '#FF4957',
   blueGreen: '#00D3CA',
   jungleGreen: '#37b38b',
@@ -163,5 +155,13 @@ const colors = {
   instagram: '#125688',
   rose: '#54D62C',
 };
+
+colors.primary = colors.primaryColors.main || '#FC4C69';
+colors.secondary = colors.secondaryColors.main || '#AAF27F';
+colors.tertiary = colors.tertiaryColors.main || '#909CEF';
+colors.success = colors.successColors.main || '#4caf50';
+colors.info = colors.infoColors.main || '#1890FF';
+colors.warning = colors.warningColors.main || '#FFC107';
+colors.danger = colors.dangerColors.main || '#FF4842';
 
 export default colors;

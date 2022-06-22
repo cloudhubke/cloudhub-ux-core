@@ -14,49 +14,52 @@ const RowActions = ({
   column,
   permissions,
   saveActionButton: SaveActionButton,
+  tableRow,
   ...props
 }) => {
   const { colors } = React.useContext(ThemeContext);
 
   return (
     <TableCell>
-      <Block
-        row
-        style={{
-          height: '100%',
-          width: '100%',
-          minWidth: 150,
-        }}
-      >
-        <IconButton
-          padding={2}
-          onClick={() => props.onView(row)}
-          title="View row"
+      {tableRow.hovered && (
+        <Block
+          row
+          style={{
+            height: '100%',
+            width: '100%',
+            minWidth: 150,
+          }}
         >
-          <Visibility style={{ fontSize: 24, color: colors.primary }} />
-        </IconButton>
-
-        {SaveActionButton ? (
-          <SaveActionButton editingRow={row} />
-        ) : (
           <IconButton
             padding={2}
-            onClick={() => props.onEdit(row)}
-            title="Edit row"
-            disabled={!permissions.allowedit}
+            onClick={() => props.onView(row)}
+            title="View row"
           >
-            <EditIcon style={{ fontSize: 24, color: colors.secondary }} />
+            <Visibility style={{ fontSize: 24, color: colors.primary }} />
           </IconButton>
-        )}
-        <IconButton
-          padding={2}
-          onClick={() => props.onDelete(row)}
-          title="Delete row"
-          disabled={!permissions.allowdelete}
-        >
-          <DeleteIcon style={{ fontSize: 24, color: colors.danger }} />
-        </IconButton>
-      </Block>
+
+          {SaveActionButton ? (
+            <SaveActionButton editingRow={row} />
+          ) : (
+            <IconButton
+              padding={2}
+              onClick={() => props.onEdit(row)}
+              title="Edit row"
+              disabled={!permissions.allowedit}
+            >
+              <EditIcon style={{ fontSize: 24, color: colors.secondary }} />
+            </IconButton>
+          )}
+          <IconButton
+            padding={2}
+            onClick={() => props.onDelete(row)}
+            title="Delete row"
+            disabled={!permissions.allowdelete}
+          >
+            <DeleteIcon style={{ fontSize: 24, color: colors.danger }} />
+          </IconButton>
+        </Block>
+      )}
     </TableCell>
   );
 };

@@ -34,22 +34,6 @@ const useStyles = makeStyles({
       paddingLeft: '10px',
       paddingRight: '10px',
     },
-    '& div::-webkit-scrollbar': {
-      width: '16px',
-    },
-    '& div::-webkit-scrollbar-track': {
-      background: 'grey',
-      borderTop: '7px solid white',
-      borderBottom: '7px solid white',
-    },
-    '& div::-webkit-scrollbar-thumb': {
-      background: 'grey',
-      borderTop: '4px solid white',
-      borderBottom: '4px solid white',
-    },
-    '& div::-webkit-scrollbar-thumb:hover': {
-      backgroundColor: '#aaa',
-    },
   },
 });
 

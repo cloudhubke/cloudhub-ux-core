@@ -1,26 +1,66 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MuiSwitch from '@mui/material/Switch';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/styles';
 import Block from './Block';
-import colors from './theme/Colors';
 
-const useStyles = ({ color }) =>
-  makeStyles({
-    switchBase: {
-      '&$checked': {
-        color,
+const IOSSwitch = styled((props) => (
+  <MuiSwitch
+    focusVisibleClassName=".Mui-focusVisible"
+    disableRipple
+    {...props}
+  />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  '& .MuiSwitch-switchBase': {
+    padding: 0,
+    margin: 2,
+    transitionDuration: '300ms',
+    '&.Mui-checked': {
+      transform: 'translateX(16px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        backgroundColor: theme.themeMode === 'dark' ? '#2ECA45' : '#65C466',
+        opacity: 1,
+        border: 0,
       },
-      '&$checked + $track': {
-        backgroundColor: color,
+      '&.Mui-disabled + .MuiSwitch-track': {
+        opacity: 0.5,
       },
     },
-    checked: {},
-    track: {},
-  });
+    '&.Mui-focusVisible .MuiSwitch-thumb': {
+      color: '#33cf4d',
+      border: '6px solid #fff',
+    },
+    '&.Mui-disabled .MuiSwitch-thumb': {
+      color:
+        theme.themeMode === 'light'
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    '&.Mui-disabled + .MuiSwitch-track': {
+      opacity: theme.themeMode === 'light' ? 0.7 : 0.3,
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxSizing: 'border-box',
+    width: 22,
+    height: 22,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.themeMode === 'light' ? '#E9E9EA' : '#39393D',
+    opacity: 1,
+    transition: theme.transitions.create(['background-color'], {
+      duration: 500,
+    }),
+  },
+}));
 
 const Switch = ({
-  color = colors.primary,
   value,
   input,
   onChange,
@@ -34,8 +74,6 @@ const Switch = ({
   const val = input.value || value;
 
   const [checked, setChecked] = React.useState(val);
-
-  const classes = useStyles({ color })();
 
   const handleChange = (event) => {
     const val = event.target.checked;
@@ -59,12 +97,7 @@ const Switch = ({
     <Block {...containerProps}>
       <FormControlLabel
         control={
-          <MuiSwitch
-            checked={checked}
-            classes={classes}
-            {...props}
-            onChange={handleChange}
-          />
+          <IOSSwitch checked={checked} {...props} onChange={handleChange} />
         }
         label={label}
         labelPlacement={labelPlacement}

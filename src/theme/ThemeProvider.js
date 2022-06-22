@@ -6,20 +6,21 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
 
-import { CssBaseline } from '@mui/material';
 import { getLightColors, getDarkColors } from './palette';
 import typography from './typography';
 import breakpoints from './breakpoints';
-import GlobalStyles from './globalStyles';
+import GlobalCss from './GlobalCss';
 import useSettings from './context/useSettings';
 import shadows, { customShadows } from './shadows';
 import shape from './shape';
+import Block from '../Block';
 
 import ThemeContext from './ThemeContext';
 import localsizes from './Sizes';
 import localcolors from './Colors';
 import localfonts from './Fonts';
 import { ToastContainer } from '../toastr';
+import './theme.css';
 
 const ThemeProvider = ({
   children,
@@ -29,6 +30,7 @@ const ThemeProvider = ({
   addBaseWeb,
   componentsOverride,
   globalStyles = {},
+  ssr = false,
   ...props
 }) => {
   const newfonts = { ...localfonts, ...fonts };
@@ -40,6 +42,7 @@ const ThemeProvider = ({
 
   const themeOptions = React.useMemo(
     () => ({
+      themeMode,
       palette: isLight ? getLightColors(newcolors) : getDarkColors(newcolors),
       shape,
       typography: typography({ fonts }),
@@ -72,23 +75,25 @@ const ThemeProvider = ({
   return (
     // Apply theme for designs (Premium themes)
     <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <GlobalStyles />
+      <GlobalCss />
+      {!ssr && (
+        <ThemeContext.Provider
+          value={{
+            theme,
+            fonts: newfonts,
+            colors: newcolors,
+            sizes: newsizes,
+            CONFIG: props.CONFIG || {},
+            ...props,
+          }}
+        >
+          <Block>{children}</Block>
 
-      <ThemeContext.Provider
-        value={{
-          fonts: newfonts,
-          colors: newcolors,
-          sizes: newsizes,
-          CONFIG: props.CONFIG || {},
-          ...props,
-        }}
-      >
-        {children}
-        <div style={{ flex: 0, zIndex: 9999 }}>
-          <ToastContainer />
-        </div>
-      </ThemeContext.Provider>
+          <div style={{ zIndex: 9999 }}>
+            <ToastContainer />
+          </div>
+        </ThemeContext.Provider>
+      )}
     </MuiThemeProvider>
   );
 };
