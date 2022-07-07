@@ -293,21 +293,24 @@ const S3Uploader = ({
       if (maxSize && maxSize > 0) {
         const sizelimit = Number(maxSize * 1024 * 1024);
         const inds = [...(files || [])]
-          .map((file, index) =>
-            file && file.size > sizelimit ? index + 1 : null
-          )
+          .map((fileItem, index) => {
+            const file = (fileItem || {})[0] || file;
+            return file && file.size > sizelimit ? index + 1 : null;
+          })
           .filter(Boolean);
         if (inds.length > 0) {
           return toastr.error(
             `File "${
-              files[inds[0] - 1].name
+              files[inds[0] - 1].name ||
+              ((files[inds[0] - 1] || [])[0] || {}).filename
             }" exceeds ${maxSize}MB. Please try again with a smaller file`
           );
         }
       }
       const fileObjArray = await [...(files || [])].filter(Boolean).map(
-        async (file) =>
+        async (fileItem) =>
           new Promise((resolve, reject) => {
+            const file = (fileItem || {})[0] || fileItem;
             const video = document.createElement('video');
             video.src = URL.createObjectURL(file);
             video.preload = 'metadata';
@@ -883,5 +886,6 @@ S3Uploader.defaultProps = {
   setuploading: () => {},
   uploadaxiosinstance: axios.create(),
   signaxiosinstance: axios.create(),
+  limit: 1,
 };
 export default S3Uploader;

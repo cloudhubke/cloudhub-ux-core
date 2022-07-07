@@ -61,11 +61,15 @@ const S3FilesUploader = ({
     if (typeof input.onChange === 'function') {
       if (limit === 1) {
         input.onChange((fileUpdate || [])[0]);
+      } else {
+        input.onChange(fileUpdate || []);
       }
     }
     if (typeof onChange === 'function') {
       if (limit === 1) {
         onChange((fileUpdate || [])[0]);
+      } else {
+        onChange(fileUpdate || []);
       }
     }
   };
@@ -219,9 +223,9 @@ const S3FilesUploader = ({
     }
 
     const fileArray = [...(files || [])].filter(Boolean).map((file) => ({
-      name: file.name.replace(/[^\w\d_\-.]+/gi, ''),
-      type: file.type,
-      size: file.size,
+      name: ((file || {})[0] || file).name.replace(/[^\w\d_\-.]+/gi, ''),
+      type: ((file || {})[0] || file).type,
+      size: ((file || {})[0] || file).size,
     }));
 
     if (fileArray.length > 0) {
@@ -230,32 +234,32 @@ const S3FilesUploader = ({
         return;
       }
       signedUrls.filter(Boolean);
-      const uploads = [...(files || [])].filter(Boolean).map(
-        (file) =>
-          signedUrls
-            .filter(Boolean)
-            .map(({ signedUrl, filename }) => {
-              if (filename === file.name.replace(/[^\w\d_\-.]+/gi, '')) {
-                return {
-                  signedUrl,
-                  file,
-                  options: {
-                    headers: {
-                      'Content-Type': qs.parse(signedUrl)['Content-Type'],
-                      Expires: qs.parse(signedUrl).Expires,
-                      'x-amz-acl':
-                        qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
-                    },
-                    onUploadProgress: (progressEvent) => {
-                      onprogress(progressEvent, signedUrl);
-                    },
+      const uploads = [...(files || [])].filter(Boolean).map((fileItem) => {
+        const file = fileItem[0] || fileItem;
+        return signedUrls
+          .filter(Boolean)
+          .map(({ signedUrl, filename }) => {
+            if (filename === file.name.replace(/[^\w\d_\-.]+/gi, '')) {
+              return {
+                signedUrl,
+                file,
+                options: {
+                  headers: {
+                    'Content-Type': qs.parse(signedUrl)['Content-Type'],
+                    Expires: qs.parse(signedUrl).Expires,
+                    'x-amz-acl':
+                      qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
                   },
-                };
-              }
-              return null;
-            })
-            .filter(Boolean)[0]
-      );
+                  onUploadProgress: (progressEvent) => {
+                    onprogress(progressEvent, signedUrl);
+                  },
+                },
+              };
+            }
+            return null;
+          })
+          .filter(Boolean)[0];
+      });
 
       for (const thisfile of uploads) {
         try {

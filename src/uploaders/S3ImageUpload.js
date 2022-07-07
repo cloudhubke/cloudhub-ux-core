@@ -56,7 +56,6 @@ const S3ImageUpload = ({
 
   const elemId = uniq(5);
   React.useEffect(() => {
-    console.log(incominginput);
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }

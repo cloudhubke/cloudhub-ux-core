@@ -10,6 +10,7 @@ import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
 import { Block, Text, toastr, Dialog, Button, Input } from '..';
 import { Tooltip } from '@mui/material';
 import isEqual from 'lodash/isEqual';
+import axios from 'axios';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import AntProgress from '../ant/AntProgress';
@@ -223,8 +224,9 @@ const S3ImagesUploader = ({
         return toastr.error(`Only a maximum of ${limit} files allowed`);
       }
       const fileObjArray = await [...(files || [])].filter(Boolean).map(
-        async (file) =>
+        async (fileItem) =>
           new Promise((resolve, reject) => {
+            const file = fileItem[0] || fileItem;
             const img = new Image();
             img.src = URL.createObjectURL(file);
             img.onload = () => {
@@ -334,36 +336,32 @@ const S3ImagesUploader = ({
         (urls) => urls
       );
       signedUrls.filter(Boolean);
-      const uploads = [...(filesArray || [])].map(
-        (file) =>
-          signedUrls
-            .filter(Boolean)
-            .map(({ signedUrl, filename }) => {
-              if (
-                file &&
-                filename === file.name.replace(/[^\w\d_\-.]+/gi, '')
-              ) {
-                return {
-                  signedUrl,
-                  file,
-                  options: {
-                    headers: {
-                      'Content-Type': qs.parse(signedUrl)['Content-Type'],
-                      Expires: qs.parse(signedUrl).Expires,
-                      'x-amz-acl':
-                        qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
-                    },
-                    onUploadProgress: (progressEvent) => {
-                      onprogress(progressEvent, signedUrl);
-                    },
+      const uploads = [...(filesArray || [])].map((fileItem) => {
+        const file = fileItem[0] || fileItem;
+        return signedUrls
+          .filter(Boolean)
+          .map(({ signedUrl, filename }) => {
+            if (file && filename === file.name.replace(/[^\w\d_\-.]+/gi, '')) {
+              return {
+                signedUrl,
+                file,
+                options: {
+                  headers: {
+                    'Content-Type': qs.parse(signedUrl)['Content-Type'],
+                    Expires: qs.parse(signedUrl).Expires,
+                    'x-amz-acl':
+                      qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
                   },
-                };
-              }
-              return null;
-            })
-            .filter(Boolean)[0]
-      );
-
+                  onUploadProgress: (progressEvent) => {
+                    onprogress(progressEvent, signedUrl);
+                  },
+                },
+              };
+            }
+            return null;
+          })
+          .filter(Boolean)[0];
+      });
       for (const upload of uploads) {
         try {
           // eslint-disable-next-line no-await-in-loop
@@ -372,6 +370,7 @@ const S3ImagesUploader = ({
             upload.file,
             upload.options
           );
+
           onUploadFinish(upload.signedUrl);
         } catch (error) {
           onUploadError(upload.signedUrl);
@@ -385,6 +384,7 @@ const S3ImagesUploader = ({
         }
       }
     } catch (error) {
+      console.log(error);
       toastr.error('Some files could not be uploaded');
     }
   };
@@ -669,5 +669,6 @@ S3ImagesUploader.defaultProps = {
     onChange: () => {},
   },
   setuploading: () => {},
+  uploadaxiosinstance: axios,
 };
 export default S3ImagesUploader;
