@@ -31,6 +31,7 @@ const SearchForm = ({
   onDataChanged,
   inputProps,
   popperStyle,
+  Graphqlmodel,
 }) => {
   const inputRef = React.useRef();
   const [text, setText] = React.useState(
@@ -45,12 +46,28 @@ const SearchForm = ({
     try {
       setFetching(true);
       // await sleep(2000);
-      const { data } = await axiosinstance().get(`${url}`, {
-        params: {
-          [paramName]: debouncedText,
-          ...otherparams,
-        },
-      });
+      let data;
+      if (Graphqlmodel) {
+        try {
+          data = await Graphqlmodel()
+            .find({
+              [paramName]: debouncedText,
+              ...otherparams,
+            })
+            .toJson();
+        } catch (error) {
+          console.log(error.toString());
+        }
+      } else {
+        const options = await axiosinstance().get(`${url}`, {
+          params: {
+            [paramName]: debouncedText,
+            ...otherparams,
+          },
+        });
+        // eslint-disable-next-line
+        data = options.data;
+      }
 
       const arr = data.items || data;
 
