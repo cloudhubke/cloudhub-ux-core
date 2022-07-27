@@ -1,19 +1,10 @@
-import React, { Component } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
 import spinner from './assets/images/spinner.gif';
+import Text from './Text';
 
-export default class Loading extends Component {
-  static defaultProps = {
-    size: 16,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { size } = this.props;
+function Loading({ size = 16, ...props }) {
+  if (props.error) {
+    console.log(props.error);
     return (
       <div
         style={{
@@ -25,9 +16,25 @@ export default class Loading extends Component {
           alignItems: 'center',
         }}
       >
-        {/* <CircularProgress color="secondary" /> */}
-        <img alt="loading...." src={spinner} style={{ height: size * 2 }} />
+        <Text error>Error!</Text>
       </div>
     );
   }
+  return (
+    <div
+      style={{
+        flex: 1,
+        minHeight: '100%',
+        maxHeight: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {/* <CircularProgress color="secondary" /> */}
+      <img alt="loading...." src={spinner} style={{ height: size * 2 }} />
+    </div>
+  );
 }
+
+export default Loading;
