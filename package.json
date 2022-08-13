@@ -1,14 +1,14 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.68.0",
+  "version": "0.79.0",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "mocha src/index.test.js -w --require babel-core/register",
     "test:single": "mocha src/index.test.js --require babel-core/register",
-    "build": "npm-run-all --parallel build:*",
-    "build:main": "npx babel --config-file ./babel.json --copy-files --out-dir ./dist --ignore *.test.js src && cp package.json ./dist/package.json",
+    "babelbuild": "npx babel --config-file ./babel.json --copy-files --out-dir ./dist --ignore *.test.js src && cp package.json ./dist/package.json",
+    "build": "tsc",
     "lint": "node ./node_modules/.bin/eslint ./src --max-warnings=0 && echo '✔  Your code looks good.'",
     "prepublishOnly": "./publish.sh",
     "semantic-release": "semantic-release"
@@ -128,25 +128,10 @@
     "validate.js": "0.13.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.0",
-    "@babel/core": "7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-transform-object-assign": "7.2.0",
-    "@babel/preset-env": "7.2.0",
-    "@babel/preset-flow": "7.0.0",
-    "@babel/preset-react": "7.0.0",
-    "babel-eslint": "10.0.1",
-    "babel-plugin-css-modules-transform": "1.6.2",
-    "babel-plugin-import": "1.13.3",
-    "babel-plugin-transform-imports": "2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
     "chai": "4.1.2",
-    "eslint": "5.16.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-plugin-baseui": "9.112.0",
-    "eslint-plugin-import": "2.17.3",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "7.13.0",
+    "eslint-plugin-react-hooks": "4.6.0",
     "ghooks": "2.0.2",
     "mocha": "4.0.1",
     "npm-run-all": "4.1.2",
@@ -154,7 +139,9 @@
     "regenerator-runtime": "0.11.1",
     "rimraf": "2.6.2",
     "semantic-release": "17.3.1",
-    "semantic-release-cli": "5.4.1"
+    "semantic-release-cli": "5.4.1",
+    "typescript": "4.7.4",
+    "zustand": "4.0.0"
   },
   "config": {
     "commitizen": {

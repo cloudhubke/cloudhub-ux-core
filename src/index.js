@@ -68,4 +68,8 @@ export { toast, ToastContainer } from './toastr';
 export { default as VideoThumbnail } from './VideoThumbnail';
 export { default as DatePicker } from './DatePicker';
 export { default as DateRangePicker } from './DateRangePicker';
+
+// Storage
+export { default as AsyncStorage } from './AsyncStorage';
+
 export * from './@material-extend';

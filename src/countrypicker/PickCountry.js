@@ -8,7 +8,7 @@ const styles = () => ({
   root: {},
 });
 class PickCountry extends Component {
-  static defaultProps: {
+  static defaultProps = {
     onCallingCodeChanged: () => {},
     cca2: 'KE',
     callingCode: '254',
