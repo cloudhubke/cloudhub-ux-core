@@ -29,10 +29,12 @@ const useStyles = (color) =>
       display: 'flex',
       alignItems: 'center',
       padding: theme.spacing(3),
-      ...(theme.palette[color] && {
-        color: theme.palette[color].darker,
-        backgroundColor: theme.palette[color].lighter,
-      }: {}),
+      ...(theme.palette[color]
+        ? {
+            color: theme.palette[color].darker,
+            backgroundColor: theme.palette[color].lighter,
+          }
+        : {}),
     },
     trending: {
       display: 'flex',
