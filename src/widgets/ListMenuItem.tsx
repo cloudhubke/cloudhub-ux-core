@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -13,7 +14,7 @@ import Divider from '@mui/material/Divider';
 import { useLocation } from '../customhooks';
 import { Link } from '../reach';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {},
   listItem: {
     ...theme.typography.body2,
@@ -42,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const CustomListItem = ({ button, ...props }: any) => {
+  if (button) {
+    return <ListItemButton {...props} />;
+  }
+
+  return <ListItem {...props} />;
+};
+
 const ListMenuItem = ({
   icon,
   avatar,
@@ -55,21 +64,39 @@ const ListMenuItem = ({
   iconStyle,
   textProps,
   actionProps,
-  linkto,
+  linkto = '',
   color,
   className,
+  button = true,
   ...rest
+}: {
+  icon?: React.ReactChild;
+  avatar?: React.ReactNode;
+  primary: React.ReactNode | string;
+  secondary?: React.ReactNode | string;
+  action?: React.ReactNode | string;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  divider?: boolean;
+  dividerColor?: string;
+  iconStyle?: React.CSSProperties;
+  textProps?: any;
+  actionProps?: any;
+  linkto: string;
+  color?: string;
+  className?: string;
+  button?: boolean;
 }) => {
   const { location } = useLocation();
   const classes = useStyles();
 
-  const isActive = `${location.pathname}`.endsWith(linkto);
+  const isActive = Boolean(linkto) && `${location.pathname}`.endsWith(linkto);
 
   return (
     <React.Fragment>
       {children && (
-        <ListItem
-          styles={{ flex: 1, display: 'flex', ...style }}
+        <CustomListItem
+          style={{ flex: 1, display: 'flex', ...style }}
           className={clsx(
             classes.listItem,
             {
@@ -77,16 +104,18 @@ const ListMenuItem = ({
             },
             className
           )}
+          button
           component={linkto ? Link : 'div'}
           to={linkto}
           {...rest}
         >
           {children}
-        </ListItem>
+        </CustomListItem>
       )}
 
       {!children && (
-        <ListItem
+        <CustomListItem
+          button
           component={linkto ? Link : 'div'}
           to={linkto}
           className={clsx(
@@ -108,7 +137,6 @@ const ListMenuItem = ({
                 color: color || 'inherit',
                 ...iconStyle,
               }}
-              className={classes.listItemIcon}
             >
               {icon}
             </ListItemIcon>
@@ -126,7 +154,7 @@ const ListMenuItem = ({
               {action}
             </ListItemSecondaryAction>
           )}
-        </ListItem>
+        </CustomListItem>
       )}
       {divider && !dividerColor && <Divider />}
       {divider && dividerColor && (
@@ -134,11 +162,6 @@ const ListMenuItem = ({
       )}
     </React.Fragment>
   );
-};
-
-ListMenuItem.defaultProps = {
-  icon: null,
-  button: true,
 };
 
 export default ListMenuItem;

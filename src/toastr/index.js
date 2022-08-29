@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { makeStyles } from '@mui/styles';
 import colors from '../theme/Colors';
 
-const ToastContainer = ({ constainerStyle, ...props }) => {
+const ToastContainer = ({ constainerStyle = {}, ...props }) => {
   const classes = makeStyles({
     toastcontainer: {
       '& .Toastify__toast--default': {

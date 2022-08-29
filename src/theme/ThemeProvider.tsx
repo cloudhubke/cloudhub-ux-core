@@ -66,7 +66,7 @@ const ThemeProvider = ({
     [isLight, themeDirection]
   );
 
-  const theme = createTheme(themeOptions);
+  const theme = createTheme(themeOptions as any);
 
   if (typeof componentsOverride === 'function') {
     theme.components = componentsOverride(theme);

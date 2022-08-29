@@ -1,6 +1,6 @@
 {
   "name": "@cloudhub-ux/core",
-  "version": "0.79.0",
+  "version": "0.80.1",
   "description": "Various components to use in react projects",
   "main": "./index.js",
   "scripts": {
@@ -128,6 +128,9 @@
     "validate.js": "0.13.1"
   },
   "devDependencies": {
+    "@mui/icons-material": "5.8.4",
+    "@mui/material": "5.10.0",
+    "@mui/styles": "5.9.3",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "chai": "4.1.2",

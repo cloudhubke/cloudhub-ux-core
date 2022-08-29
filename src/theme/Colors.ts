@@ -156,12 +156,12 @@ const colors = {
   rose: '#54D62C',
 };
 
-colors.primary = colors.primaryColors.main || '#FC4C69';
-colors.secondary = colors.secondaryColors.main || '#AAF27F';
-colors.tertiary = colors.tertiaryColors.main || '#909CEF';
-colors.success = colors.successColors.main || '#4caf50';
-colors.info = colors.infoColors.main || '#1890FF';
-colors.warning = colors.warningColors.main || '#FFC107';
-colors.danger = colors.dangerColors.main || '#FF4842';
+(colors as any).primary = colors.primaryColors.main || '#FC4C69';
+(colors as any).secondary = colors.secondaryColors.main || '#AAF27F';
+(colors as any).tertiary = (colors.tertiaryColors as any).main || '#909CEF';
+(colors as any).success = colors.successColors.main || '#4caf50';
+(colors as any).info = colors.infoColors.main || '#1890FF';
+(colors as any).warning = colors.warningColors.main || '#FFC107';
+(colors as any).danger = colors.dangerColors.main || '#FF4842';
 
 export default colors;

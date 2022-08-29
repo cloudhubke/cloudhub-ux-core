@@ -8,10 +8,14 @@ const sizes = {
   margin: 15,
 
   // font sizes
-  h1: 48,
-  h2: 24,
-  h3: 16,
+  h1: 24,
+  h2: 22,
+  h3: 20,
+  h4: 18,
+  h5: 16,
+  h6: 14,
   title: 18,
+  subTitle: 14,
   header: 15,
   subHeader: 14,
   body: 16,

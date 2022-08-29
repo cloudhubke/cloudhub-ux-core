@@ -9,7 +9,7 @@ export default {
   getItem: async (key: string) => {
     try {
       const str = await localStorage.getItem(`${key}`);
-      const jsonValue = str != null ? JSON.parse(str) : {};
+      const jsonValue = JSON.parse(str || '{}');
       return jsonValue.value || null;
     } catch (error) {}
   },
