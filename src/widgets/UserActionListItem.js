@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import {
   ListItem,
@@ -51,7 +51,7 @@ const UserActionListItem = ({
                 className={classes.inline}
                 color="textSecondary"
               >
-                {` ${moment(timestamp).fromNow()}`}
+                {` ${dayjs(timestamp).fromNow()}`}
               </Typography>
             )}
           </React.Fragment>

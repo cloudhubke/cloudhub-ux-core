@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import WatchLaterOutlined from '@mui/icons-material/WatchLaterOutlined';
 import isEqual from 'lodash/isEqual';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import Popper from '../dialogs/Popper';
 import IconButton from '../IconButton';
@@ -55,7 +55,7 @@ const TimeDurationPicker = ({
     }
   }, [durations, values, input, onChange]);
 
-  const format = (tt) => moment(tt, 'HHmmss').format('hh:mm a');
+  const format = (tt) => dayjs(tt, 'HHmmss').format('hh:mm a');
 
   return (
     <Block row middle style={styles.input} padding={[0, sizes.padding]}>
