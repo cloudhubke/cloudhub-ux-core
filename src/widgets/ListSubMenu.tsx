@@ -15,7 +15,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import ThemeContext from '../theme/ThemeContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   root: {},
   listItem: {
     ...theme.typography.body2,
@@ -67,6 +67,17 @@ const ListSubMenu = ({
   divider = true,
   className,
   ...rest
+}: {
+  children: React.ReactNode;
+  headerIcon?: React.ReactNode;
+  header?: React.ReactNode | string;
+  expanded?: boolean;
+  expandedStyles?: React.CSSProperties;
+  style?: React.CSSProperties;
+  showHeaderIcon?: boolean;
+  dividerColor?: string;
+  divider?: boolean;
+  className?: string;
 }) => {
   const { colors, sizes } = React.useContext(ThemeContext);
   const [menuexpanded, setMenuExpand] = useState(expanded);

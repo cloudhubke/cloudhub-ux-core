@@ -262,7 +262,7 @@ const RemoteSelector = React.forwardRef(
             return false;
           }}
           renderOption={(props, option, { selected }) => (
-            <li {...props}>
+            <li {...props} key={option.value}>
               {renderOption ? (
                 renderOption({ option: option.item, selected })
               ) : (
