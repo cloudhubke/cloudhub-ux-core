@@ -124,7 +124,7 @@ const S3ImageUpload = ({
   };
 
   React.useEffect(() => {
-    if (Array.isArray(fileList)) {
+    if (Array.isArray(fileList) && fileList.length > 0) {
       const isuploading = fileList.filter(Boolean).map(({ status }) => {
         if (status === 'done') return 'done';
         return 'uploading';

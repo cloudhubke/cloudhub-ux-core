@@ -58,6 +58,9 @@ const S3ImagesUploader = ({
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
+    if (incominginput && !isEqual(incominginput, (fileList || [])[0])) {
+      setfileList([incominginput]);
+    }
   }, [incominginput]);
 
   React.useEffect(() => {
@@ -104,13 +107,17 @@ const S3ImagesUploader = ({
       typeof input.onChange === 'function' &&
       !isEqual(fileUpdate, incominginput)
     ) {
-      if (limit === 1) {
+      if (limit === 1 || !limit) {
         input.onChange((fileUpdate || [])[0]);
+      } else {
+        input.onChange(fileUpdate);
       }
     }
     if (typeof onChange === 'function' && !isEqual(fileUpdate, incominginput)) {
-      if (limit === 1) {
+      if (limit === 1 || !limit) {
         onChange((fileUpdate || [])[0]);
+      } else {
+        onChange(fileUpdate);
       }
     }
   };
@@ -441,7 +448,7 @@ const S3ImagesUploader = ({
               flex={false}
               style={{
                 backgroundImage: `url(${
-                  file.status === 'done' ? file.url : ''
+                  file.status === 'done' ? file.Location : ''
                 })`,
                 backgroundSize: 'cover',
                 width: previewWidth || 150,
@@ -670,5 +677,6 @@ S3ImagesUploader.defaultProps = {
   },
   setuploading: () => {},
   uploadaxiosinstance: axios,
+  limit: 1,
 };
 export default S3ImagesUploader;
