@@ -5,9 +5,15 @@
 import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
-import { AddAPhotoSharp, Cancel } from '@mui/icons-material';
-import { Block, Text, toastr, Dialog, Button, Input } from '..';
-import { Tooltip } from '@mui/material';
+import AddAPhotoSharp from '@mui/icons-material/AddAPhotoSharp';
+import Cancel from '@mui/icons-material/Cancel';
+import Block from '../Block';
+import Input from '../Input';
+import Text from '../Text';
+import toastr from '../toastr';
+import Dialog from '../toastr';
+import Button from '../Button';
+import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';

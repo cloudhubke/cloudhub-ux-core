@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import MuiPopper from '@mui/material/Popper';
 import Paper from '@mui/material/Paper';
 import Fade from '@mui/material/Fade';
-
-import { ClickAwayListener } from '@mui/material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { makeStyles } from '@mui/styles';
 import Block from '../Block';
 import colors from '../theme/Colors';

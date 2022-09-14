@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Card, CardContent, CardActions } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import { makeStyles } from '@mui/styles';
 import Scrollbars from '../Scrollbars';
 import CardToolbar from './CardToolbar';

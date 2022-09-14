@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Popover } from '@mui/material';
+import Popover from '@mui/material/Popover';
 import { makeStyles } from '@mui/styles';
-import { Close } from '@mui/icons-material';
+import Close from '@mui/icons-material/Close';
 import Scrollbars from '../Scrollbars';
 import Text from '../Text';
 import Block from '../Block';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 // material
-import { IconButton } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 //
 import { ButtonAnimate } from '../animate';
 

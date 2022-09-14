@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import MuiPopper from '@mui/material/Popper';
 import Paper from '@mui/material/Paper';
 import Fade from '@mui/material/Fade';
-
-import { ClickAwayListener } from '@mui/material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { makeStyles } from '@mui/styles';
 import { useRect } from '@reach/rect';
 import Block from '../Block';

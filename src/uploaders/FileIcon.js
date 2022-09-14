@@ -1,5 +1,7 @@
 import React from 'react';
-import { Image, InsertDriveFile, PictureAsPdf } from '@mui/icons-material';
+import Image from '@mui/icons-material/Image';
+import InsertDriveFile from '@mui/icons-material/InsertDriveFile';
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf';
 import ThemeContext from '../theme/ThemeContext';
 
 const FileIcon = ({ fd }) => {

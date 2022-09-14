@@ -1,6 +1,9 @@
 import React from 'react';
-import { ListItem, ListItemText, ListItemAvatar } from '@mui/material';
-import { PlayArrow, PlayCircleOutline } from '@mui/icons-material';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import PlayArrow from '@mui/icons-material/PlayArrow';
+import PlayCircleOutline from '@mui/icons-material/PlayCircleOutline';
 import dayjs from 'dayjs';
 import Block from './Block';
 import Text from './Text';

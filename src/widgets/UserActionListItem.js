@@ -1,14 +1,11 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React from 'react';
 import dayjs from 'dayjs';
-
-import {
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  ListItemSecondaryAction,
-  Typography,
-} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
 import { makeStyles } from '@mui/styles';
 import { Link } from '../reach';
 

@@ -1,9 +1,10 @@
 // just copy this code from the driving repo :)
 
 import React from 'react';
-
 import { makeStyles } from '@mui/styles';
-import { Slide, Grow, Paper } from '@mui/material';
+import Slide from '@mui/material/Slide';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
 import classNames from 'classnames';
 import ThemeContext from './theme/ThemeContext';
 

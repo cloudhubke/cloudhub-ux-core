@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight } from '@mui/icons-material';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 import Block from './Block';
 import ThemeContext from './theme/ThemeContext';
 

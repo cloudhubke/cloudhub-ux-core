@@ -1,7 +1,6 @@
 // just copy this code from the driving repo :)
 import React from 'react';
-import { Typography } from '@mui/material';
-
+import Typography from '@mui/material/Typography';
 import ThemeContext from './theme/ThemeContext';
 
 const Text = ({

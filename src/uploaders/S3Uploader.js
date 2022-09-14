@@ -7,16 +7,20 @@
 import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
-import { Block, Text, toastr, IconButton, Dialog, Button } from '..';
+import Block from '../Block';
+import IconButton from '../IconButton';
+import Text from '../Text';
+import toastr from '../toastr';
+import Dialog from '../toastr';
+import Button from '../Button';
 import axios from 'axios';
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
-} from '@mui/material';
-import { Upload, Close } from '@mui/icons-material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import Upload from '@mui/icons-material/Upload';
+import Close from '@mui/icons-material/Close';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import isPlainObject from 'lodash/isPlainObject';

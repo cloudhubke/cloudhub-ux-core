@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
-import { Avatar } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import { capitalize } from '@mui/material/utils';
 import { makeStyles } from '@mui/styles';
 

@@ -6,19 +6,24 @@
 import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
-import { List, ListItem, ListItemSecondaryAction } from '@mui/material';
-import {
-  VideoLibrarySharp,
-  Delete,
-  AddPhotoAlternate,
-  Close,
-  InfoOutlined,
-} from '@mui/icons-material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import VideoLibrarySharp from '@mui/icons-material/VideoLibrarySharp';
+import Delete from '@mui/icons-material/Delete';
+import AddPhotoAlternate from '@mui/icons-material/AddPhotoAlternate';
+import InfoOutlined from '@mui/icons-material/InfoOutlined';
 import axios from 'axios';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';
 import isEmpty from 'lodash/isEmpty';
-import { Block, Text, toastr, VideoThumbnail, Button, Dialog, Input } from '..';
+import Block from '../Block';
+import Input from '../Input';
+import VideoThumbnail from '../VideoThumbnail';
+import Text from '../Text';
+import toastr from '../toastr';
+import Dialog from '../toastr';
+import Button from '../Button';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import ThemeContext from '../theme/ThemeContext';
