@@ -2,7 +2,7 @@
   "name": "@cloudhub-ux/core",
   "version": "0.81.1",
   "description": "Various components to use in react projects",
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "mocha src/index.test.js -w --require babel-core/register",
