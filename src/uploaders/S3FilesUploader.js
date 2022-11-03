@@ -11,7 +11,7 @@ import Block from '../Block';
 import IconButton from '../IconButton';
 import Text from '../Text';
 import toastr from '../toastr';
-import Dialog from '../toastr';
+import Dialog from '../dialogs/Dialog';
 import Button from '../Button';
 import axios from 'axios';
 import List from '@mui/material/List';
@@ -20,6 +20,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
 import Upload from '@mui/icons-material/Upload';
 import Close from '@mui/icons-material/Close';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
@@ -57,6 +59,13 @@ const S3FilesUploader = ({
   React.useEffect(() => {
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
+    }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
     }
   }, [incominginput]);
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import AutoComplete from '@mui/material/AutoComplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import { makeStyles } from '@mui/styles';
 import ThemeContext from '../theme/ThemeContext';
 import Block from '../Block';

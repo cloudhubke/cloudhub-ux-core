@@ -12,10 +12,12 @@ import Block from '../Block';
 import Input from '../Input';
 import Text from '../Text';
 import toastr from '../toastr';
-import Dialog from '../toastr';
 import Button from '../Button';
 import Tooltip from '@mui/material/Tooltip';
+import Dialog from '../dialogs/Dialog';
 import isEqual from 'lodash/isEqual';
+import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
 import axios from 'axios';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
@@ -64,7 +66,11 @@ const S3ImagesUploader = ({
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
-    if (incominginput && !isEqual(incominginput, (fileList || [])[0])) {
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
       setfileList([incominginput]);
     }
   }, [incominginput]);

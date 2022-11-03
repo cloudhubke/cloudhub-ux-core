@@ -12,7 +12,7 @@ import Block from '../Block';
 import Input from '../Input';
 import Text from '../Text';
 import toastr from '../toastr';
-import Dialog from '../toastr';
+import Dialog from '../dialogs/Dialog';
 import Button from '../Button';
 import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios';

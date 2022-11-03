@@ -22,7 +22,7 @@ import Input from '../Input';
 import VideoThumbnail from '../VideoThumbnail';
 import Text from '../Text';
 import toastr from '../toastr';
-import Dialog from '../toastr';
+import Dialog from '../dialogs/Dialog';
 import Button from '../Button';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';

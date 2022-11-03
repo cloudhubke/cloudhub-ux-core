@@ -11,7 +11,7 @@ import Block from '../Block';
 import IconButton from '../IconButton';
 import Text from '../Text';
 import toastr from '../toastr';
-import Dialog from '../toastr';
+import Dialog from '../dialogs/Dialog';
 import Button from '../Button';
 import axios from 'axios';
 import List from '@mui/material/List';
