@@ -154,6 +154,14 @@ const colors = {
   reddit: '#ff4500',
   instagram: '#125688',
   rose: '#54D62C',
+
+  primary: '#00AB55',
+  secondary: '#3366FF',
+  success: '#35CC5A',
+  tertiary: '#FF4957',
+  info: '#2E5BF2',
+  warning: '#FFC405',
+  danger: '#FF474D',
 };
 
 (colors as any).primary = colors.primaryColors.main || '#FC4C69';

@@ -14,34 +14,36 @@ import Divider from '@mui/material/Divider';
 import { useLocation } from '../customhooks';
 import { Link } from '../reach';
 
-const useStyles = makeStyles((theme: any) => ({
-  root: {},
-  listItem: {
-    ...theme.typography.body2,
-    minHeight: 48,
-    textTransform: 'capitalize',
-    paddingLeft: theme.spacing(2.5),
-    paddingRight: theme.spacing(2.5),
-    color: theme.palette.text.secondary,
-  },
-  isActiveListItem: {
-    color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightMedium,
-    backgroundColor: alpha(
-      theme.palette.primary.main,
-      theme.palette.action.selectedOpacity
-    ),
-    '&:before': {
-      top: 0,
-      right: 0,
-      width: 3,
-      bottom: 0,
-      content: "''",
-      position: 'absolute',
-      backgroundColor: theme.palette.primary.main,
+const useStyles = makeStyles((theme: any) => {
+  return {
+    root: {},
+    listItem: {
+      ...theme.typography.body2,
+      minHeight: 48,
+      textTransform: 'capitalize',
+      paddingLeft: theme.spacing(2.5),
+      paddingRight: theme.spacing(2.5),
+      color: theme.palette.text.secondary,
     },
-  },
-}));
+    isActiveListItem: {
+      color: theme.palette.primary.main,
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: alpha(
+        theme.palette.primary.main,
+        theme.palette.action.selectedOpacity
+      ),
+      '&:before': {
+        top: 0,
+        right: 0,
+        width: 3,
+        bottom: 0,
+        content: "''",
+        position: 'absolute',
+        backgroundColor: theme.palette.primary.main,
+      },
+    },
+  };
+});
 
 const CustomListItem = ({ button, ...props }: any) => {
   if (button) {
@@ -70,9 +72,10 @@ const ListMenuItem = ({
   button = true,
   ...rest
 }: {
+  [x: string]: any;
   icon?: React.ReactChild;
   avatar?: React.ReactNode;
-  primary: React.ReactNode | string;
+  primary?: React.ReactNode | string;
   secondary?: React.ReactNode | string;
   action?: React.ReactNode | string;
   children?: React.ReactNode;
@@ -82,7 +85,7 @@ const ListMenuItem = ({
   iconStyle?: React.CSSProperties;
   textProps?: any;
   actionProps?: any;
-  linkto: string;
+  linkto?: string;
   color?: string;
   className?: string;
   button?: boolean;

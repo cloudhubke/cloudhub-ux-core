@@ -1,7 +1,7 @@
 import create from 'zustand/vanilla';
 import appReducer, { INITIAL_STATE } from './appReducer';
 
-const appStore: any = create((set: any) => ({
+const appStore = create((set) => ({
   ...INITIAL_STATE,
   dispatch: (args) => {
     if (typeof args === 'function') {
