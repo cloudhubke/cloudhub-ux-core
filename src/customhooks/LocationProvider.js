@@ -6,7 +6,7 @@ import {
 import LocationContext from './LocationContext';
 import ScrollToTop from './ScrollToTop';
 
-const LocationProvider = ({ children, scrolltop, ...props }) => (
+const LocationProvider = ({ children, ...props }) => (
   <ReachLocationProvider {...props}>
     <Location>
       {({ location, navigate }) => (

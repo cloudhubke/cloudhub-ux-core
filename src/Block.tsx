@@ -19,9 +19,10 @@ const useStyles = () =>
   });
 
 interface BlockProps {
-  children: React.ReactNode;
-  margin?: number | number[];
-  padding?: number | number[];
+  [key: string]: any;
+  children?: React.ReactNode;
+  margin?: number | number[] | boolean;
+  padding?: number | number[] | boolean;
   color?: string;
   absolute?: boolean;
   flex?: boolean;
@@ -125,7 +126,7 @@ const Block = React.forwardRef(
         };
       }
 
-      if (typeof padding === 'boolean' && padding) {
+      if (typeof padding === 'boolean') {
         return {
           paddingTop: sizes.padding || 15,
           paddingRight: sizes.padding || 15,

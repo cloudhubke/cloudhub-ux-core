@@ -102,6 +102,7 @@ const Fonts = {
     fontSize: sizes.body,
     lineHeight: '200%',
     color: colors.darkGray,
+    fontWeight: 400,
   },
 
   caption: {
