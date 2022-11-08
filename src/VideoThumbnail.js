@@ -1,7 +1,10 @@
 import React from 'react';
-import { ListItem, ListItemText, ListItemAvatar } from '@mui/material';
-import { PlayArrow, PlayCircleOutline } from '@mui/icons-material';
-import moment from 'moment';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import PlayArrow from '@mui/icons-material/PlayArrow';
+import PlayCircleOutline from '@mui/icons-material/PlayCircleOutline';
+import dayjs from 'dayjs';
 import Block from './Block';
 import Text from './Text';
 import Avatar from './Avatar';
@@ -229,7 +232,7 @@ const VideoThumbnail = ({
                   <Block row style={{ matrginLeft: 'auto' }}>
                     {views && <Text body>{showViews()}</Text>}
                     {views && posted && <> &bull; </>}
-                    {posted && <Text body>{moment(posted).fromNow(true)}</Text>}
+                    {posted && <Text body>{dayjs(posted).fromNow(true)}</Text>}
                   </Block>
                 )}
               </Block>

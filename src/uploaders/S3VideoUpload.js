@@ -6,16 +6,24 @@
 import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
-import { List, ListItem, ListItemSecondaryAction } from '@mui/material';
-import {
-  VideoLibrarySharp,
-  Delete,
-  AddPhotoAlternate,
-  Close,
-  InfoOutlined,
-} from '@mui/icons-material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import VideoLibrarySharp from '@mui/icons-material/VideoLibrarySharp';
+import Delete from '@mui/icons-material/Delete';
+import AddPhotoAlternate from '@mui/icons-material/AddPhotoAlternate';
+import InfoOutlined from '@mui/icons-material/InfoOutlined';
+import axios from 'axios';
 import isEqual from 'lodash/isEqual';
-import { Block, Text, toastr, VideoThumbnail, Button, Dialog, Input } from '..';
+import isPlainObject from 'lodash/isPlainObject';
+import isEmpty from 'lodash/isEmpty';
+import Block from '../Block';
+import Input from '../Input';
+import VideoThumbnail from '../VideoThumbnail';
+import Text from '../Text';
+import toastr from '../toastr';
+import Dialog from '../dialogs/Dialog';
+import Button from '../Button';
 import { Form, Field } from '../form';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import ThemeContext from '../theme/ThemeContext';
@@ -64,6 +72,13 @@ const S3Uploader = ({
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
+    }
   }, [incominginput]);
 
   React.useEffect(() => {
@@ -82,11 +97,19 @@ const S3Uploader = ({
   }, [thumberror]);
 
   const logChange = (fileUpdate) => {
-    if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+    const incominginput = input && input.value ? input.value : value || [];
+    let newValue = fileUpdate || [];
+    if ((!limit || limit === 1) && Array.isArray(fileUpdate)) {
+      newValue = fileUpdate[0] || {};
     }
-    if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+    if (
+      typeof input.onChange === 'function' &&
+      !isEqual(newValue, incominginput)
+    ) {
+      input.onChange(newValue);
+    }
+    if (typeof onChange === 'function' && !isEqual(newValue, incominginput)) {
+      onChange(newValue);
     }
   };
 
@@ -275,21 +298,24 @@ const S3Uploader = ({
       if (maxSize && maxSize > 0) {
         const sizelimit = Number(maxSize * 1024 * 1024);
         const inds = [...(files || [])]
-          .map((file, index) =>
-            file && file.size > sizelimit ? index + 1 : null
-          )
+          .map((fileItem, index) => {
+            const file = (fileItem || {})[0] || file;
+            return file && file.size > sizelimit ? index + 1 : null;
+          })
           .filter(Boolean);
         if (inds.length > 0) {
           return toastr.error(
             `File "${
-              files[inds[0] - 1].name
+              files[inds[0] - 1].name ||
+              ((files[inds[0] - 1] || [])[0] || {}).filename
             }" exceeds ${maxSize}MB. Please try again with a smaller file`
           );
         }
       }
       const fileObjArray = await [...(files || [])].filter(Boolean).map(
-        async (file) =>
+        async (fileItem) =>
           new Promise((resolve, reject) => {
+            const file = (fileItem || {})[0] || fileItem;
             const video = document.createElement('video');
             video.src = URL.createObjectURL(file);
             video.preload = 'metadata';
@@ -863,5 +889,8 @@ S3Uploader.defaultProps = {
     onChange: () => {},
   },
   setuploading: () => {},
+  uploadaxiosinstance: axios.create(),
+  signaxiosinstance: axios.create(),
+  limit: 1,
 };
 export default S3Uploader;

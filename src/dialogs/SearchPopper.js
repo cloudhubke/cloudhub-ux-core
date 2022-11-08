@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { Search, PinDrop } from '@mui/icons-material';
+import Search from '@mui/icons-material/Search';
+import PinDrop from '@mui/icons-material/PinDrop';
 import isObject from 'lodash/isObject';
 import isEmpty from 'lodash/isEmpty';
-
 import Axios from 'axios';
-import { CircularProgress } from '@mui/material';
-import { Block, IconButton } from '..';
+import CircularProgress from '@mui/material/CircularProgress';
+import Block from '../Block';
+import IconButton from '../IconButton';
 import { useDebounce } from '../customhooks';
 import TextInput from '../TextInput';
 import FieldPopper from './FieldPopper';
@@ -31,6 +31,7 @@ const SearchForm = ({
   onDataChanged,
   inputProps,
   popperStyle,
+  Graphqlmodel,
 }) => {
   const inputRef = React.useRef();
   const [text, setText] = React.useState(
@@ -45,12 +46,28 @@ const SearchForm = ({
     try {
       setFetching(true);
       // await sleep(2000);
-      const { data } = await axiosinstance().get(`${url}`, {
-        params: {
-          [paramName]: debouncedText,
-          ...otherparams,
-        },
-      });
+      let data;
+      if (Graphqlmodel) {
+        try {
+          data = await Graphqlmodel()
+            .find({
+              [paramName]: debouncedText,
+              ...otherparams,
+            })
+            .toJson();
+        } catch (error) {
+          console.log(error.toString());
+        }
+      } else {
+        const options = await axiosinstance().get(`${url}`, {
+          params: {
+            [paramName]: debouncedText,
+            ...otherparams,
+          },
+        });
+        // eslint-disable-next-line
+        data = options.data;
+      }
 
       const arr = data.items || data;
 

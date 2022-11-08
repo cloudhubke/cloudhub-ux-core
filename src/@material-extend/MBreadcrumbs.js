@@ -3,7 +3,10 @@ import { last } from 'lodash';
 import PropTypes from 'prop-types';
 // material
 import { Link as RouterLink } from '@cloudhub-ux/core/reach';
-import { Typography, Box, Link, Breadcrumbs } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 // ----------------------------------------------------------------------
 

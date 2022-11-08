@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 // material
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 //
 import { varFadeInUp } from './variants';
 

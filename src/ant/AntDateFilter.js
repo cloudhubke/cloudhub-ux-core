@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'antd/lib/date-picker';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import 'antd/lib/input/style/index.css';
 import 'antd/lib/date-picker/style/index.css';
@@ -12,7 +12,7 @@ const dateFormat = 'DD-MM-YYYY hh:mm a';
 
 class DateFilter extends Component {
   static defaultProps = {
-    defaultValue: [moment().startOf('day'), moment().endOf('day')],
+    defaultValue: [dayjs().startOf('day'), dayjs().endOf('day')],
     onChange: () => {},
     input: {
       onChange: () => {},

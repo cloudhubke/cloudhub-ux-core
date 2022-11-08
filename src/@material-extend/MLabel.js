@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 import { capitalize } from '@mui/material/utils';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 

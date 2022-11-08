@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 // material
 import { useTheme } from '@mui/material/styles';
-import { Fab } from '@mui/material';
+import Fab from '@mui/material/Fab';
 //
 import { ButtonAnimate } from '../animate';
 

@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  // FormHelperText,
-  Radio,
-} from '@mui/material';
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
 import Text from './Text';
 import ThemeContext from './theme/ThemeContext';
 

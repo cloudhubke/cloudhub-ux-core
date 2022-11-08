@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import AntTimePicker from './AntTimePicker';
 import Block from '../Block';
 import Text from '../Text';
@@ -59,7 +59,7 @@ const TimePicker = ({ meta, value, input, onChange, ...props }) => {
 
   useEffect(() => {
     if (passedvalue) {
-      setTime(moment(passedvalue, 'HHmmss'));
+      setTime(dayjs(passedvalue, 'HHmmss'));
     }
   }, [passedvalue]);
 

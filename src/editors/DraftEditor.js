@@ -1,7 +1,7 @@
 import React from 'react';
 import Loadable from '@react-loadable/revised';
-
-import { Card, Box } from '@mui/material';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import Loading from '../Loading';
 import Block from '../Block';
 import ThemeContext from '../theme/ThemeContext';

@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Typography, Grid, Button, TextField } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import validate from 'validate.js';
 
 const useStyles = makeStyles((theme) => ({

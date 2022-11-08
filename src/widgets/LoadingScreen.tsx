@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 // material
 import { makeStyles, createStyles } from '@mui/styles';
 import { alpha, styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 //
 import Logo from './Logo';
 

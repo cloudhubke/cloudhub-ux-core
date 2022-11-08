@@ -7,17 +7,23 @@
 import React from 'react';
 import qs from 'qs';
 import uniq from 'uid';
-import { Block, Text, toastr, IconButton, Dialog, Button } from '..';
+import Block from '../Block';
+import IconButton from '../IconButton';
+import Text from '../Text';
+import toastr from '../toastr';
+import Dialog from '../dialogs/Dialog';
+import Button from '../Button';
 import axios from 'axios';
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
-} from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import Upload from '@mui/icons-material/Upload';
+import Close from '@mui/icons-material/Close';
 import isEqual from 'lodash/isEqual';
-import { Upload, Close } from '@mui/icons-material';
+import isEmpty from 'lodash/isEmpty';
+import isPlainObject from 'lodash/isPlainObject';
 import { DialogHeader, DialogContent, DialogActions } from '../dialogs';
 import ThemeContext from '../theme/ThemeContext';
 import FileIcon from './FileIcon';
@@ -54,14 +60,25 @@ const S3Uploader = ({
     if (Array.isArray(incominginput) && !isEqual(incominginput, fileList)) {
       setfileList(incominginput);
     }
+    if (
+      (!limit || limit === 1) &&
+      isPlainObject(incominginput) &&
+      !isEmpty(incominginput)
+    ) {
+      setfileList([incominginput]);
+    }
   }, [incominginput]);
 
   const logChange = (fileUpdate) => {
+    let newValue = fileUpdate || [];
+    if ((!limit || limit === 1) && Array.isArray(fileUpdate)) {
+      newValue = fileUpdate[0] || {};
+    }
     if (typeof input.onChange === 'function') {
-      input.onChange(fileUpdate || []);
+      input.onChange(newValue);
     }
     if (typeof onChange === 'function') {
-      onChange(fileUpdate || []);
+      onChange(newValue);
     }
   };
 
@@ -188,89 +205,111 @@ const S3Uploader = ({
   };
 
   const handleFiles = async (event) => {
-    const { files } = event.target;
-    if (
-      limit &&
-      Array.isArray(fileList) &&
-      Array.isArray(files) &&
-      files.length + fileList.length > limit
-    ) {
-      return toastr.error(`Only a maximum of ${limit} files allowed`);
-    }
-    if (maxSize && maxSize > 0) {
-      const sizelimit = Number(maxSize * 1024 * 1024);
-      const inds = [...(files || [])]
-        .map((file, index) =>
-          file && file.size > sizelimit ? index + 1 : null
-        )
-        .filter(Boolean);
-      if (inds.length > 0) {
-        return toastr.error(
-          `File "${
-            files[inds[0] - 1].name
-          }" exceeds ${maxSize}MB. Please try again with a smaller file`
-        );
+    try {
+      const { files } = event.target;
+      if (
+        limit &&
+        Array.isArray(fileList) &&
+        Array.isArray(files) &&
+        files.length + fileList.length > limit
+      ) {
+        return toastr.error(`Only a maximum of ${limit} files allowed`);
       }
-    }
-
-    const fileArray = [...(files || [])].filter(Boolean).map((file) => ({
-      name: file.name.replace(/[^\w\d_\-.]+/gi, ''),
-      type: file.type,
-      size: file.size,
-    }));
-
-    if (fileArray.length > 0) {
-      const signedUrls = await getSignedUrl(fileArray).then((urls) => urls);
-      signedUrls.filter(Boolean);
-      const uploads = [...(files || [])].filter(Boolean).map(
-        (file) =>
-          signedUrls
-            .filter(Boolean)
-            .map(({ signedUrl, filename }) => {
-              if (filename === file.name.replace(/[^\w\d_\-.]+/gi, '')) {
-                return {
-                  signedUrl,
-                  file,
-                  options: {
-                    headers: {
-                      'Content-Type': qs.parse(signedUrl)['Content-Type'],
-                      Expires: qs.parse(signedUrl).Expires,
-                      'x-amz-acl':
-                        qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
-                    },
-                    onUploadProgress: (progressEvent) => {
-                      onprogress(progressEvent, signedUrl);
-                    },
-                  },
-                };
-              }
-              return null;
-            })
-            .filter(Boolean)[0]
-      );
-
-      for (const thisfile of uploads) {
-        try {
-          await uploadaxiosinstance.put(
-            thisfile.signedUrl,
-            thisfile.file,
-            thisfile.options
+      if (files.length === 0) {
+        return;
+      }
+      if (files.length > limit || files.length + fileList.length > limit) {
+        return toastr.error(`Only a maximum of ${limit} files allowed`);
+      }
+      const fileArray = new Array(files.length).fill(1).map((item, index) => {
+        const file = files[index] || {};
+        return {
+          name: (file.name || '').replace(/[^\w\d_\-.]+/gi, ''),
+          type: file.type,
+          size: file.size,
+        };
+      });
+      if (maxSize && maxSize > 0) {
+        const sizelimit = Number(maxSize * 1024 * 1024);
+        const inds = [...(fileArray || [])]
+          .map((file, index) =>
+            file && file.size > sizelimit ? index + 1 : null
+          )
+          .filter(Boolean);
+        if (inds.length > 0) {
+          return toastr.error(
+            `File "${
+              files[inds[0] - 1].name
+            }" exceeds ${maxSize}MB. Please try again with a smaller file`
           );
-          onUploadFinish(thisfile.signedUrl);
-        } catch (error) {
-          onUploadError(thisfile.signedUrl);
-          toastr.error(
-            `${
-              error.response
-                ? error.response.data
-                : `upload failed, try again later${thisfile.signedUrl}`
-            }`
-          );
-          continue;
         }
       }
 
-      toastr.success('Upload successful');
+      if (fileArray.length > 0) {
+        const signedUrls = await getSignedUrl(fileArray).then((urls) => urls);
+        signedUrls.filter(Boolean);
+        const uploads = fileArray.map(
+          (file, index) =>
+            signedUrls
+              .map((signed) => {
+                const { signedUrl, filename } = signed || {};
+                if (signedUrl && filename) {
+                  if (
+                    filename ===
+                    (files[index].name || '').replace(/[^\w\d_\-.]+/gi, '')
+                  ) {
+                    return {
+                      signedUrl,
+                      file: files[index],
+                      options: {
+                        headers: {
+                          'Content-Type': qs.parse(signedUrl)['Content-Type'],
+                          Expires: qs.parse(signedUrl).Expires,
+                          'x-amz-acl':
+                            qs.parse(signedUrl)['x-amz-acl'] || 'public-read',
+                        },
+                        onUploadProgress: (progressEvent) => {
+                          onprogress(progressEvent, signedUrl);
+                        },
+                      },
+                    };
+                  }
+                }
+                return null;
+              })
+              .filter(Boolean)[0]
+        );
+
+        for (const thisfile of uploads) {
+          try {
+            await uploadaxiosinstance.put(
+              thisfile.signedUrl,
+              thisfile.file,
+              thisfile.options
+            );
+            onUploadFinish(thisfile.signedUrl);
+          } catch (error) {
+            onUploadError(thisfile.signedUrl);
+            toastr.error(
+              `${
+                error.response
+                  ? error.response.data
+                  : `upload failed, try again later${thisfile.signedUrl}`
+              }`
+            );
+            continue;
+          }
+        }
+
+        toastr.success('Upload successful');
+      }
+    } catch (error) {
+      const response = error.response || {};
+      const data = response.data || error.data || {};
+      const message =
+        data.message || error.message || error.errorMessage || `${error}`;
+      console.log(message);
+      toastr.error(message);
     }
   };
 
@@ -416,5 +455,7 @@ S3Uploader.defaultProps = {
   },
   setuploading: () => {},
   limit: 1,
+  uploadaxiosinstance: axios.create(),
+  signaxiosinstance: axios.create(),
 };
 export default S3Uploader;

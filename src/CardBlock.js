@@ -1,6 +1,8 @@
 import React from 'react';
 // material
-import { Card, CardHeader, Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import Typography from '@mui/material/Typography';
 import ThemeContext from './theme/ThemeContext';
 import Block from './Block';
 

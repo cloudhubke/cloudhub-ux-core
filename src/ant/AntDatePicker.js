@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePicker from 'antd/lib/date-picker';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import 'antd/lib/input/style/index.css';
 import 'antd/lib/date-picker/style/index.css';
@@ -62,7 +62,7 @@ const AntDatePicker = ({
     <DatePicker
       className={classes.datePicker}
       dropdownClassName={classes.dropdown}
-      value={val ? moment(val) : null}
+      value={val ? dayjs(val) : null}
       format={dateFormat}
       onChange={onDateChanged}
       showTime={showTime}
